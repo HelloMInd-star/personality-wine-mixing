@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═════════════════════════════════════════════════════════
+   深空基底 · 毛玻璃 · 微妙发光
+   ═════════════════════════════════════════════════════════ */
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #08080e;
+  color: #e8e2d8;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* 深空星尘背景 · 克制的氛围层 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(122, 75, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(212, 160, 64, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(20, 20, 30, 0.4) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+@layer components {
+  /* 毛玻璃面板 · 深空基底 */
+  .glass-panel {
+    @apply rounded-2xl border backdrop-blur-xl;
+    background: rgba(20, 20, 30, 0.55);
+    border-color: rgba(139, 115, 209, 0.18);
+  }
+
+  .glass-panel-gold {
+    @apply rounded-2xl border backdrop-blur-xl;
+    background: rgba(20, 20, 30, 0.55);
+    border-color: rgba(212, 160, 64, 0.3);
+  }
+
+  /* 模块主题色边线 · 鼠标点侧边页时只加深的微妙交互 */
+  .module-tarot {
+    --module-color: #d4a040;
+  }
+  .module-zodiac {
+    --module-color: #7a4bff;
+  }
+  .module-poker {
+    --module-color: #c41e3a;
+  }
+  .module-texas {
+    --module-color: #4dd0e1;
+  }
+}
+
+@layer utilities {
+  .text-module {
+    color: var(--module-color, #d4a040);
+  }
+  .border-module {
+    border-color: var(--module-color, #d4a040);
+  }
+  .bg-module-soft {
+    background: color-mix(in srgb, var(--module-color, #d4a040) 12%, transparent);
+  }
+  .shadow-glow-module {
+    box-shadow: 0 0 24px color-mix(in srgb, var(--module-color, #d4a040) 35%, transparent);
+  }
+  .tracking-display {
+    letter-spacing: 0.15em;
+  }
+}
+
+/* 翻牌 3D 基础 */
+.flip-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.flip-3d.is-flipped {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+/* 滚动条 · 深空适配 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 115, 209, 0.25);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 115, 209, 0.4);
+}

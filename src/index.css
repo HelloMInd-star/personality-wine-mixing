@@ -1,0 +1,280 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Y.Mine · 全局视觉基调
+   深空紫金 · 磨砂玻璃 · 镜月隐喻 · 微妙发光
+   ============================================================ */
+
+:root {
+  --void-900: #070414;
+  --void-700: #15102e;
+  --void-500: #2d1b4e;
+  --gold-400: #f0c674;
+  --gold-600: #a8842f;
+  --amethyst-500: #7c5fbf;
+  --moon-200: #d8c9f5;
+  --text-primary: #ece6ff;
+  --text-muted: #8b7fb8;
+  --border-soft: rgba(155, 123, 212, 0.18);
+  --border-gold: rgba(240, 198, 116, 0.32);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  background: radial-gradient(ellipse at top, #2d1b4e 0%, #15102e 40%, #070414 100%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* 滚动条 · 紫金细线 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(240, 198, 116, 0.4), rgba(124, 95, 191, 0.4));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(240, 198, 116, 0.7), rgba(124, 95, 191, 0.7));
+}
+
+/* 文本选区 */
+::selection {
+  background: rgba(240, 198, 116, 0.3);
+  color: #fff;
+}
+
+@layer components {
+  /* 磨砂玻璃容器 */
+  .glass {
+    background: linear-gradient(
+      135deg,
+      rgba(45, 27, 78, 0.45) 0%,
+      rgba(21, 16, 46, 0.55) 100%
+    );
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid var(--border-soft);
+    box-shadow: 0 8px 32px rgba(15, 8, 40, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  .glass-gold {
+    border-color: var(--border-gold);
+    box-shadow: 0 8px 32px rgba(15, 8, 40, 0.5),
+      0 0 24px rgba(240, 198, 116, 0.12),
+      inset 0 1px 0 rgba(240, 198, 116, 0.1);
+  }
+
+  /* 金色文字 */
+  .text-gold-sheen {
+    background: linear-gradient(135deg, #f0c674 0%, #d4a84b 50%, #a8842f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-amethyst-sheen {
+    background: linear-gradient(135deg, #9b7bd4 0%, #7c5fbf 50%, #5d44a0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* 标题字 · 衬线优雅 */
+  .font-display {
+    font-family: 'Noto Serif SC', Georgia, serif;
+    letter-spacing: 0.04em;
+  }
+
+  /* 细金线分隔 */
+  .divider-gold {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(240, 198, 116, 0.5),
+      transparent
+    );
+  }
+
+  /* 微妙发光按钮 */
+  .btn-ghost {
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-ghost:hover {
+    background: rgba(124, 95, 191, 0.12);
+    box-shadow: 0 0 16px rgba(124, 95, 191, 0.2);
+  }
+
+  /* 侧栏项 · 鼠标点入时只加深 */
+  .nav-item {
+    transition: all 0.25s ease;
+    position: relative;
+  }
+  .nav-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    width: 2px;
+    height: 60%;
+    background: linear-gradient(180deg, #f0c674, #7c5fbf);
+    transition: transform 0.3s ease;
+    border-radius: 2px;
+  }
+  .nav-item:hover {
+    background: rgba(124, 95, 191, 0.08);
+    color: var(--moon-200);
+  }
+  .nav-item.active {
+    background: rgba(124, 95, 191, 0.14);
+    color: var(--gold-400);
+  }
+  .nav-item.active::before {
+    transform: translateY(-50%) scaleY(1);
+  }
+
+  /* 情绪调节器滑块 · 紫金轨道，开启时染情绪色 */
+  .mood-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, rgba(124, 95, 191, 0.4), rgba(240, 198, 116, 0.5));
+    outline: none;
+    cursor: pointer;
+  }
+  .mood-slider:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  .mood-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--mood-color, #f0c674);
+    box-shadow: 0 0 10px var(--mood-color, rgba(240, 198, 116, 0.6));
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.2s ease;
+  }
+  .mood-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+  .mood-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--mood-color, #f0c674);
+    box-shadow: 0 0 10px var(--mood-color, rgba(240, 198, 116, 0.6));
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+  }
+
+  /* 旅程音乐播放按钮 · 慢速脉动光圈 */
+  @keyframes ping-slow {
+    0% {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    75%,
+    100% {
+      transform: scale(1.4);
+      opacity: 0;
+    }
+  }
+  .animate-ping-slow {
+    animation: ping-slow 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  /* 分子积木落入动画 · 乐高搭建感 · scale 0→1.15→1 + 轻微旋转 */
+  @keyframes molecule-drop {
+    0% {
+      transform: scale(0) rotate(-25deg);
+      opacity: 0;
+    }
+    55% {
+      transform: scale(1.15) rotate(6deg);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1) rotate(0);
+      opacity: 1;
+    }
+  }
+  .molecule-drop {
+    animation: molecule-drop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* 分子结构节点浮现 · 预览步用 */
+  @keyframes molecule-rise {
+    0% {
+      transform: translateY(8px) scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+  .molecule-rise {
+    animation: molecule-rise 0.6s ease-out backwards;
+  }
+
+  /* 树洞暗号展开 · 柔和淡入 */
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out;
+  }
+}
+
+@layer utilities {
+  .text-shadow-glow-gold {
+    text-shadow: 0 0 12px rgba(240, 198, 116, 0.5);
+  }
+  .text-shadow-glow-soft {
+    text-shadow: 0 0 10px rgba(216, 201, 245, 0.4);
+  }
+  .animate-delay-200 {
+    animation-delay: 0.2s;
+  }
+  .animate-delay-400 {
+    animation-delay: 0.4s;
+  }
+  .animate-delay-600 {
+    animation-delay: 0.6s;
+  }
+}
