@@ -507,6 +507,17 @@ export default function MbtiCardRevealStage({
         ctx.font = `${size * 0.026}px 'PingFang SC', system-ui, serif`;
         ctx.fillText(truncate(card.subtitle, 8), cardX + cardW / 2, cy + cardH * 0.72);
 
+        // 人格标签 · personaTag · 仅 MBTI 卡有效 · 人格主色小字
+        if (card.personaTag) {
+          ctx.fillStyle = hexToRgba(card.primary, 0.8);
+          ctx.font = `${size * 0.022}px 'PingFang SC', system-ui, serif`;
+          ctx.fillText(
+            truncate(card.personaTag, 12),
+            cardX + cardW / 2,
+            cy + cardH * 0.8,
+          );
+        }
+
         // 底部短语 · 极小字 · settle 阶段渐入
         if (progress >= 1) {
           const captionAlpha = Math.min(1, (localT - T_CARD_DRAW) / 0.5);

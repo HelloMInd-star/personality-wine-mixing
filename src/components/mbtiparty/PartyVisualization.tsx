@@ -318,6 +318,15 @@ export default function PartyVisualization({
             >
               {seat.mbti ?? '???'} · {profile?.nickname ?? '神秘客'}
             </div>
+            {/* 人格标签 · personaTag */}
+            {profile?.personaTag && (
+              <div
+                className="text-[9px] tracking-[0.12em] opacity-80"
+                style={{ color: profile?.primary ?? '#d8c9f5' }}
+              >
+                {profile.personaTag}
+              </div>
+            )}
             {/* 角色标签 */}
             {roleMeta && (
               <div className="text-[9px] text-moon-200/50 tracking-[0.1em] mt-0.5">

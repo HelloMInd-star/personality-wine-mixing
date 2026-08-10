@@ -7,9 +7,9 @@
  */
 
 import type { CSSProperties } from 'react';
-import type { MusicTrack } from '../../types/journey';
-import { JOURNEY_PHASE_META } from '../../data/journeyMeta';
-import GlassPanel from '../ui/GlassPanel';
+import type { MusicTrack } from '../../../types/journey';
+import { JOURNEY_PHASE_META } from '../../../data/journeyMeta';
+import GlassPanel from '../../ui/GlassPanel';
 
 export interface MusicControlProps {
   /** 当前曲目 · 由 useJourney 派生 */

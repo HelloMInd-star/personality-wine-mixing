@@ -23,7 +23,7 @@
  */
 
 import { useEffect, useRef } from 'react';
-import type { LightEffect } from '../../types/journey';
+import type { LightEffect } from '../../../types/journey';
 
 export interface LightCanvasProps {
   /** 光效参数 · 由 lightEngine 派生 */

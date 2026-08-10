@@ -119,6 +119,7 @@ export default function ChessPage() {
   const [phase, setPhase] = useState<Phase>('atlas');
   const [step, setStep] = useState(0);
   const [signals, setSignals] = useState<Partial<ChessDecisionSignals>>({});
+  const [fullSignals, setFullSignals] = useState<ChessDecisionSignals | null>(null);
   const [result, setResult] = useState<{
     temperament: ChessTemperament;
     scores: Record<MbtiDimension, number>;
@@ -139,6 +140,7 @@ export default function ChessPage() {
         decisionLogic: next.decisionLogic ?? 0.5,
         endgameDecisiveness: next.endgameDecisiveness ?? 0.5,
       };
+      setFullSignals(full);
       const { temperamentId, scores } = signalsToTemperament(full);
       const temperament = getChessTemperament(temperamentId);
       saveVector(temperament.vector);
@@ -372,9 +374,10 @@ export default function ChessPage() {
       )}
 
       {/* ── report 棋风人格报告 ── */}
-      {phase === 'report' && result && (
+      {phase === 'report' && result && fullSignals && (
         <ReportView
           result={result}
+          signals={fullSignals}
           onRestart={restart}
           onGoCocktail={() => navigate('/cocktail')}
         />
@@ -446,14 +449,17 @@ function ScenarioCard({
 
 function ReportView({
   result,
+  signals,
   onRestart,
   onGoCocktail,
 }: {
   result: { temperament: ChessTemperament; scores: Record<MbtiDimension, number> };
+  signals: ChessDecisionSignals;
   onRestart: () => void;
   onGoCocktail: () => void;
 }) {
   const { temperament, scores } = result;
+  const navigate = useNavigate();
   const DIM_LABEL_MAP: Record<MbtiDimension, string> = {
     EI: '能量方向',
     NS: '信息获取',
@@ -557,7 +563,16 @@ function ReportView({
 
       {/* 出口 */}
       <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-        <GradientButton variant="gold" size="lg" onClick={onGoCocktail}>
+        <GradientButton
+          variant="gold"
+          size="lg"
+          onClick={() => {
+            navigate('/brew/balance', { state: { from: 'chess', signals } });
+          }}
+        >
+          对战模拟 →
+        </GradientButton>
+        <GradientButton variant="ghost" size="md" onClick={onGoCocktail}>
           融入调酒 →
         </GradientButton>
         <button

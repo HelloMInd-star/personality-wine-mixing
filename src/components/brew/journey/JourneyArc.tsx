@@ -6,9 +6,9 @@
  * 视觉语言：磨砂玻璃深空 · 节点用单字符号 · 当前阶段主色光晕呼吸
  */
 
-import { cocktailService } from '../../services/cocktailService';
-import type { JourneyState, StimulationTier } from '../../types/journey';
-import GlassPanel from '../ui/GlassPanel';
+import { cocktailService } from '../../../services/cocktailService';
+import type { JourneyState, StimulationTier } from '../../../types/journey';
+import GlassPanel from '../../ui/GlassPanel';
 
 /** 刺激档位中文标签 */
 const TIER_LABEL: Record<StimulationTier, string> = {

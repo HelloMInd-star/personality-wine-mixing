@@ -1,10 +1,10 @@
 /**
- * JourneyStorybookPage · P0-3 情绪旅程回路组件文档
+ * BrewJourneyPage · 酿·弧 · 情绪旅程回路
  * 轻量演示页 · 零新依赖，复用真实组件与深空 UI
  *
  * 展示内容：
  *   1. 阶段预设控制台 · 一键切换四阶段（开场/上升/高潮/收尾）
- *   2. 三组件实况 · MoodDial + JourneyArc + MusicControl（真实交互）
+ *   2. 五组件实况 · MoodDial + JourneyArc + MusicControl + LightCanvas + ScentCard
  *   3. 当前阶段元数据卡 · 诗、色、BPM、刺激档位、曲目、合成参数
  *   4. 阶段契合推荐样本 · 带刺激档位标签
  *   5. 四阶段对照表 · 回路全貌
@@ -12,17 +12,17 @@
  * 独立工作 · 内置 mock 画像，无需先做测评
  */
 
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppStore } from '../store/appStore';
 import { useJourney } from '../hooks/useJourney';
 import { cocktailService } from '../services/cocktailService';
 import { JOURNEY_PHASE_META, JOURNEY_PHASE_ORDER, MUSIC_TRACKS } from '../data/journeyMeta';
-import MoodDial from '../components/cocktail/MoodDial';
-import JourneyArc from '../components/cocktail/JourneyArc';
-import MusicControl from '../components/cocktail/MusicControl';
-import LightCanvas from '../components/cocktail/LightCanvas';
-import ScentCard from '../components/cocktail/ScentCard';
+import MoodDial from '../components/brew/journey/MoodDial';
+import JourneyArc from '../components/brew/journey/JourneyArc';
+import MusicControl from '../components/brew/music/MusicControl';
+import LightCanvas from '../components/brew/light/LightCanvas';
+import ScentCard from '../components/brew/scent/ScentCard';
 import GlassPanel from '../components/ui/GlassPanel';
 import type { PersonalityProfile } from '../types/personality';
 import type { JourneyPhase, StimulationTier } from '../types/journey';
@@ -89,7 +89,7 @@ function presetPhase(
   }
 }
 
-export default function JourneyStorybookPage() {
+export default function BrewJourneyPage() {
   const {
     profile: storedProfile,
     activeMood,
@@ -106,6 +106,19 @@ export default function JourneyStorybookPage() {
   const profile = storedProfile ?? DEMO_PROFILE;
   const { journeyState, currentTrack, isPlaying, lightEffect, scentProfile } = useJourney();
 
+  // 布局调试日志 · 挂载时打印内边距与返回链接信息
+  useEffect(() => {
+    console.debug('[BrewJourneyPage:layout]', {
+      padding: 'px-6 md:px-12 lg:px-20 py-12 md:py-16 pb-20',
+      mainOffset: 'ml-20 lg:ml-64 (App.tsx 非沉浸页统一偏移)',
+      returnLink: '/cocktail · 返回调酒',
+      sidebarWidth: { mobile: 80, desktop: 256 },
+      breakpoints: { sm: 640, md: 768, lg: 1024 },
+      pageTitle: '酿 · 弧 · Journey Arc',
+      timestamp: new Date().toISOString(),
+    });
+  }, []);
+
   // 当前阶段推荐样本 · 3 款，带刺激档位
   const recs = useMemo(
     () => cocktailService.recommendByJourney(profile, activeMood, moodIntensity, new Date(), 3),
@@ -115,13 +128,13 @@ export default function JourneyStorybookPage() {
   const meta = journeyState.meta;
 
   return (
-    <div className="min-h-screen pb-20">
+    <div className="animate-fade-in min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16 pb-20">
       {/* 顶部标题区 */}
       <header className="mb-10">
         <div className="flex items-center justify-between gap-4 mb-3">
           <div>
             <div className="text-[10px] tracking-[0.3em] text-amethyst-400/70 uppercase mb-1">
-              P0-3 · Component Storybook
+              酿 · 弧 · Journey Arc
             </div>
             <h1 className="font-display text-2xl md:text-3xl text-moon-50 tracking-[0.1em]">
               情绪旅程回路
@@ -131,7 +144,7 @@ export default function JourneyStorybookPage() {
             to="/cocktail"
             className="text-xs text-amethyst-300/70 hover:text-amethyst-200 transition-colors tracking-[0.1em]"
           >
-            ← 返回调酒页
+            ← 返回调酒
           </Link>
         </div>
         <p className="text-sm text-moon-200/55 leading-relaxed max-w-2xl">
@@ -190,7 +203,7 @@ export default function JourneyStorybookPage() {
         </div>
       </GlassPanel>
 
-      {/* 四组件实况 */}
+      {/* 五组件实况 */}
       <MoodDial
         activeMood={activeMood}
         intensity={moodIntensity}

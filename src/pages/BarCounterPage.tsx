@@ -18,11 +18,13 @@ import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../store/appStore';
 import { useJourney } from '../hooks/useJourney';
 import { useCoasterDriver } from '../hooks/useCoasterDriver';
+import { useGameTheory } from '../hooks/useGameTheory';
 import GlassPanel from '../components/ui/GlassPanel';
 import GradientButton from '../components/ui/GradientButton';
-import LightCanvas from '../components/cocktail/LightCanvas';
-import ScentCard from '../components/cocktail/ScentCard';
+import LightCanvas from '../components/brew/light/LightCanvas';
+import ScentCard from '../components/brew/scent/ScentCard';
 import RolePersonaPicker from '../components/cocktail/RolePersonaPicker';
+import NashConvergenceChart from '../components/cocktail/NashConvergenceChart';
 import { DIM_LABEL, type PersonaDim } from '../types/personaFusion';
 import type { CoasterState } from '../types/tavern';
 
@@ -53,6 +55,7 @@ export default function BarCounterPage() {
   const navigate = useNavigate();
   const { profile, vector } = useAppStore();
   const { journeyState, lightEffect, scentProfile } = useJourney();
+  const { result: gameTheoryResult, convergenceTrace, input: gameTheoryInput } = useGameTheory();
 
   // 数据源 · 向量优先 · 无则提示采集
   const hasDataSource = !!(vector || profile);
@@ -252,6 +255,19 @@ export default function BarCounterPage() {
                 </GradientButton>
               </div>
             </div>
+          </GlassPanel>
+        </section>
+      )}
+
+      {/* —— 纳什均衡收敛分析 · 博弈论可视化 —— */}
+      {hasDataSource && gameTheoryResult && (
+        <section className="max-w-4xl mx-auto mb-12">
+          <GlassPanel gold padding="lg">
+            <NashConvergenceChart
+              trace={convergenceTrace}
+              result={gameTheoryResult}
+              input={gameTheoryInput}
+            />
           </GlassPanel>
         </section>
       )}

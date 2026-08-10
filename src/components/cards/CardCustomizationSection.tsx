@@ -387,6 +387,15 @@ export default function CardCustomizationSection() {
                   <div className="mt-3 text-gold-sheen/90 font-display text-xs">
                     {previewCard.subtitle}
                   </div>
+                  {/* 人格标签 · personaTag · 仅 MBTI 卡有效 */}
+                  {previewCard.personaTag && (
+                    <div
+                      className="mt-1 text-[10px] tracking-wider opacity-80"
+                      style={{ color: previewCard.primary }}
+                    >
+                      {previewCard.personaTag}
+                    </div>
+                  )}
                 </div>
                 {/* 底部短语 / 牌义 */}
                 <div className="absolute bottom-5 left-0 right-0 text-center text-[9px] text-moon-200/55 italic px-3 leading-relaxed">

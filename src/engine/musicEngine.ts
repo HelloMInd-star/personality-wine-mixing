@@ -25,6 +25,9 @@
  */
 
 import type { MusicTrack } from '../types/journey';
+import type { PersonaMusicParams } from './personaMusicEngine';
+import { vectorToMusicParams } from './personaMusicEngine';
+import type { PersonaVector } from '../types/personaFusion';
 
 /** 活跃音频节点集合 · 用于停止时清理 */
 interface ActiveNodes {
@@ -65,6 +68,8 @@ class MusicEngine {
   private playing = false;
   /** 白噪音 buffer 缓存 · 首次生成后复用 · 避免 buildNodes 重复计算 */
   private noiseBuffer: AudioBuffer | null = null;
+  /** 人格声纹参数 · 来自 personaMusicEngine · 用于动态覆盖合成参数 */
+  private personaParams: PersonaMusicParams | null = null;
 
   /**
    * 懒创建 AudioContext · SSR 与不支持环境安全降级
@@ -229,9 +234,82 @@ class MusicEngine {
     this.start(track);
   }
 
+  // ═════════════════════════════════════════════════════════
+  // 人格声纹集成 · personaMusicEngine
+  // ═════════════════════════════════════════════════════════
+
+  /**
+   * 设置人格声纹参数 · 覆盖后续 start() 的合成参数
+   *
+   * @param params 人格声纹参数（来自 personaMusicEngine）
+   */
+  setPersonaMusicParams(params: PersonaMusicParams | null): void {
+    this.personaParams = params;
+    this.logSynth('setPersonaParams', {
+      hasParams: params !== null,
+      bpm: params?.bpm,
+      timbre: params?.timbre,
+      scale: params?.scale,
+      energy: params?.energy,
+    });
+  }
+
+  /**
+   * 使用人格向量播放曲目 · 向量 → 音乐参数 → 覆盖 synth
+   *
+   * 将 personaMusicEngine 的映射结果注入到曲目的合成参数中，
+   * 使同一曲目在不同人格下产生不同的听觉体验。
+   *
+   * @param track 基础曲目
+   * @param vector 六维人格向量
+   */
+  playTrackWithPersonaVector(track: MusicTrack, vector: PersonaVector): void {
+    const params = vectorToMusicParams(vector);
+    this.setPersonaMusicParams(params);
+    this.start(track);
+  }
+
+  /**
+   * 使用人格声纹参数直接播放曲目
+   *
+   * @param track 基础曲目
+   * @param params 人格声纹参数
+   */
+  playTrackWithPersonaParams(track: MusicTrack, params: PersonaMusicParams): void {
+    this.setPersonaMusicParams(params);
+    this.start(track);
+  }
+
+  /**
+   * 清除人格声纹参数 · 恢复到曲目默认合成参数
+   */
+  clearPersonaParams(): void {
+    this.personaParams = null;
+    this.logSynth('clearPersonaParams', {});
+  }
+
+  /**
+   * 获取当前人格声纹参数
+   */
+  getPersonaParams(): PersonaMusicParams | null {
+    return this.personaParams;
+  }
+
   /** 构建曲目对应的合成节点并淡入 */
   private buildNodes(ctx: AudioContext, track: MusicTrack): void {
     const { synth, bpm, energy } = track;
+
+    // ── 人格声纹覆盖 · 若已设置 personaParams，用其映射值覆盖 synth ──
+    const finalSynth = this.personaParams
+      ? {
+          rootFreq: this.personaParams.rootFreq,
+          timbre: this.personaParams.timbre,
+          filterFreq: this.personaParams.filterFreq,
+          reverb: this.personaParams.reverb,
+        }
+      : synth;
+    const finalBpm = this.personaParams?.bpm ?? bpm;
+    const finalEnergy = this.personaParams?.energy ?? energy;
     const now = ctx.currentTime;
 
     // ── 合成 logger · 排查音量突变 · opening/climax 重点 ──
@@ -239,12 +317,12 @@ class MusicEngine {
       trackId: track.id,
       title: track.title,
       phase: track.phase,
-      bpm,
-      energy,
-      timbre: synth.timbre,
-      rootFreq: synth.rootFreq,
-      filterFreq: synth.filterFreq,
-      reverb: synth.reverb,
+      bpm: finalBpm,
+      energy: finalEnergy,
+      timbre: finalSynth.timbre,
+      rootFreq: finalSynth.rootFreq,
+      filterFreq: finalSynth.filterFreq,
+      reverb: finalSynth.reverb,
       masterVolume: this.volume,
       fadeMs: FADE_MS,
       isKeyPhase: track.phase === 'opening' || track.phase === 'climax',
@@ -276,14 +354,14 @@ class MusicEngine {
     noiseFilter.type = 'lowpass';
     // 滤波频率随阶段能量递增 · opening 350Hz 棕噪音感 → climax 1500Hz 宽频带
     // 公式：350 + energy * 1150 · energy 0.2→580Hz · 0.5→925Hz · 0.9→1385Hz
-    const noiseFilterFreq = 350 + energy * 1150;
+    const noiseFilterFreq = 350 + finalEnergy * 1150;
     noiseFilter.frequency.setValueAtTime(noiseFilterFreq, now);
     noiseFilter.Q.value = 0.7; // 低 Q 值 · 柔和过渡避免共振刺耳
 
     const noiseGain = ctx.createGain();
     noiseGain.gain.setValueAtTime(0, now);
     // 噪音音量 0.22-0.35 · 随能量递增 · 始终为主导底音
-    const noiseTargetGain = 0.22 + energy * 0.13;
+    const noiseTargetGain = 0.22 + finalEnergy * 0.13;
     noiseGain.gain.linearRampToValueAtTime(noiseTargetGain, now + FADE_MS / 1000);
 
     noiseSource.connect(noiseFilter);
@@ -320,7 +398,7 @@ class MusicEngine {
     // 低通滤波器 · pad 音色塑形
     const filter = ctx.createBiquadFilter();
     filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(synth.filterFreq, now);
+    filter.frequency.setValueAtTime(finalSynth.filterFreq, now);
     filter.Q.value = 1.2;
     filter.connect(masterGain);
 
@@ -328,11 +406,11 @@ class MusicEngine {
     const lfo = ctx.createOscillator();
     lfo.type = 'sine';
     // 能量越高 LFO 越快 · climax 阶段呼吸更急促
-    const lfoFreq = LFO_BASE_FREQ + energy * 0.3;
+    const lfoFreq = LFO_BASE_FREQ + finalEnergy * 0.3;
     lfo.frequency.setValueAtTime(lfoFreq, now);
     const lfoGain = ctx.createGain();
     // reverb 越大调制越深 · 呼吸幅度更明显
-    const lfoDepth = synth.filterFreq * (0.3 + synth.reverb * 0.4);
+    const lfoDepth = finalSynth.filterFreq * (0.3 + finalSynth.reverb * 0.4);
     lfoGain.gain.setValueAtTime(lfoDepth, now);
     lfo.connect(lfoGain);
     lfoGain.connect(filter.frequency);
@@ -345,19 +423,19 @@ class MusicEngine {
       lfoFreq,
       lfoDepth,
       modulates: 'filter.frequency',
-      filterBaseFreq: synth.filterFreq,
+      filterBaseFreq: finalSynth.filterFreq,
       filterQ: 1.2,
       chain: 'lfo→lfoGain→filter.frequency',
     });
 
     // 主垫振荡器 · 根音 + 五度 · 音量压低至 0.15 仅作和声底
     const padOscs: OscillatorNode[] = [];
-    const rootFreq = synth.rootFreq;
+    const rootFreq = finalSynth.rootFreq;
     const intervals = [1, 1.5]; // 根音 + 纯五度
     const padGainValue = 0.15;
     intervals.forEach((ratio, idx) => {
       const osc = ctx.createOscillator();
-      osc.type = synth.timbre;
+      osc.type = finalSynth.timbre;
       osc.frequency.setValueAtTime(rootFreq * ratio, now);
       // 弱微调频 · 模拟模拟音色的不稳定性
       const detuneCents = (Math.random() - 0.5) * 6;
@@ -373,7 +451,7 @@ class MusicEngine {
       // ── KEY 时序 · pad 振荡器启动 · 监控 sawtooth 高频与噪音的对齐 ──
       this.logKeyPhase(`pad:started#${idx}`, {
         startAt: now,
-        timbre: synth.timbre,
+        timbre: finalSynth.timbre,
         freq: rootFreq * ratio,
         ratio,
         detuneCents: +detuneCents.toFixed(2),
@@ -385,23 +463,23 @@ class MusicEngine {
     // ── pad 参数 logger · climax 阶段 sawtooth 易刺耳 · 监控音量占比 ──
     this.logSynth('pad:built', {
       phase: track.phase,
-      timbre: synth.timbre,
+      timbre: finalSynth.timbre,
       rootFreq,
       intervals,
       actualFreqs: intervals.map((r) => rootFreq * r),
       padGainValue,
-      lfoFreq: LFO_BASE_FREQ + energy * 0.3,
-      lfoDepth: synth.filterFreq * (0.3 + synth.reverb * 0.4),
+      lfoFreq: LFO_BASE_FREQ + finalEnergy * 0.3,
+      lfoDepth: finalSynth.filterFreq * (0.3 + finalSynth.reverb * 0.4),
       // pad 总音量 = padGain × 2 个振荡器 · 与噪音对比
       padTotalGain: padGainValue * intervals.length,
       noiseToPadRatio: noiseTargetGain / (padGainValue * intervals.length),
     });
 
-    // 节拍 · 仅 energy > 0.4 的阶段启用（rising/climax）
+    // 节拍 · 仅 finalEnergy > 0.4 的阶段启用（rising/climax）
     let beatOsc: OscillatorNode | null = null;
     let beatGain: GainNode | null = null;
     let beatTimer: number | null = null;
-    if (energy > 0.4) {
+    if (finalEnergy > 0.4) {
       beatOsc = ctx.createOscillator();
       beatOsc.type = 'sine';
       // 节拍音高 = 根音 × 2（高八度，更清脆）
@@ -414,8 +492,8 @@ class MusicEngine {
       beatOsc.start();
 
       // 按 BPM 触发节拍脉冲 · 60/BPM = 每拍秒数
-      const beatIntervalMs = (60 / bpm) * 1000;
-      const beatAmp = Math.min(0.35, energy * 0.4);
+      const beatIntervalMs = (60 / finalBpm) * 1000;
+      const beatAmp = Math.min(0.35, finalEnergy * 0.4);
       // 节拍脉冲计数 · 用于 KEY 时序日志追踪每拍触发的对齐
       let beatPulseCount = 0;
       const triggerBeat = () => {
@@ -455,7 +533,7 @@ class MusicEngine {
         chain: 'beatOsc→beatGain→masterGain',
         firstBeatDelayMs: beatIntervalMs,
         firstBeatScheduledAt: now + beatIntervalMs / 1000,
-        bpm,
+        bpm: finalBpm,
         beatIntervalMs,
         beatAmp,
         attackMs: 8,
@@ -465,7 +543,7 @@ class MusicEngine {
       // ── 节拍 logger · climax 阶段节拍脉冲最易感知音量突变 ──
       this.logSynth('beat:built', {
         phase: track.phase,
-        bpm,
+        bpm: finalBpm,
         beatIntervalMs,
         beatAmp,
         beatFreq: rootFreq * 2,
@@ -498,14 +576,14 @@ class MusicEngine {
         noise: noiseTargetGain,
         padPerOsc: padGainValue,
         padTotal: padGainValue * intervals.length,
-        beat: energy > 0.4 ? Math.min(0.35, energy * 0.4) : 0,
+        beat: finalEnergy > 0.4 ? Math.min(0.35, finalEnergy * 0.4) : 0,
       },
       // 总输出估算 · noise + padTotal + beat · 应 ≤ master 避免削波
       estimatedTotal:
-        noiseTargetGain + padGainValue * intervals.length + (energy > 0.4 ? Math.min(0.35, energy * 0.4) : 0),
+        noiseTargetGain + padGainValue * intervals.length + (finalEnergy > 0.4 ? Math.min(0.35, finalEnergy * 0.4) : 0),
       masterVolume: this.volume,
       mayClip:
-        noiseTargetGain + padGainValue * intervals.length + (energy > 0.4 ? Math.min(0.35, energy * 0.4) : 0) >
+        noiseTargetGain + padGainValue * intervals.length + (finalEnergy > 0.4 ? Math.min(0.35, finalEnergy * 0.4) : 0) >
         this.volume,
     });
   }

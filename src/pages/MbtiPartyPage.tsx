@@ -153,7 +153,7 @@ export default function MbtiPartyPage() {
     const roleMeta = PARTY_ROLE_META[selectedRole];
     setTurn({
       seatIndex: 0,
-      mbtiLabel: `${userMbti} · ${profile.nickname}`,
+      mbtiLabel: `${userMbti} · ${profile.nickname} · ${profile.personaTag}`,
       roleLabel: `${roleMeta.symbol} ${roleMeta.label}`,
     });
   }, [selectedTable, selectedRole, userMbti]);

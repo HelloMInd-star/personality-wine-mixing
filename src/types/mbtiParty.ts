@@ -110,6 +110,8 @@ export interface MbtiParticleProfile {
   nickname: string;
   /** 诗意短语 · 气味卡片下方 */
   poem: string;
+  /** 三级人格标签 · 如 "谋略者·敛·锐" · 由 mbtiToBaseVector + derivePersonaTag 派生 */
+  personaTag: string;
 }
 
 /** 调酒操作步骤 · 模拟博弈台 */

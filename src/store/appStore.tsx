@@ -10,6 +10,8 @@
  *   - ymine-feedback-audit · 校准动作日志（仅追加，cap 100）· 含 drift/fused
  *   旧 key 'ymine-feedback' 在 mount 时一次性迁移到 raw 区
  *
+ * 鉴权：Mock 登录 · localStorage 持久化 · 后端就绪后替换 login 为真实 API
+ *
  * 性能监控：关键状态切换点输出 perfMark 日志（仅 DEV），含堆内存占用
  */
 
@@ -29,9 +31,56 @@ import type { TimeSlot } from '../engine/timeEngine';
 import type { FeedbackSignal, CalibrateAuditEntry } from '../types/feedback';
 import { cocktailService } from '../services/cocktailService';
 import { calibrateVectorWithAudit, trackFeedback } from '../engine/feedbackEngine';
+import { logger } from '../engine/logger';
+import { signEntry } from '../services/storageBus';
 
 /** 情绪调节器 session 存储键 · 关 tab 即失 */
 const MOOD_STORAGE_KEY = 'y-mine-mood';
+
+// ═════════════════════════════════════════════════════════
+// 鉴权 · Mock 登录 · localStorage 持久化
+// ═════════════════════════════════════════════════════════
+
+/** 鉴权存储键 */
+const AUTH_STORAGE_KEY = 'y-mine-auth';
+
+interface AuthState {
+  isLoggedIn: boolean;
+  username: string;
+  loginAt: number;
+}
+
+const DEFAULT_AUTH_STATE: AuthState = {
+  isLoggedIn: false,
+  username: '',
+  loginAt: 0,
+};
+
+/** 从本地恢复鉴权状态 · 失败回默认（未登录） */
+function loadAuthState(): AuthState {
+  try {
+    const raw = localStorage.getItem(AUTH_STORAGE_KEY);
+    if (!raw) return DEFAULT_AUTH_STATE;
+    const parsed = JSON.parse(raw) as Partial<AuthState>;
+    if (!parsed.isLoggedIn || !parsed.username) return DEFAULT_AUTH_STATE;
+    return {
+      isLoggedIn: true,
+      username: parsed.username,
+      loginAt: parsed.loginAt ?? 0,
+    };
+  } catch {
+    return DEFAULT_AUTH_STATE;
+  }
+}
+
+/** 持久化鉴权状态 · 失败静默降级 */
+function persistAuthState(state: AuthState): void {
+  try {
+    localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    /* localStorage 不可用 · 静默降级 */
+  }
+}
 
 // ═════════════════════════════════════════════════════════
 // 反馈数据三分区存储 · 参考 YBus PIPELINE/DRAFT/AUDIT 隔离
@@ -67,7 +116,7 @@ function perfMark(scope: string, detail: Record<string, unknown> = {}): void {
     ? ` mem=${(mem.usedJSHeapSize / 1024 / 1024).toFixed(2)}MB`
     : '';
   const ts = performance.now().toFixed(1);
-  console.debug(`[Perf:AppStore:${scope}] t=${ts}ms${memStr}`, detail);
+  logger.store(`AppStore:${scope}`, { ...detail, ts, mem: memStr.trim() });
 }
 
 /** 情绪调节器持久化结构 */
@@ -86,6 +135,14 @@ const DEFAULT_MOOD_STATE: MoodState = {
 };
 
 interface AppStoreValue {
+  /** 是否已登录 · localStorage 持久化 */
+  isLoggedIn: boolean;
+  /** 当前用户名 · localStorage 持久化 */
+  username: string;
+  /** 登录 · Mock 鉴权 · 后端就绪后替换为真实 API */
+  login: (username: string) => void;
+  /** 登出 · 清除鉴权状态 */
+  logout: () => void;
   profile: PersonalityProfile | null;
   /** 六维人格向量 · 牌类入口产物，作为唯一数据契约驱动派生层 */
   vector: PersonaVector | null;
@@ -247,13 +304,15 @@ function loadAuditLog(): CalibrateAuditEntry[] {
 
 /**
  * 追加审计条目到 audit 区 · 仅追加 + 截断到 100 条上限
+ * 条目自动附加 HMAC 防篡改签名
  * @returns 更新后的完整日志（供 setState 用）
  */
 function appendAuditEntry(
   log: CalibrateAuditEntry[],
   entry: CalibrateAuditEntry,
 ): CalibrateAuditEntry[] {
-  const next = [...log, entry];
+  const signed = signEntry(entry as unknown as Record<string, unknown>) as unknown as CalibrateAuditEntry;
+  const next = [...log, signed];
   const trimmed =
     next.length > AUDIT_LOG_LIMIT
       ? next.slice(next.length - AUDIT_LOG_LIMIT)
@@ -278,6 +337,8 @@ export function AppStoreProvider({ children }: { children: ReactNode }) {
   const [feedbackHistory, setFeedbackHistory] = useState<FeedbackSignal[]>(loadRawFeedback);
   // 校准审计日志 · audit 区 · localStorage 持久化，追溯向量演变
   const [auditLog, setAuditLog] = useState<CalibrateAuditEntry[]>(loadAuditLog);
+  // 鉴权状态 · localStorage 持久化 · Mock 登录
+  const [authState, setAuthState] = useState<AuthState>(loadAuthState);
 
   // 上一次情绪态引用 · 用于切换前后对比日志
   const prevMoodRef = useRef<MoodState>(moodState);
@@ -414,6 +475,25 @@ export function AppStoreProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  // ── 鉴权 · Mock 登录 ──────────────────────────────────
+
+  const login = useCallback((username: string) => {
+    const next: AuthState = {
+      isLoggedIn: true,
+      username,
+      loginAt: Date.now(),
+    };
+    setAuthState(next);
+    persistAuthState(next);
+    perfMark('login', { username });
+  }, []);
+
+  const logout = useCallback(() => {
+    setAuthState(DEFAULT_AUTH_STATE);
+    persistAuthState(DEFAULT_AUTH_STATE);
+    perfMark('logout', {});
+  }, []);
+
   // 校准向量 · 基于当前向量 + 评分历史 · 兜底推荐向量取最近一条 feedback 的快照
   // 需用 ref 读最新 vector/feedbackHistory，避免 useCallback 闭包陈旧
   const vectorRef = useRef<PersonaVector | null>(vector);
@@ -471,6 +551,10 @@ export function AppStoreProvider({ children }: { children: ReactNode }) {
   return (
     <AppStoreContext.Provider
       value={{
+        isLoggedIn: authState.isLoggedIn,
+        username: authState.username,
+        login,
+        logout,
         profile,
         vector,
         activeMood: moodState.mood,

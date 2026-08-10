@@ -1,0 +1,124 @@
+/* ============================================================
+   Y.Mine · 通用动画关键帧库
+   深空紫金主题 · 磨砂玻璃 · 微妙发光
+   使用：直接在元素上添加对应 class
+   ============================================================ */
+
+/* ═════════════════════════════════════════════════════════
+   Keyframes
+   ═════════════════════════════════════════════════════════ */
+
+@keyframes ym-fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ym-fade-in-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ym-fade-in-down {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ym-fade-in-scale {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ym-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+@keyframes ym-float-subtle {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+
+@keyframes ym-glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.2); }
+  50%      { box-shadow: 0 0 40px rgba(168, 85, 247, 0.4); }
+}
+
+@keyframes ym-glow-pulse-gold {
+  0%, 100% { box-shadow: 0 0 20px rgba(240, 198, 116, 0.15); }
+  50%      { box-shadow: 0 0 40px rgba(240, 198, 116, 0.3); }
+}
+
+@keyframes ym-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes ym-pulse-soft {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.03); opacity: 0.85; }
+}
+
+@keyframes ym-scan-down {
+  0%   { top: 0; }
+  100% { top: 100%; }
+}
+
+@keyframes ym-spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes ym-breath {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 1; }
+}
+
+/* ═════════════════════════════════════════════════════════
+   动画工具类
+   ═════════════════════════════════════════════════════════ */
+
+.ym-fade-in         { animation: ym-fade-in 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+.ym-fade-in-up      { animation: ym-fade-in-up 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
+.ym-fade-in-down    { animation: ym-fade-in-down 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+.ym-fade-in-scale   { animation: ym-fade-in-scale 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.ym-float           { animation: ym-float 4s ease-in-out infinite; }
+.ym-float-subtle    { animation: ym-float-subtle 3s ease-in-out infinite; }
+.ym-glow-pulse      { animation: ym-glow-pulse 2.5s ease-in-out infinite; }
+.ym-glow-pulse-gold { animation: ym-glow-pulse-gold 2.5s ease-in-out infinite; }
+.ym-pulse-soft      { animation: ym-pulse-soft 2s ease-in-out infinite; }
+.ym-spin-slow       { animation: ym-spin-slow 12s linear infinite; }
+.ym-breath          { animation: ym-breath 3s ease-in-out infinite; }
+
+/* 微光扫过 · 需要配合 bg-gradient 使用 */
+.ym-shimmer {
+  background-size: 200% 100%;
+  animation: ym-shimmer 2.5s ease-in-out infinite;
+}
+
+/* ═════════════════════════════════════════════════════════
+   分级入场动画 · stagger
+   ═════════════════════════════════════════════════════════ */
+
+.ym-stagger-item {
+  animation: ym-fade-in-up 0.6s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+}
+.ym-stagger-item:nth-child(1) { animation-delay: 0s; }
+.ym-stagger-item:nth-child(2) { animation-delay: 0.08s; }
+.ym-stagger-item:nth-child(3) { animation-delay: 0.16s; }
+.ym-stagger-item:nth-child(4) { animation-delay: 0.24s; }
+.ym-stagger-item:nth-child(5) { animation-delay: 0.32s; }
+.ym-stagger-item:nth-child(6) { animation-delay: 0.40s; }
+.ym-stagger-item:nth-child(7) { animation-delay: 0.48s; }
+.ym-stagger-item:nth-child(8) { animation-delay: 0.56s; }
+
+/* ═════════════════════════════════════════════════════════
+   入场延迟工具类
+   ═════════════════════════════════════════════════════════ */
+
+.ym-delay-100 { animation-delay: 0.1s; }
+.ym-delay-200 { animation-delay: 0.2s; }
+.ym-delay-300 { animation-delay: 0.3s; }
+.ym-delay-400 { animation-delay: 0.4s; }
+.ym-delay-500 { animation-delay: 0.5s; }
+.ym-delay-600 { animation-delay: 0.6s; }
+.ym-delay-800 { animation-delay: 0.8s; }

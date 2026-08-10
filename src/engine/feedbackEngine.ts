@@ -12,6 +12,7 @@
 
 import type { PersonaVector, PersonaDim } from '../types/personaFusion';
 import type { FeedbackSignal } from '../types/feedback';
+import { logger } from './logger';
 
 /** 六维人格向量维度键 · 顺序固定，用于遍历 */
 const PERSONA_DIMS: PersonaDim[] = ['TOL', 'SPD', 'INF', 'ENT', 'LEAD', 'VIS'];
@@ -98,16 +99,16 @@ export function trackFeedback(
   }
 
   const ts = performance.now().toFixed(1);
-  const tag = `[Feedback:${node}] t=${ts}ms`;
+  const tag = `Feedback:${node}`;
   switch (level) {
     case 'error':
-      console.error(tag, safePayload);
+      logger.error(tag, { ...safePayload, ts });
       break;
     case 'warn':
-      console.warn(tag, safePayload);
+      logger.info(tag, { ...safePayload, ts });
       break;
     default:
-      console.debug(tag, safePayload);
+      logger.engine(tag, { ...safePayload, ts });
   }
 }
 

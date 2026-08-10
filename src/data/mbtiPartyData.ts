@@ -37,6 +37,7 @@ export const MBTI_PARTICLE_MAP: Record<MbtiCode, MbtiParticleProfile> = {
     symbol: '策',
     nickname: '黑暗先知',
     poem: '冷蓝紫粒子 · 像深夜未启的星辰',
+    personaTag: '结构者·深',
   },
   INTP: {
     code: 'INTP',
@@ -45,6 +46,7 @@ export const MBTI_PARTICLE_MAP: Record<MbtiCode, MbtiParticleProfile> = {
     symbol: '思',
     nickname: '逻辑构建者',
     poem: '青蓝粒子 · 像不断重组的方程',
+    personaTag: '沉思者·深',
   },
   ENTJ: {
     code: 'ENTJ',
@@ -53,6 +55,7 @@ export const MBTI_PARTICLE_MAP: Record<MbtiCode, MbtiParticleProfile> = {
     symbol: '统',
     nickname: '统帅',
     poem: '深红粒子 · 像握紧的指挥棒',
+    personaTag: '结构者·灵',
   },
   ENTP: {
     code: 'ENTP',
@@ -61,6 +64,7 @@ export const MBTI_PARTICLE_MAP: Record<MbtiCode, MbtiParticleProfile> = {
     symbol: '辩',
     nickname: '辩论家',
     poem: '橙红粒子 · 像永远未熄的火花',
+    personaTag: '灵感者·深',
   },
 
   // 外交家 NF · 柔色调
@@ -71,6 +75,7 @@ export const MBTI_PARTICLE_MAP: Record<MbtiCode, MbtiParticleProfile> = {
     symbol: '倡',
     nickname: '提倡者',
     poem: '暮紫粒子 · 像夜深处的一盏灯',
+    personaTag: '灵感者·律',
   },
   INFP: {
     code: 'INFP',
@@ -79,6 +84,7 @@ export const MBTI_PARTICLE_MAP: Record<MbtiCode, MbtiParticleProfile> = {
     symbol: '调',
     nickname: '调停者',
     poem: '柔粉粒子 · 像清晨第一缕光',
+    personaTag: '沉思者·灵',
   },
   ENFJ: {
     code: 'ENFJ',
@@ -87,6 +93,7 @@ export const MBTI_PARTICLE_MAP: Record<MbtiCode, MbtiParticleProfile> = {
     symbol: '主',
     nickname: '主人公',
     poem: '暖金粒子 · 像酒馆里最暖的灯',
+    personaTag: '炽烈者·灵·强',
   },
   ENFP: {
     code: 'ENFP',
@@ -95,6 +102,7 @@ export const MBTI_PARTICLE_MAP: Record<MbtiCode, MbtiParticleProfile> = {
     symbol: '竞',
     nickname: '竞选者',
     poem: '暖橙粒子 · 像夏日午后的蜜桃',
+    personaTag: '炽烈者·灵·稳',
   },
 
   // 守护者 SJ · 稳色调
@@ -105,6 +113,7 @@ export const MBTI_PARTICLE_MAP: Record<MbtiCode, MbtiParticleProfile> = {
     symbol: '务',
     nickname: '物流师',
     poem: '深蓝粒子 · 像旧书页与雨夜',
+    personaTag: '谋略者·敛·锐',
   },
   ISFJ: {
     code: 'ISFJ',
@@ -113,6 +122,7 @@ export const MBTI_PARTICLE_MAP: Record<MbtiCode, MbtiParticleProfile> = {
     symbol: '守',
     nickname: '守卫者',
     poem: '苔绿粒子 · 像清晨湿润的草地',
+    personaTag: '实干者·锐',
   },
   ESTJ: {
     code: 'ESTJ',
@@ -121,6 +131,7 @@ export const MBTI_PARTICLE_MAP: Record<MbtiCode, MbtiParticleProfile> = {
     symbol: '总',
     nickname: '总经理',
     poem: '焦糖粒子 · 像陈年橡木桶',
+    personaTag: '决断者·强',
   },
   ESFJ: {
     code: 'ESFJ',
@@ -129,6 +140,7 @@ export const MBTI_PARTICLE_MAP: Record<MbtiCode, MbtiParticleProfile> = {
     symbol: '执',
     nickname: '执政官',
     poem: '暖陶粒子 · 像家中的暖光餐桌',
+    personaTag: '炽烈者·锐',
   },
 
   // 探险家 SP · 明色调
@@ -139,6 +151,7 @@ export const MBTI_PARTICLE_MAP: Record<MbtiCode, MbtiParticleProfile> = {
     symbol: '匠',
     nickname: '鉴赏家',
     poem: '青绿粒子 · 像雨后的金属光泽',
+    personaTag: '谋略者·敛·韧',
   },
   ISFP: {
     code: 'ISFP',
@@ -147,6 +160,7 @@ export const MBTI_PARTICLE_MAP: Record<MbtiCode, MbtiParticleProfile> = {
     symbol: '探',
     nickname: '探险家',
     poem: '紫粉粒子 · 像未完成的画',
+    personaTag: '弹性者·实',
   },
   ESTP: {
     code: 'ESTP',
@@ -155,6 +169,7 @@ export const MBTI_PARTICLE_MAP: Record<MbtiCode, MbtiParticleProfile> = {
     symbol: '企',
     nickname: '企业家',
     poem: '焦橙粒子 · 像赛车场的尾焰',
+    personaTag: '实干者·深',
   },
   ESFP: {
     code: 'ESFP',
@@ -163,6 +178,7 @@ export const MBTI_PARTICLE_MAP: Record<MbtiCode, MbtiParticleProfile> = {
     symbol: '表',
     nickname: '表演者',
     poem: '亮金粒子 · 像聚光灯下的杯沿',
+    personaTag: '炽烈者·韧',
   },
 };
 
@@ -176,6 +192,7 @@ export function getMbtiProfile(code: MbtiCode): MbtiParticleProfile {
       symbol: '？',
       nickname: '神秘客',
       poem: '紫金粒子 · 像未明的星辰',
+      personaTag: '均衡者',
     }
   );
 }

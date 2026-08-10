@@ -266,7 +266,7 @@ describe('feedbackEngine · trackFeedback', () => {
   });
 
   it('向量字段被桶化到 0.1 · 不记原始值', () => {
-    const debugSpy = vi.spyOn(console, 'debug').mockImplementation(() => {});
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
     const preciseVec: PersonaVector = {
       TOL: 0.37,
       SPD: 0.82,
@@ -276,15 +276,15 @@ describe('feedbackEngine · trackFeedback', () => {
       VIS: 0.001,
     };
     trackFeedback('calibrate.result', { vector: preciseVec });
-    expect(debugSpy).toHaveBeenCalled();
-    const payload = debugSpy.mock.calls[0][1] as { vector: PersonaVector };
+    expect(logSpy).toHaveBeenCalled();
+    const payload = logSpy.mock.calls[0][logSpy.mock.calls[0].length - 1] as { vector: PersonaVector };
     expect(payload.vector.TOL).toBe(0.4);
     expect(payload.vector.SPD).toBe(0.8);
     expect(payload.vector.INF).toBe(0.6);
     expect(payload.vector.ENT).toBe(0.1);
     expect(payload.vector.LEAD).toBe(1);
     expect(payload.vector.VIS).toBe(0);
-    debugSpy.mockRestore();
+    logSpy.mockRestore();
   });
 
   it('error 级别节点始终输出', () => {
@@ -295,9 +295,9 @@ describe('feedbackEngine · trackFeedback', () => {
   });
 
   it('warn 级别节点 · feedback.skipped', () => {
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const infoSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
     trackFeedback('feedback.skipped', { recipeId: 'x' });
-    expect(warnSpy).toHaveBeenCalled();
-    warnSpy.mockRestore();
+    expect(infoSpy).toHaveBeenCalled();
+    infoSpy.mockRestore();
   });
 });

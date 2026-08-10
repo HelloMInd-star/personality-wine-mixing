@@ -8,6 +8,7 @@
    ============================================================ */
 
 :root {
+  color-scheme: dark;
   --void-900: #070414;
   --void-700: #15102e;
   --void-500: #2d1b4e;
@@ -19,6 +20,132 @@
   --text-muted: #8b7fb8;
   --border-soft: rgba(155, 123, 212, 0.18);
   --border-gold: rgba(240, 198, 116, 0.32);
+
+  /* ═══════════════════════════════════════════════
+     字体节奏 · 9 级
+     ═══════════════════════════════════════════════ */
+  --fz-xxs: 10px;   /* 极小辅助 · 角标 */
+  --fz-xs: 11px;    /* 辅助说明 · 副标题 */
+  --fz-sm: 12px;    /* 辅助信息 */
+  --fz-md: 14px;    /* 正文基准 */
+  --fz-lg: 16px;    /* 重点正文 */
+  --fz-xl: 18px;    /* 小组件标题 */
+  --fz-2xl: 22px;   /* 区块标题 */
+  --fz-3xl: 28px;   /* 页面主标题 */
+  --fz-4xl: 38px;   /* 大号标题 */
+
+  /* 字重 */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+
+  /* 行距与字距 */
+  --lh-tight: 1.25;
+  --lh-normal: 1.55;
+  --lh-relaxed: 1.75;
+  --ls-tight: -0.02em;
+  --ls-normal: 0;
+  --ls-wide: 0.04em;
+  --ls-extrawide: 0.14em;
+
+  /* ═══════════════════════════════════════════════
+     间距 · 五级
+     ═══════════════════════════════════════════════ */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+
+  /* ═══════════════════════════════════════════════
+     圆角 · 三级
+     ═══════════════════════════════════════════════ */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  /* ═══════════════════════════════════════════════
+     阴影分层 · 三级
+     ═══════════════════════════════════════════════ */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-layer-1: 0 1px 2px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.25);
+  --shadow-layer-2: 0 4px 10px rgba(0, 0, 0, 0.5), 0 10px 28px rgba(124, 95, 191, 0.12);
+  --shadow-layer-3: 0 12px 28px rgba(0, 0, 0, 0.58), 0 24px 60px rgba(124, 95, 191, 0.18),
+                     0 0 0 1px rgba(240, 198, 116, 0.06);
+
+  /* ═══════════════════════════════════════════════
+     过渡
+     ═══════════════════════════════════════════════ */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ═══════════════════════════════════════════════
+     Badge / Tag · 语义色
+     ═══════════════════════════════════════════════ */
+  --badge-radius: 999px;
+  --badge-pad-x: 12px;
+  --badge-pad-y: 4px;
+  --badge-border: rgba(240, 198, 116, 0.25);
+  --badge-bg-purple: linear-gradient(135deg, rgba(124, 95, 191, 0.18), rgba(124, 95, 191, 0.06));
+  --badge-bg-gold: linear-gradient(135deg, rgba(240, 198, 116, 0.18), rgba(240, 198, 116, 0.06));
+  --badge-bg-green: linear-gradient(135deg, rgba(52, 211, 153, 0.18), rgba(52, 211, 153, 0.06));
+  --badge-bg-blue: linear-gradient(135deg, rgba(96, 165, 250, 0.18), rgba(96, 165, 250, 0.06));
+  --badge-bg-pink: linear-gradient(135deg, rgba(244, 114, 182, 0.18), rgba(244, 114, 182, 0.06));
+  --badge-line-purple: #7c5fbf;
+  --badge-line-gold: #f0c674;
+  --badge-line-green: #34d399;
+  --badge-line-blue: #60a5fa;
+  --badge-line-pink: #f472b6;
+
+  /* ═══════════════════════════════════════════════
+     按钮
+     ═══════════════════════════════════════════════ */
+  --btn-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  --btn-inner-highlight-strong: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  --btn-text-color: #ffffff;
+
+  /* ═══════════════════════════════════════════════
+     卡片装饰
+     ═══════════════════════════════════════════════ */
+  --card-top-line: linear-gradient(90deg, transparent 0%, #7c5fbf 20%, #f0c674 50%, #7c5fbf 80%, transparent 100%);
+  --card-corner-glow: radial-gradient(circle at 0% 0%, rgba(124, 95, 191, 0.25), transparent 50%),
+                      radial-gradient(circle at 100% 100%, rgba(240, 198, 116, 0.2), transparent 50%);
+
+  /* ═══════════════════════════════════════════════
+     进度条
+     ═══════════════════════════════════════════════ */
+  --progress-track: rgba(255, 255, 255, 0.06);
+  --progress-fill: linear-gradient(90deg, #7c5fbf 0%, #f0c674 100%);
+  --progress-fill-highlight: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, transparent 40%);
+
+  /* ═══════════════════════════════════════════════
+     Section 标题装饰线
+     ═══════════════════════════════════════════════ */
+  --section-title-line: linear-gradient(90deg, #f0c674 0%, rgba(240, 198, 116, 0) 100%);
+  --section-title-line-short: linear-gradient(180deg, #7c5fbf, #f0c674);
+
+  /* ═══════════════════════════════════════════════
+     侧边栏选中态
+     ═══════════════════════════════════════════════ */
+  --sider-selected-indicator: linear-gradient(180deg, #7c5fbf 0%, #f0c674 100%);
+  --sider-indicator-width: 3px;
+
+  /* ═══════════════════════════════════════════════
+     头像光环
+     ═══════════════════════════════════════════════ */
+  --avatar-ring: linear-gradient(135deg, #7c5fbf, #f0c674, #7c5fbf);
+  --avatar-ring-width: 2px;
+  --avatar-glow: 0 0 14px rgba(124, 95, 191, 0.45), 0 0 6px rgba(240, 198, 116, 0.35);
+
+  /* ═══════════════════════════════════════════════
+     内阴影文字
+     ═══════════════════════════════════════════════ */
+  --text-shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 * {

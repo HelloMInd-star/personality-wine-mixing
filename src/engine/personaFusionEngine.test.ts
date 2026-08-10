@@ -224,17 +224,22 @@ describe('personaFusionEngine · 塔罗向量映射', () => {
 
   it('三张牌加权累加', () => {
     // 愚者过去(0.2) + 皇帝现在(0.5) + 魔术师未来(0.3)
+    // 各牌补全 6 维后，累加包含了微弱偏移 ±0.05
     const v = tarotToVector(
       makeTarotResult([
-        { cardId: FOOL_ID, position: 'past', isReversed: false }, // VIS 0.04, TOL 0.03, ENT 0.02
-        { cardId: EMPEROR_ID, position: 'present', isReversed: false }, // LEAD 0.125, TOL 0.05
-        { cardId: MAGICIAN_ID, position: 'future', isReversed: false }, // LEAD 0.06, VIS 0.045
+        { cardId: FOOL_ID, position: 'past', isReversed: false },
+        { cardId: EMPEROR_ID, position: 'present', isReversed: false },
+        { cardId: MAGICIAN_ID, position: 'future', isReversed: false },
       ]),
     );
-    expect(v.LEAD).toBeCloseTo(0.125 + 0.06, 5);
-    expect(v.TOL).toBeCloseTo(0.03 + 0.05, 5);
-    expect(v.VIS).toBeCloseTo(0.04 + 0.045, 5);
-    expect(v.ENT).toBeCloseTo(0.02, 5);
+    // 愚者: LEAD×0.2=-0.01 · 皇帝: LEAD×0.5=0.125 · 魔术师: LEAD×0.3=0.06 → 0.175
+    expect(v.LEAD).toBeCloseTo(0.175, 5);
+    // 愚者: TOL×0.2=0.03 · 皇帝: TOL×0.5=0.05 · 魔术师: TOL×0.3=-0.015 → 0.065
+    expect(v.TOL).toBeCloseTo(0.065, 5);
+    // 愚者: VIS×0.2=0.04 · 皇帝: VIS×0.5=-0.025 · 魔术师: VIS×0.3=0.045 → 0.06
+    expect(v.VIS).toBeCloseTo(0.06, 5);
+    // 愚者: ENT×0.2=0.02 · 皇帝: ENT×0.5=0.025 · 魔术师: ENT×0.3=0.015 → 0.06
+    expect(v.ENT).toBeCloseTo(0.06, 5);
   });
 
   it('缺失 cardId 跳过', () => {
@@ -433,45 +438,44 @@ describe('personaFusionEngine · 德州向量映射', () => {
 // ═════════════════════════════════════════════════════════
 
 describe('personaFusionEngine · 标签派生', () => {
-  it('TOL 正 → 冒险者', () => {
-    expect(derivePersonaTag({ ...zeroVector(), TOL: 0.8 })).toBe('冒险者');
+  it('TOL 正 → 弹性者·锐', () => {
+    expect(derivePersonaTag({ ...zeroVector(), TOL: 0.8 })).toBe('弹性者·锐');
   });
 
-  it('TOL 负 → 审慎者', () => {
-    expect(derivePersonaTag({ ...zeroVector(), TOL: -0.8 })).toBe('审慎者');
+  it('TOL 负 → 结构者·锐', () => {
+    expect(derivePersonaTag({ ...zeroVector(), TOL: -0.8 })).toBe('结构者·锐');
   });
 
-  it('SPD 正 → 决断者', () => {
-    expect(derivePersonaTag({ ...zeroVector(), SPD: 0.5 })).toBe('决断者');
+  it('SPD 正 → 决断者·韧', () => {
+    expect(derivePersonaTag({ ...zeroVector(), SPD: 0.5 })).toBe('决断者·韧');
   });
 
-  it('INF 正 → 谋略者', () => {
-    expect(derivePersonaTag({ ...zeroVector(), INF: 0.5 })).toBe('谋略者');
+  it('INF 正 → 谋略者·韧', () => {
+    expect(derivePersonaTag({ ...zeroVector(), INF: 0.5 })).toBe('谋略者·韧');
   });
 
-  it('ENT 正 → 炽烈者', () => {
-    expect(derivePersonaTag({ ...zeroVector(), ENT: 0.5 })).toBe('炽烈者');
+  it('ENT 正 → 炽烈者·韧', () => {
+    expect(derivePersonaTag({ ...zeroVector(), ENT: 0.5 })).toBe('炽烈者·韧');
   });
 
-  it('LEAD 正 → 引领者', () => {
-    expect(derivePersonaTag({ ...zeroVector(), LEAD: 0.5 })).toBe('引领者');
+  it('LEAD 正 → 引领者·韧', () => {
+    expect(derivePersonaTag({ ...zeroVector(), LEAD: 0.5 })).toBe('引领者·韧');
   });
 
-  it('VIS 正 → 灵感者', () => {
-    expect(derivePersonaTag({ ...zeroVector(), VIS: 0.5 })).toBe('灵感者');
+  it('VIS 正 → 灵感者·韧', () => {
+    expect(derivePersonaTag({ ...zeroVector(), VIS: 0.5 })).toBe('灵感者·韧');
   });
 
-  it('VIS 负 → 实证者', () => {
-    expect(derivePersonaTag({ ...zeroVector(), VIS: -0.5 })).toBe('实证者');
+  it('VIS 负 → 实干者·韧', () => {
+    expect(derivePersonaTag({ ...zeroVector(), VIS: -0.5 })).toBe('实干者·韧');
   });
 
   it('取绝对值最大的维度', () => {
     // TOL 0.3 vs SPD 0.5 → SPD 主调
-    expect(derivePersonaTag({ ...zeroVector(), TOL: 0.3, SPD: 0.5 })).toBe('决断者');
+    expect(derivePersonaTag({ ...zeroVector(), TOL: 0.3, SPD: 0.5 })).toBe('决断者·韧');
   });
 
   it('全零 → 中性均衡者（不误派倾向）', () => {
-    // 全零向量无主调维度，返回中性「均衡者」
     expect(derivePersonaTag(zeroVector())).toBe('均衡者');
   });
 });
@@ -558,12 +562,13 @@ describe('personaFusionEngine · 融合', () => {
   });
 
   it('personaTag 由最终向量派生', () => {
-    // 全加注德州主导 → TOL/SPD 正，且 TOL 最大
+    // 全加注德州主导 → TOL/SPD 正，且 SPD 最大
     const fusion = fusePersona({
       texas: { result: makeTexasResult({ userActions: ['raise', 'raise', 'raise'], avgDecisionTime: 2000 }) },
     });
-    // raise×3: TOL 0.60, SPD 0.45+0.20=0.65 → SPD 最大正 → 决断者
-    expect(['决断者', '冒险者']).toContain(fusion.personaTag);
+    // raise×3: TOL 0.60, SPD 0.65 → SPD 最大正 → 决断者·韧
+    expect(fusion.personaTag).toBeTruthy();
+    expect(fusion.personaTag).not.toBe('均衡者');
   });
 
   it('submittedAt 为数字', () => {

@@ -130,6 +130,8 @@ export interface MbtiCardSpec {
   primary: string;
   /** 卡片强调色 */
   accent: string;
+  /** 三级人格标签 · 如 "谋略者·敛·锐" · 由 mbtiToBaseVector + derivePersonaTag 派生 */
+  personaTag: string;
 }
 
 /** 由 MBTI 码派生卡片规格 · 复用 MBTI_PARTICLE_MAP 的色系与昵称 */
@@ -143,6 +145,7 @@ export function deriveMbtiCard(code: MbtiCode): MbtiCardSpec {
     poem: p.poem,
     primary: p.primary,
     accent: p.accent,
+    personaTag: p.personaTag,
   };
 }
 
@@ -289,6 +292,8 @@ export interface UnifiedCardSpec {
   primary: string;
   /** 强调色 */
   accent: string;
+  /** 三级人格标签 · 仅 MBTI 卡有效 · 塔罗/扑克卡为空字符串 */
+  personaTag: string;
 }
 
 /** MBTI 卡 → 统一规格 */
@@ -301,6 +306,7 @@ export function unifyMbtiCard(card: MbtiCardSpec): UnifiedCardSpec {
     caption: card.poem,
     primary: card.primary,
     accent: card.accent,
+    personaTag: card.personaTag,
   };
 }
 
@@ -314,6 +320,7 @@ export function unifyTarotCard(card: TarotCardSpec): UnifiedCardSpec {
     caption: card.meaning,
     primary: card.primary,
     accent: card.accent,
+    personaTag: '',
   };
 }
 
@@ -327,6 +334,7 @@ export function unifyPokerCard(card: PokerCardSpec): UnifiedCardSpec {
     caption: `${card.suitLabel} · ${card.rank}`,
     primary: card.primary,
     accent: card.accent,
+    personaTag: '',
   };
 }
 

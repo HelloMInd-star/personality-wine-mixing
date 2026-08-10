@@ -64,6 +64,8 @@ export interface PersonalityProfile {
   flavorPreference: FlavorPreference;
   /** 生成时间戳 */
   createdAt: number;
+  /** 可选 · MBTI 四字母代码（如 "ISTJ"）· 用于三级标签体系 */
+  mbti?: string;
 }
 
 /** 风味偏好 · 由人格映射而来（详见 flavor.ts） */

@@ -1,5 +1,5 @@
 /**
- * ScentLabPage · 气味定制页 · 五步流程
+ * BrewScentPage · 酿·香 · 气味定制页 · 五步流程
  *
  * 1. 选香味基础（6 调性 · 对应 MBTI 倾向）
  * 2. 拖拽组合配方（乐高分子结构搭建 · MoleculeBuilder）
@@ -74,7 +74,7 @@ const SLOT_SCENT_HINT: Record<string, string> = {
   midnight: '沉静 · 麝香 / 广藿香',
 };
 
-export default function ScentLabPage() {
+export default function BrewScentPage() {
   const navigate = useNavigate();
   const { profile, vector, manualTimeSlot, setManualTimeSlot, getCalibratedVector } = useAppStore();
   const currentSlot = resolveTimeSlot(new Date(), manualTimeSlot);
@@ -169,7 +169,7 @@ export default function ScentLabPage() {
       {/* 标题区 */}
       <header className="mb-10">
         <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3">
-          Scent Lab · 气味定制
+          酿 · 香 · Scent Lab
         </div>
         <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
           气味 · 分子搭建

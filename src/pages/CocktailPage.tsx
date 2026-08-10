@@ -1,8 +1,7 @@
 /**
  * CocktailPage · 调酒配方库主页面
- * 三层信息架构：Ⅰ 基础酒单 → Ⅱ 角色扮演 → Ⅲ 创意调酒
+ * 三层信息架构：酒单（浏览） → 调酒台（推荐+搭建） → 调酒回路（感官）
  * 有人格画像 · 织就契合推荐；无人格画像 · 浏览全部夜之酒单
- * 搜索与情绪筛选始终作用于「全部酒单」区，与推荐区互不干扰
  */
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
@@ -10,38 +9,23 @@ import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../store/appStore';
 import { useCocktail } from '../hooks/useCocktail';
 import { useJourney } from '../hooks/useJourney';
-import { COCKTAILS } from '../data/cocktails';
-import type { Cocktail, CocktailRecommendation, MoodTag } from '../types/cocktail';
 import GlassPanel from '../components/ui/GlassPanel';
 import GradientButton from '../components/ui/GradientButton';
 import CocktailCard from '../components/cocktail/CocktailCard';
 import CocktailDetail from '../components/cocktail/CocktailDetail';
-import MoodDial from '../components/cocktail/MoodDial';
-import JourneyArc from '../components/cocktail/JourneyArc';
-import MusicControl from '../components/cocktail/MusicControl';
-import LightCanvas from '../components/cocktail/LightCanvas';
-import ScentCard from '../components/cocktail/ScentCard';
-import PlaylistSelector from '../components/cocktail/PlaylistSelector';
-import SanctuarySpace from '../components/cocktail/SanctuarySpace';
+import MoodDial from '../components/brew/journey/MoodDial';
+import JourneyArc from '../components/brew/journey/JourneyArc';
+import MusicControl from '../components/brew/music/MusicControl';
+import LightCanvas from '../components/brew/light/LightCanvas';
+import ScentCard from '../components/brew/scent/ScentCard';
+import PlaylistSelector from '../components/brew/music/PlaylistSelector';
+import SanctuarySpace from '../components/sanctuary/SanctuarySpace';
 import RatingCard from '../components/cocktail/RatingCard';
 import CocktailBuilder from '../components/cocktail/CocktailBuilder';
 import { DIM_LABEL, type PersonaDim } from '../types/personaFusion';
 import { resolveTimeSlot, describeBiologyShift, applyBiologyShift } from '../engine/timeEngine';
 import { profileToVector } from '../engine/profileToVector';
-
-/** 情绪标签中文映射 · 筛选药丸的文案来源 */
-const MOOD_LABELS: Record<MoodTag, string> = {
-  calm: '沉静',
-  passion: '热烈',
-  melancholy: '怅然',
-  elegant: '雅致',
-  rebel: '叛逆',
-  romantic: '浪漫',
-  mystery: '神秘',
-  celebration: '庆典',
-};
-
-const MOOD_KEYS = Object.keys(MOOD_LABELS) as MoodTag[];
+import { derivePersonaTag, mbtiToBaseVector } from '../engine/personaFusionEngine';
 
 /** 三层分段标题 · 统一深空紫金语系 */
 function SectionHeader({
@@ -133,10 +117,6 @@ export default function CocktailPage() {
     refreshByJourneyVector,
     selectedCocktail,
     selectCocktail,
-    search,
-    searchKeyword,
-    searchResults,
-    filterByMoodTag,
   } = useCocktail(profile?.flavorPreference);
 
   // 旅程派生 · 阶段 + 曲目 + 音乐 + 光效 + 气味 + 歌单档位联动
@@ -177,10 +157,6 @@ export default function CocktailPage() {
   // Builder 调酒完成态 · 传出稳定 recipeId 供评分回路 · 优先于酒单选择的酒
   const [lastCrafted, setLastCrafted] = useState<{ recipeId: string; name: string } | null>(null);
 
-  // 情绪筛选本地态 · 与搜索互斥（与情绪调节器分离）
-  const [filterMood, setFilterMood] = useState<MoodTag | null>(null);
-  const [moodResults, setMoodResults] = useState<Cocktail[]>([]);
-
   const handleSelect = (id: string, reasons: string[]) => {
     selectCocktail(id);
     setDetailReasons(reasons);
@@ -188,41 +164,6 @@ export default function CocktailPage() {
   };
 
   const handleClose = () => setDetailOpen(false);
-
-  const handleSearch = (kw: string) => {
-    search(kw);
-    // 搜索时清空情绪筛选 · 两者互斥
-    setFilterMood(null);
-    setMoodResults([]);
-  };
-
-  const handleMoodClick = (mood: MoodTag) => {
-    if (filterMood === mood) {
-      // 再次点击同一情绪 · 取消筛选
-      setFilterMood(null);
-      setMoodResults([]);
-      return;
-    }
-    const results = filterByMoodTag(mood);
-    setFilterMood(mood);
-    setMoodResults(results);
-    // 情绪筛选时清空搜索
-    search('');
-  };
-
-  // 酒单展示列表 · 搜索优先于情绪，再回退全量
-  const displayedMenu: Cocktail[] = searchKeyword.trim()
-    ? searchResults
-    : filterMood
-      ? moodResults
-      : COCKTAILS;
-
-  // 浏览酒单时构造无契合度的推荐对象 · 供 CocktailCard 统一渲染
-  const menuRecommendations: CocktailRecommendation[] = displayedMenu.map((c) => ({
-    cocktail: c,
-    matchScore: 0,
-    reasons: [],
-  }));
 
   const hasPersona = !!(profile || vector);
 
@@ -406,11 +347,7 @@ export default function CocktailPage() {
               <GradientButton
                 variant="ghost"
                 size="md"
-                onClick={() =>
-                  document
-                    .getElementById('cocktail-menu')
-                    ?.scrollIntoView({ behavior: 'smooth' })
-                }
+                onClick={() => navigate('/menu')}
               >
                 浏览全部
               </GradientButton>
@@ -464,84 +401,23 @@ export default function CocktailPage() {
         </section>
       )}
 
-      {/* 酒单区 · 搜索与筛选始终显示 */}
-      <section id="cocktail-menu">
-        <div className="flex items-center justify-between gap-4 mb-5">
-          <h3 className="font-display text-xl md:text-2xl text-moon-200/80 tracking-[0.1em]">
-            {profile ? '全部酒单' : '夜之酒单'}
-          </h3>
-          <span className="text-xs text-moon-200/40 font-mono">
-            {displayedMenu.length} 款
-          </span>
-        </div>
-
-        {/* 搜索框 */}
-        <div className="mb-4">
-          <div className="relative max-w-md">
-            <input
-              type="text"
-              value={searchKeyword}
-              onChange={(e) => handleSearch(e.target.value)}
-              placeholder="搜索酒名、基酒或情绪…"
-              className="w-full px-4 py-2.5 pl-10 rounded-xl bg-void-700/60 border border-amethyst-500/25 text-sm text-moon-50 placeholder-moon-200/35 focus:outline-none focus:border-gold-400/50 focus:shadow-glow-gold transition-all duration-300"
-            />
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-moon-200/40 text-sm pointer-events-none">
-              ⌕
-            </span>
-            {searchKeyword && (
-              <button
-                type="button"
-                onClick={() => handleSearch('')}
-                aria-label="清空"
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-moon-200/40 hover:text-gold-400 transition-colors text-sm"
-              >
-                ✕
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* 情绪标签筛选 */}
-        <div className="mb-6 flex flex-wrap gap-2">
-          {MOOD_KEYS.map((mood) => {
-            const active = filterMood === mood;
-            return (
-              <button
-                key={mood}
-                type="button"
-                onClick={() => handleMoodClick(mood)}
-                className={`px-3 py-1 rounded-full text-xs tracking-[0.1em] border transition-all duration-300 ${
-                  active
-                    ? 'border-gold-400/60 text-gold-400 bg-gold-400/10 shadow-glow-gold'
-                    : 'border-amethyst-500/30 text-moon-200/60 hover:border-amethyst-400/50 hover:text-moon-200/90'
-                }`}
-              >
-                {MOOD_LABELS[mood]}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* 酒单网格 */}
-        {displayedMenu.length > 0 ? (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {menuRecommendations.map((rec) => (
-              <CocktailCard
-                key={rec.cocktail.id}
-                recommendation={rec}
-                onSelect={(id) => handleSelect(id, [])}
-                showMatch={false}
-              />
-            ))}
-          </div>
-        ) : (
-          <GlassPanel padding="lg">
-            <p className="text-center text-sm text-moon-200/50 italic">
-              夜里没有找到这一杯。换一个词，或换一种心情。
+      {/* 酒单浏览引导 · 从个性化推荐过渡到完整酒单 */}
+      <GlassPanel gold padding="md" className="mb-10 max-w-2xl mx-auto">
+        <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="text-[10px] tracking-[0.3em] text-amethyst-400/70 uppercase mb-1">
+              Browse · 浏览
+            </div>
+            <h3 className="font-display text-lg text-gold-sheen">浏览全部酒单</h3>
+            <p className="text-xs text-moon-200/50 mt-1">
+              经典、创意、原创 · 按分类与情绪筛选
             </p>
-          </GlassPanel>
-        )}
-      </section>
+          </div>
+          <GradientButton variant="gold" size="md" onClick={() => navigate('/menu')}>
+            前往酒单 →
+          </GradientButton>
+        </div>
+      </GlassPanel>
 
       {/* 喝后评分 · 闭环节点 · 基础酒单之后 · 优先评 Builder 调的酒，回退酒单选择的酒 */}
       {hasPersona && (lastCrafted || (!detailOpen && selectedCocktail)) && (
@@ -553,14 +429,14 @@ export default function CocktailPage() {
       )}
 
       {/* ═══════════════════════════════════════
-       *  Ⅱ · 创意调酒 · 人格 / 情绪 / 杯垫 / 气味
+       *  Ⅱ · 创意调酒 → 已迁移至「酿」层 · 见 /brew/*
        * ═══════════════════════════════════════ */}
       {hasPersona && (
         <>
           <SectionHeader
             index="Ⅱ"
             title="创意调酒"
-            subtitle="人格 · 情绪 · 杯垫 · 气味 · 调酒的创意氛围层"
+            subtitle="已迁移至「酿」层 · 前往探索香、弧、光、乐"
           />
 
           {/* 有人格画像 · 画像摘要条 */}
@@ -580,6 +456,13 @@ export default function CocktailPage() {
                   <h2 className="font-display text-2xl md:text-3xl text-gold-sheen text-shadow-glow-gold mt-1">
                     {profile.archetype.name}
                   </h2>
+                  <p className="text-sm text-gold-400/70 font-mono tracking-wider mt-0.5">
+                    {profile.mbti
+                      ? derivePersonaTag(mbtiToBaseVector(profile.mbti))
+                      : vector
+                        ? derivePersonaTag(vector)
+                        : null}
+                  </p>
                   <p className="text-sm text-moon-200/70 italic mt-1">
                     {profile.archetype.tagline}
                   </p>

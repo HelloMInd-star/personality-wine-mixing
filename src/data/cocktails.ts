@@ -46,6 +46,7 @@ export const COCKTAILS: Cocktail[] = [
     auraColor: '#a8842f',
     archetypeAffinity: ['clockmaker', 'alchemist'],
     difficulty: 2,
+    category: '经典',
   },
 
   // 2 · 涩格罗尼 — 叛逆与守序的角力
@@ -84,6 +85,7 @@ export const COCKTAILS: Cocktail[] = [
     auraColor: '#c97b5a',
     archetypeAffinity: ['clockmaker', 'nightcaller'],
     difficulty: 1,
+    category: '经典',
   },
 
   // 3 · 玛格丽特 — 浪漫的盐边
@@ -123,6 +125,7 @@ export const COCKTAILS: Cocktail[] = [
     auraColor: '#9b7bd4',
     archetypeAffinity: ['velvet', 'ember'],
     difficulty: 2,
+    category: '经典',
   },
 
   // 4 · 莫吉托 — 焰心者的清凉
@@ -164,6 +167,7 @@ export const COCKTAILS: Cocktail[] = [
     auraColor: '#7c5fbf',
     archetypeAffinity: ['ember', 'velvet'],
     difficulty: 2,
+    category: '经典',
   },
 
   // 5 · 曼哈顿 — 雅致的烈
@@ -202,6 +206,7 @@ export const COCKTAILS: Cocktail[] = [
     auraColor: '#d4a84b',
     archetypeAffinity: ['clockmaker', 'twilight'],
     difficulty: 2,
+    category: '经典',
   },
 
   // 6 · 干马天尼 — 炼金者的极简
@@ -240,6 +245,7 @@ export const COCKTAILS: Cocktail[] = [
     auraColor: '#d8c9f5',
     archetypeAffinity: ['alchemist', 'clockmaker'],
     difficulty: 3,
+    category: '经典',
   },
 
   // 7 · 浓缩马天尼 — 庆典的苦与润
@@ -279,6 +285,7 @@ export const COCKTAILS: Cocktail[] = [
     auraColor: '#5d44a0',
     archetypeAffinity: ['ember', 'nightcaller'],
     difficulty: 3,
+    category: '创意',
   },
 
   // 8 · 椰林飘香 — 浪漫的柔润
@@ -318,6 +325,7 @@ export const COCKTAILS: Cocktail[] = [
     auraColor: '#f0c674',
     archetypeAffinity: ['velvet', 'twilight'],
     difficulty: 2,
+    category: '经典',
   },
 
   // 9 · 威士忌酸 — 怅然的回甘
@@ -358,6 +366,7 @@ export const COCKTAILS: Cocktail[] = [
     auraColor: '#a8842f',
     archetypeAffinity: ['mistwalker', 'solitude'],
     difficulty: 3,
+    category: '经典',
   },
 
   // 10 · 吉姆雷特 — 雅致的酸
@@ -396,6 +405,7 @@ export const COCKTAILS: Cocktail[] = [
     auraColor: '#d8c9f5',
     archetypeAffinity: ['clockmaker', 'alchemist'],
     difficulty: 1,
+    category: '经典',
   },
 
   // 11 · 血腥玛丽 — 叛逆的咸辣
@@ -437,6 +447,7 @@ export const COCKTAILS: Cocktail[] = [
     auraColor: '#c97b5a',
     archetypeAffinity: ['nightcaller', 'ember'],
     difficulty: 2,
+    category: '经典',
   },
 
   // 12 · 阿佩罗海滩 — 庆典的橘金
@@ -476,6 +487,7 @@ export const COCKTAILS: Cocktail[] = [
     auraColor: '#f0c674',
     archetypeAffinity: ['ember', 'twilight'],
     difficulty: 1,
+    category: '经典',
   },
 
   // 13 · 盘尼西林 — 炼金者的烟熏
@@ -515,6 +527,7 @@ export const COCKTAILS: Cocktail[] = [
     auraColor: '#5d44a0',
     archetypeAffinity: ['alchemist', 'dreamweaver'],
     difficulty: 3,
+    category: '创意',
   },
 
   // 14 · 老广场 — 神秘的烈
@@ -555,6 +568,7 @@ export const COCKTAILS: Cocktail[] = [
     auraColor: '#7c5fbf',
     archetypeAffinity: ['clockmaker', 'solitude'],
     difficulty: 3,
+    category: '经典',
   },
 
   // 15 · 飞行 — 神秘的紫罗兰
@@ -594,6 +608,7 @@ export const COCKTAILS: Cocktail[] = [
     auraColor: '#9b7bd4',
     archetypeAffinity: ['dreamweaver', 'mistwalker'],
     difficulty: 3,
+    category: '经典',
   },
 
   // 16 · 最后的话 — 独酌者的酸甜
@@ -633,5 +648,173 @@ export const COCKTAILS: Cocktail[] = [
     auraColor: '#7c5fbf',
     archetypeAffinity: ['solitude', 'dreamweaver'],
     difficulty: 2,
+    category: '经典',
+  },
+
+  // 17 · 刻度 — ISTJ 物流师的专属定制
+  {
+    id: 'the-gauge',
+    name: '刻度',
+    nameEn: 'The Gauge',
+    tagline: '多一分则过，少一分不足。',
+    story:
+      '以经典曼哈顿为骨架，加入阿玛罗增添草本复杂度，两种苦精精准校准风味刻度——就像 ISTJ 做任何事都有精确的标尺。没有花里胡哨的装饰，只有严谨到苛刻的平衡，喝下去的每一口都是"靠谱"的味道。',
+    baseSpirit: 'whisky',
+    abv: 32,
+    glass: 'coupe',
+    garnish: '柠檬皮扭与马拉斯奇诺樱桃',
+    flavorProfile: {
+      sweet: 2,
+      sour: 1,
+      bitter: 5,
+      strong: 7,
+      smoky: 1,
+      fruity: 0,
+      herbal: 4,
+      creamy: 0,
+    },
+    ingredients: [
+      { name: '黑麦威士忌 Rye Whiskey', amount: '45ml' },
+      { name: '干味美思 Dry Vermouth', amount: '15ml' },
+      { name: '阿玛罗 Amaro Nonino', amount: '10ml' },
+      { name: '安格斯特拉苦精 Angostura Bitters', amount: '2 dashes' },
+      { name: '橙味苦精 Orange Bitters', amount: '1 dash' },
+    ],
+    steps: [
+      { order: 1, text: '将黑麦威士忌、干味美思与阿玛罗加入调酒杯，加冰搅拌约 25 秒至冰透。' },
+      { order: 2, text: '滴入安格斯特拉与橙味苦精，继续搅拌 5 秒使风味校准。' },
+      { order: 3, text: '滤入冰镇浅碟杯，将柠檬皮油脂喷于杯面后扭入杯中，缀以马拉斯奇诺樱桃。' },
+    ],
+    moods: ['elegant', 'calm'],
+    auraColor: '#b8842f',
+    archetypeAffinity: ['clockmaker', 'navigator'],
+    difficulty: 3,
+    category: '原创',
+  },
+
+  // 18 · 毛衣 — ISFJ 守卫者的专属定制
+  {
+    id: 'wool-sweater',
+    name: '毛衣',
+    nameEn: 'Wool Sweater',
+    tagline: '穿在身上的温度。',
+    story:
+      '这是一杯"穿在身上的酒"——爱尔兰威士忌的温润打底，蜂蜜和榛子像冬日的暖阳，奶油带来柔软包裹感，一点点柠檬提鲜不让甜腻泛滥。就像 ISFJ，总是用最温柔的方式照顾身边每一个人，不张扬、不抢眼，但你知道只要 TA 在，就不会冷。',
+    baseSpirit: 'whisky',
+    abv: 22,
+    glass: 'rocks',
+    garnish: '肉豆蔻粉撒面与一小枝百里香',
+    flavorProfile: {
+      sweet: 6,
+      sour: 2,
+      bitter: 1,
+      strong: 4,
+      smoky: 0,
+      fruity: 2,
+      herbal: 3,
+      creamy: 7,
+    },
+    ingredients: [
+      { name: '爱尔兰威士忌 Irish Whiskey', amount: '40ml' },
+      { name: '蜂蜜糖浆 Honey Syrup', amount: '15ml' },
+      { name: '榛子利口酒 Frangelico', amount: '10ml' },
+      { name: '鲜榨柠檬汁 Lemon Juice', amount: '10ml' },
+      { name: '浓奶油 Heavy Cream', amount: '15ml' },
+      { name: '蛋清 Egg White', amount: '半个（约15ml，可选）' },
+    ],
+    steps: [
+      { order: 1, text: '将所有材料加入摇酒壶，先无冰干摇 15 秒使蛋清起泡。' },
+      { order: 2, text: '加入冰块再摇 15 秒至冰透绵密。' },
+      { order: 3, text: '滤入装有大方冰的古典杯，表面撒肉豆蔻粉，缀以一小枝百里香。' },
+    ],
+    moods: ['calm', 'romantic'],
+    auraColor: '#e0b85e',
+    archetypeAffinity: ['velvet', 'mistwalker'],
+    difficulty: 3,
+    category: '原创',
+  },
+
+  // 19 · 军令 — ESTJ 总经理的专属定制
+  {
+    id: 'chain-of-command',
+    name: '军令',
+    nameEn: 'Chain of Command',
+    tagline: '一杯酒，就是一个决定。',
+    story:
+      '双威士忌基底奠定力量感的基调，金巴利和甜味美思构成苦甜平衡的中层，苦精与茴香洗杯带来直击鼻腔的冲击力——每一层都有明确的分工，像一支纪律严明的军队。这不是一杯用来"小酌"的酒，这是一杯用来"做决定"的酒。喝下去，你就是那个发号施令的人。',
+    baseSpirit: 'whisky',
+    abv: 35,
+    glass: 'rocks',
+    garnish: '柠檬皮扭（喷香后放入）',
+    flavorProfile: {
+      sweet: 2,
+      sour: 0,
+      bitter: 6,
+      strong: 9,
+      smoky: 6,
+      fruity: 0,
+      herbal: 4,
+      creamy: 0,
+    },
+    ingredients: [
+      { name: '烟熏苏格兰威士忌 Peated Scotch', amount: '30ml' },
+      { name: '黑麦威士忌 Rye Whiskey', amount: '20ml' },
+      { name: '金巴利 Campari', amount: '15ml' },
+      { name: '甜味美思 Sweet Vermouth', amount: '10ml' },
+      { name: '安格斯特拉苦精 Angostura Bitters', amount: '3 dashes' },
+      { name: '茴香酒 Pernod', amount: '洗杯用（涮一圈后倒出）' },
+    ],
+    steps: [
+      { order: 1, text: '用茴香酒润冰镇古典杯内壁后倒出，使杯壁附着一层茴香气息。' },
+      { order: 2, text: '将双威士忌、金巴利、甜味美思与苦精加入调酒杯，加冰搅拌约 25 秒至冰透。' },
+      { order: 3, text: '滤入备好的古典杯，放一块大方冰，将柠檬皮油脂喷于杯面后扭入杯中。' },
+    ],
+    moods: ['elegant', 'mystery'],
+    auraColor: '#7c4a3a',
+    archetypeAffinity: ['navigator', 'clockmaker'],
+    difficulty: 4,
+    category: '原创',
+  },
+
+  // 20 · 派对主持 — ESFJ 执政官的专属定制
+  {
+    id: 'the-host',
+    name: '派对主持',
+    nameEn: 'The Host',
+    tagline: '让每个人都开心的魔法。',
+    story:
+      '热带水果的热情开场，西柚的微苦增加层次，气泡带来轻盈的社交感——这是一杯"让所有人都喜欢"的酒。酒精度不高，颜值在线，入口友好，谁都能喝两杯，就像 ESFJ 总能照顾到在场每个人的感受。百香果的香气一上桌就会被问"这是什么酒？"——没错，它就是全场的焦点。',
+    baseSpirit: 'rum',
+    abv: 14,
+    glass: 'flute',
+    garnish: '西柚片、百香果半颗与薄荷叶',
+    flavorProfile: {
+      sweet: 5,
+      sour: 4,
+      bitter: 2,
+      strong: 3,
+      smoky: 0,
+      fruity: 8,
+      herbal: 1,
+      creamy: 0,
+    },
+    ingredients: [
+      { name: '白朗姆酒 White Rum', amount: '30ml' },
+      { name: '蜜桃利口酒 Peach Liqueur', amount: '15ml' },
+      { name: '西柚汁 Grapefruit Juice', amount: '20ml' },
+      { name: '百香果糖浆 Passion Fruit Syrup', amount: '10ml' },
+      { name: '青柠汁 Lime Juice', amount: '10ml' },
+      { name: '普罗塞克起泡酒 Prosecco', amount: '30ml（顶部加满）' },
+    ],
+    steps: [
+      { order: 1, text: '将白朗姆、蜜桃利口酒、西柚汁、百香果糖浆与青柠汁加入摇酒壶，加冰摇匀至壶壁结霜。' },
+      { order: 2, text: '滤入冰镇笛形杯。' },
+      { order: 3, text: '缓缓注入普罗塞克至近满，缀以西柚片、百香果半颗与薄荷叶。' },
+    ],
+    moods: ['passion', 'celebration'],
+    auraColor: '#f0a050',
+    archetypeAffinity: ['ember', 'velvet'],
+    difficulty: 2,
+    category: '原创',
   },
 ];

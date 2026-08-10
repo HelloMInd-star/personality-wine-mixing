@@ -210,41 +210,138 @@ export function texasToVector(result: TexasResult): PersonaVector {
 }
 
 // ═════════════════════════════════════════════════════════
+// MBTI → 人格向量 · 独立入口（无需角色参数）
+// ═════════════════════════════════════════════════════════
+
+/**
+ * MBTI 四字母 → 六维权重基线
+ *
+ * 每字母对六维的贡献独立累加，不跨字母交叉。
+ * 设计语义：
+ *   E/I → ENT(热情) / LEAD(主导) / SPD(速度)
+ *   S/N → VIS(直觉) / TOL(容错) / SPD(速度)
+ *   T/F → INF(信息) / ENT(热情) / TOL(容错)
+ *   J/P → SPD(速度) / TOL(容错) / LEAD(主导)
+ */
+const MBTI_BASE_WEIGHT: Record<string, Partial<PersonaVector>> = {
+  E: { ENT: 0.35, LEAD: 0.2, SPD: 0.1 },
+  I: { ENT: -0.25, INF: 0.1, SPD: -0.1 },
+  S: { VIS: -0.3, TOL: 0.1, SPD: 0.1 },
+  N: { VIS: 0.35, TOL: -0.1, SPD: -0.1 },
+  T: { INF: 0.25, ENT: -0.1, TOL: -0.1 },
+  F: { ENT: 0.15, TOL: 0.1, VIS: 0.05 },
+  J: { SPD: 0.2, TOL: -0.15, LEAD: 0.1 },
+  P: { SPD: -0.2, TOL: 0.2, LEAD: -0.05 },
+};
+
+/**
+ * MBTI 16 型直出六维人格向量
+ *
+ * 四字母权重累加 → 按最大绝对值归一化到 [-1, 1]
+ * 纯函数，无副作用，无角色参数。
+ *
+ * 可作为以下入口的统一数据契约：
+ *   - MBTI 定制酒推荐（mbtiToBaseVector → flavorFromVector → recommendCocktails）
+ *   - 酒局融合基线（personaFusionEngine.fuseMbtiCodes 的参与者向量）
+ *   - 气味实验室 MBTI 模式入口
+ *
+ * @param mbti MBTI 四字母代码 · 如 "ISTJ" / "ENFP" · 不区分大小写
+ * @returns 六维向量 [-1, 1] · 全零或非法输入返回零向量
+ *
+ * @example
+ *   mbtiToBaseVector('ISTJ')
+ *   // → { TOL:-0.43, SPD:0.57, INF:1.0, ENT:-1.0, LEAD:0.29, VIS:-0.86 }
+ *   mbtiToBaseVector('ENFP')
+ *   // → { TOL:0.67, SPD:-0.14, INF:0, ENT:1.0, LEAD:0.43, VIS:0.76 }
+ */
+export function mbtiToBaseVector(mbti: string): PersonaVector {
+  const acc = zeroVector();
+  const letters = mbti.toUpperCase().split('');
+
+  for (const letter of letters) {
+    const w = MBTI_BASE_WEIGHT[letter];
+    if (!w) continue;
+    for (const [dim, v] of Object.entries(w)) {
+      acc[dim as PersonaDim] += v ?? 0;
+    }
+  }
+
+  return normalizeVector(acc);
+}
+
+// ═════════════════════════════════════════════════════════
 // 标签派生
 // ═════════════════════════════════════════════════════════
 
 /**
- * 由最终向量派生人格标签
- * 取绝对值最大的维度作为主调，正负号作为倾向
- * 全零向量返回中性「均衡者」· 避免空输入误派冒险者
+ * 三级人格标签 · 由最终向量派生
+ *
+ *   L1 基础词 · 主维度 × 正负方向（12 种）
+ *   L2 修饰字 · 第二高维度 × 正负方向（细化语义）
+ *   L3 微标   · 仅冲突对用第三维度区分（16 型 1:1 映射）
+ *
+ * 全零向量 → 中性「均衡者」
  */
 export function derivePersonaTag(vec: PersonaVector): string {
-  let maxDim: PersonaDim = 'TOL';
-  let maxAbs = 0;
-  for (const d of DIMS) {
-    const a = Math.abs(vec[d]);
-    if (a > maxAbs) {
-      maxAbs = a;
-      maxDim = d;
-    }
-  }
+  // 按绝对值降序排列
+  const ranked = DIMS
+    .map((d) => ({ dim: d, val: vec[d], abs: Math.abs(vec[d]) }))
+    .sort((a, b) => b.abs - a.abs);
 
-  // 全零向量 → 中性均衡态，不误派任何倾向
-  if (maxAbs === 0) return '均衡者';
+  if (ranked[0].abs === 0) return '均衡者';
 
-  const LABEL: Record<PersonaDim, [string, string]> = {
-    // [负倾向, 正倾向]
-    TOL: ['审慎者', '冒险者'],
-    SPD: ['沉思者', '决断者'],
-    INF: ['直觉者', '谋略者'],
-    ENT: ['沉静者', '炽烈者'],
-    LEAD: ['追随者', '引领者'],
-    VIS: ['实证者', '灵感者'],
-  };
+  // L1: 基础词 = 主维度 × 方向
+  const L1 = (() => {
+    const [neg, pos] = L1_LABEL[ranked[0].dim];
+    return ranked[0].val >= 0 ? pos : neg;
+  })();
 
-  const [neg, pos] = LABEL[maxDim];
-  return vec[maxDim] >= 0 ? pos : neg;
+  // L2: 修饰字 = 第二高维度 × 方向
+  const L2 = (() => {
+    const [neg, pos] = L2_MODIFIER[ranked[1].dim];
+    return ranked[1].val >= 0 ? pos : neg;
+  })();
+
+  const base = `${L1}·${L2}`;
+
+  // 检查是否属于冲突对（同一 L1·L2 对应多个 MBTI 类型）
+  const conflictRule = CONFLICT_RULES[base];
+  if (!conflictRule) return base;
+
+  // L3: 微标 = 冲突解决规则选出的区分维度
+  const L3 = conflictRule(vec);
+  return `${base}·${L3}`;
 }
+
+// ── L1 基础词（12 种）──
+const L1_LABEL: Record<PersonaDim, [string, string]> = {
+  TOL:  ['结构者', '弹性者'],
+  SPD:  ['沉思者', '决断者'],
+  INF:  ['直觉者', '谋略者'],
+  ENT:  ['沉静者', '炽烈者'],
+  LEAD: ['追随者', '引领者'],
+  VIS:  ['实干者', '灵感者'],
+};
+
+// ── L2 修饰字（12 种）──
+const L2_MODIFIER: Record<PersonaDim, [string, string]> = {
+  TOL:  ['律', '韧'],
+  SPD:  ['缓', '锐'],
+  INF:  ['敏', '深'],
+  ENT:  ['敛', '热'],
+  LEAD: ['随', '强'],
+  VIS:  ['实', '灵'],
+};
+
+// ── L3 冲突解决规则 ──
+// 当两个 MBTI 类型共享同一 L1·L2 时，用一条规则选区分维度
+const CONFLICT_RULES: Record<string, (v: PersonaVector) => string> = {
+  // ISTJ（SPD+） vs ISTP（TOL+）：SPD 正则锐，否则韧
+  '谋略者·敛': (v) => (v.SPD > 0 ? '锐' : '韧'),
+
+  // ENFJ（LEAD+） vs ENFP（TOL+）：LEAD 高于 TOL 则强，否则稳
+  '炽烈者·灵': (v) => (v.LEAD > v.TOL ? '强' : '稳'),
+};
 
 // ═════════════════════════════════════════════════════════
 // 融合

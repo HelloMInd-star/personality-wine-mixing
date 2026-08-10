@@ -3,10 +3,10 @@
  * 深空中的星轨 · 鼠标点入时只加深的微妙交互
  */
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppStore } from '../../store/appStore';
 
-type NavGroup = 'collect' | 'consume' | 'scene';
+type NavGroup = 'collect' | 'consume' | 'brew' | 'scene';
 
 interface NavItem {
   to: string;
@@ -23,29 +23,46 @@ const NAV_ITEMS: NavItem[] = [
   { to: '/personality', label: '人格', labelEn: 'Persona', symbol: '镜', group: 'collect' },
   { to: '/cards', label: '牌类', labelEn: 'Cards', symbol: '牌', group: 'collect' },
   { to: '/chess', label: '棋局', labelEn: 'Chess', symbol: '弈', group: 'collect' },
+  { to: '/mind', label: '思维库', labelEn: 'Library', symbol: '库', group: 'collect' },
+  { to: '/invest', label: '实验室', labelEn: 'Lab', symbol: '验', group: 'collect' },
+  { to: '/brew/sandbox', label: '沙盘', labelEn: 'Sandbox', symbol: '沙', group: 'collect' },
   // 消费层 · 给自己调什么
+  { to: '/menu', label: '酒单', labelEn: 'Menu', symbol: '单', group: 'consume' },
   { to: '/cocktail', label: '调酒', labelEn: 'Elixir', symbol: '杯', group: 'consume' },
-  { to: '/scent-lab', label: '气味', labelEn: 'Scent', symbol: '香', group: 'consume' },
-  { to: '/storybook/journey', label: '回路', labelEn: 'Journey', symbol: '弧', group: 'consume' },
+  // 酿层 · 创意调制
+  { to: '/brew/scent', label: '香', labelEn: 'Scent', symbol: '香', group: 'brew' },
+  { to: '/brew/journey', label: '弧', labelEn: 'Journey', symbol: '弧', group: 'brew' },
+  { to: '/brew/light', label: '光', labelEn: 'Light', symbol: '光', group: 'brew' },
+  { to: '/brew/music', label: '乐', labelEn: 'Music', symbol: '乐', group: 'brew' },
+  { to: '/brew/molecular', label: '分子', labelEn: 'Molecule', symbol: '粒', group: 'brew' },
+  { to: '/brew/story-preview', label: '叙事', labelEn: 'Ode', symbol: '赋', group: 'brew' },
+  { to: '/brew/balance', label: '平衡', labelEn: 'Balance', symbol: '衡', group: 'brew' },
   // 场景层 · 在哪儿喝
   { to: '/mbti-party', label: '酒局', labelEn: 'Party', symbol: '局', group: 'scene' },
   { to: '/tavern', label: '酒馆', labelEn: 'Tavern', symbol: '夜', group: 'scene' },
-  { to: '/bar-counter', label: '吧台', labelEn: 'Counter', symbol: '垫', group: 'scene' },
+  { to: '/bar-counter', label: '吧台', labelEn: 'Counter', symbol: '台', group: 'scene' },
 ];
 
 const GROUP_META: Record<NavGroup, { label: string; labelEn: string }> = {
   collect: { label: '采集', labelEn: 'COLLECT' },
   consume: { label: '消费', labelEn: 'CONSUME' },
+  brew: { label: '酿', labelEn: 'BREW' },
   scene: { label: '场景', labelEn: 'SCENE' },
 };
 
-const GROUP_ORDER: NavGroup[] = ['collect', 'consume', 'scene'];
+const GROUP_ORDER: NavGroup[] = ['collect', 'consume', 'brew', 'scene'];
 
 export default function Sidebar() {
-  const { profile, vector } = useAppStore();
+  const { profile, vector, username, logout } = useAppStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login', { replace: true });
+  };
 
   return (
-    <aside className="fixed left-0 top-0 bottom-0 w-20 lg:w-64 glass border-r border-amethyst-500/15 flex flex-col z-20">
+    <aside className="hidden md:flex fixed left-0 top-0 bottom-0 w-20 lg:w-64 glass border-r border-amethyst-500/15 flex-col z-20">
       {/* 品牌标 · 镜月 */}
       <div className="px-4 lg:px-6 py-7 flex items-center gap-3">
         <div className="relative w-10 h-10 shrink-0 animate-breathe">
@@ -66,7 +83,7 @@ export default function Sidebar() {
       <div className="divider-gold mx-4 lg:mx-6" />
 
       {/* 导航 · 星轨 · 三段式分组（采集→消费→场景） */}
-      <nav className="flex-1 px-2 lg:px-3 py-4 flex flex-col">
+      <nav className="flex-1 px-2 lg:px-3 py-4 flex flex-col overflow-y-auto">
         {GROUP_ORDER.map((group, gi) => {
           const items = NAV_ITEMS.filter((i) => i.group === group);
           // 消费层在无任何采集产物时灰显（仍可点，弱化引导）
@@ -138,6 +155,19 @@ export default function Sidebar() {
               </div>
             </>
           )}
+        </div>
+        {/* 用户信息 + 登出 */}
+        <div className="mt-2 flex items-center justify-between px-1">
+          <span className="text-[10px] text-moon-200/40 truncate max-w-[120px]">
+            {username}
+          </span>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="text-[10px] text-amethyst-400/40 hover:text-gold-400 transition-colors duration-300 tracking-wider"
+          >
+            登出
+          </button>
         </div>
       </div>
     </aside>

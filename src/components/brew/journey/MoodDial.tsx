@@ -7,9 +7,9 @@
  */
 
 import type { CSSProperties } from 'react';
-import { MOOD_META } from '../../data/moodMeta';
-import type { MoodTag } from '../../types/cocktail';
-import GlassPanel from '../ui/GlassPanel';
+import { MOOD_META } from '../../../data/moodMeta';
+import type { MoodTag } from '../../../types/cocktail';
+import GlassPanel from '../../ui/GlassPanel';
 
 export interface MoodDialProps {
   /** 当前主动情绪 · null 表示关闭调节 */

@@ -16,8 +16,8 @@ import {
   PLAYLIST_PRESETS,
   type PlaylistTier,
   type PlaylistPreset,
-} from '../../data/playlistPresets';
-import GlassPanel from '../ui/GlassPanel';
+} from '../../../data/playlistPresets';
+import GlassPanel from '../../ui/GlassPanel';
 
 export interface PlaylistSelectorProps {
   /** 当前选中歌单档位 · 由 useJourney 派生（跟随旅程阶段） */

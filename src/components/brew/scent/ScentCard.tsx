@@ -29,9 +29,9 @@
  */
 
 import { useEffect, useLayoutEffect, useRef, type CSSProperties } from 'react';
-import type { ScentProfile } from '../../types/journey';
-import { DIFFUSION_DURATION } from '../../data/scentMeta';
-import GlassPanel from '../ui/GlassPanel';
+import type { ScentProfile } from '../../../types/journey';
+import { DIFFUSION_DURATION } from '../../../data/scentMeta';
+import GlassPanel from '../../ui/GlassPanel';
 
 export interface ScentCardProps {
   /** 气味配方 · 由 scentEngine 派生 */

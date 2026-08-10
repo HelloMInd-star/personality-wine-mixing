@@ -69,7 +69,7 @@ export default function HostBadge() {
   }, [hostState.status, panelOpen]);
 
   return (
-    <div ref={containerRef} className="fixed top-6 right-6 z-30">
+    <div ref={containerRef} className="hidden md:block fixed top-6 right-6 z-30">
       {/* 组件内 keyframes · 不污染全局 index.css */}
       <style>{`
         @keyframes host-shift {

@@ -111,6 +111,37 @@ export interface Cocktail {
   archetypeAffinity: string[];
   /** 难度 1-5 */
   difficulty: number;
+
+  // ═════════════════════════════════════════════════════════
+  // 酒库扩展字段 · 可选 · 富文本百科数据
+  // ═════════════════════════════════════════════════════════
+
+  /** 酒款分类 · "经典"（标准配方）/ "创意"（现代变体）/ "原创"（Y.Mine 专属定制） */
+  category?: '经典' | '创意' | '原创';
+  /** 文本风味标签 · 如 ["清爽", "草本", "橄榄香"] */
+  flavorTags?: string[];
+  /** 口感描述 · 完整叙事文本 */
+  tastingNotes?: string;
+  /** MBTI 适配维度 · 用于人格推荐 */
+  mbtiProfile?: MbtiCocktailProfile;
+  /** 适合场景 · 如 ["独酌沉思", "商务社交"] */
+  scenarios?: string[];
+  /** 经典指数 1-5 · 星级评价 */
+  classicRating?: number;
+  /** 调制方法 · 如 "搅拌法" / "摇荡法" */
+  method?: string;
+}
+
+/** MBTI 酒款适配维度 · 酒库专属 */
+export interface MbtiCocktailProfile {
+  /** 内外向倾向 · "偏内向独酌" / "偏外向社交" / "皆可" */
+  introversionBias: string;
+  /** 酒精度偏好 · "轻量" / "中度" / "浓烈" */
+  abvPreference: string;
+  /** 复杂度 · "简单直接" / "层次丰富" / "复杂多变" */
+  complexity: string;
+  /** 风味调性 · "清爽型" / "果味型" / "草本型" / "奶油型" / "甜润型" / "花香型" */
+  flavorTone: string;
 }
 
 /** 推荐结果 · 带匹配度 */
