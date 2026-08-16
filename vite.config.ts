@@ -119,6 +119,10 @@ function swaggerUiPlugin() {
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // ⬇️ 新增：适配 GitHub Pages 子路径部署
+  base: '/personality-wine-mixing/',
+  // ⬆️ 新增结束
+
   plugins: [react(), swaggerUiPlugin()],
   resolve: {
     alias: {
@@ -132,16 +136,13 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        // 工程化降债 · 拆分大依赖独立 chunk · 首屏不再背负 echarts
         manualChunks: {
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
           'vendor-echarts': ['echarts'],
-          // 隔离 Three.js 生态 · 非 3D 页面不再加载 776KB 无用 chunk
           'vendor-three': ['three', '@react-three/fiber', '@react-three/drei'],
         },
       },
     },
-    // 按依赖图自动拆分 >500kB 的内部模块
     chunkSizeWarningLimit: 600,
   },
 });
