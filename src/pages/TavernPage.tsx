@@ -456,7 +456,7 @@ export default function TavernPage() {
             <p className="text-xs text-moon-200/60 leading-relaxed mb-3">
               单杯硬件联动 · 杯垫 × 光效 × 气味
             </p>
-            <div className="text-[10px] text-amethyst-400/60">→ 占位（待实现）</div>
+            <div className="text-[10px] text-amethyst-400/60">→ 进入吧台</div>
           </GlassPanel>
         </div>
       </section>

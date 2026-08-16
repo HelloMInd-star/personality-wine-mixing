@@ -26,6 +26,7 @@ const NAV_ITEMS: NavItem[] = [
   { to: '/mind', label: '思维库', labelEn: 'Library', symbol: '库', group: 'collect' },
   { to: '/invest', label: '实验室', labelEn: 'Lab', symbol: '验', group: 'collect' },
   { to: '/brew/sandbox', label: '沙盘', labelEn: 'Sandbox', symbol: '沙', group: 'collect' },
+  { to: '/poker', label: '扑克', labelEn: 'Poker', symbol: '扑', group: 'collect' },
   // 消费层 · 给自己调什么
   { to: '/menu', label: '酒单', labelEn: 'Menu', symbol: '单', group: 'consume' },
   { to: '/cocktail', label: '调酒', labelEn: 'Elixir', symbol: '杯', group: 'consume' },

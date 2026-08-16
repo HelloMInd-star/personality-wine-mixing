@@ -136,6 +136,8 @@ export default defineConfig({
         manualChunks: {
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
           'vendor-echarts': ['echarts'],
+          // 隔离 Three.js 生态 · 非 3D 页面不再加载 776KB 无用 chunk
+          'vendor-three': ['three', '@react-three/fiber', '@react-three/drei'],
         },
       },
     },

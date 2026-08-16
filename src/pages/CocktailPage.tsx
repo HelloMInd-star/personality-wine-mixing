@@ -26,6 +26,8 @@ import { DIM_LABEL, type PersonaDim } from '../types/personaFusion';
 import { resolveTimeSlot, describeBiologyShift, applyBiologyShift } from '../engine/timeEngine';
 import { profileToVector } from '../engine/profileToVector';
 import { derivePersonaTag, mbtiToBaseVector } from '../engine/personaFusionEngine';
+import { matchCocktailsByPersona } from '../engine/cocktailMatchEngine';
+import { ALL_LIBRARY_COCKTAILS } from '../data/cocktailLibrary';
 
 /** 三层分段标题 · 统一深空紫金语系 */
 function SectionHeader({
@@ -140,6 +142,12 @@ export default function CocktailPage() {
     const calibratedBase = getCalibratedVector() ?? vector ?? (profile ? profileToVector(profile) : null);
     return calibratedBase ? applyBiologyShift(calibratedBase, currentSlot) : null;
   }, [getCalibratedVector, vector, profile, currentSlot]);
+
+  // 人格×酒库匹配推荐 · 六维向量 → 酒库 40 款排名
+  const personaMatches = useMemo(() => {
+    if (!dynamicVector) return null;
+    return matchCocktailsByPersona(dynamicVector, profile?.mbti, ALL_LIBRARY_COCKTAILS, 6);
+  }, [dynamicVector, profile?.mbti]);
 
   // 画像 / 动态向量 / 时段 / 情绪 / 强度变化时刷新旅程推荐 · 动态向量优先（含时段校准）
   useEffect(() => {
@@ -418,6 +426,34 @@ export default function CocktailPage() {
           </GradientButton>
         </div>
       </GlassPanel>
+
+      {/* 人格×酒库契合推荐 · 六维向量 → 40 款酒库排名 */}
+      {hasPersona && personaMatches && personaMatches.length > 0 && (
+        <section className="mb-12">
+          <div className="flex items-baseline justify-between gap-4 mb-5">
+            <div>
+              <h3 className="font-display text-xl md:text-2xl text-moon-200/80 tracking-[0.1em]">
+                人格契合酒库
+              </h3>
+              <p className="text-[11px] text-amethyst-400/50 mt-1 italic">
+                六维向量 × MBTI 原型匹配 · 从 40 款经典中为你筛选
+              </p>
+            </div>
+            <span className="text-xs tracking-[0.15em] font-display text-amethyst-400/60">
+              {personaMatches.length} 款匹配
+            </span>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {personaMatches.map((rec) => (
+              <CocktailCard
+                key={rec.cocktail.id}
+                recommendation={rec}
+                onSelect={(id) => handleSelect(id, rec.reasons)}
+              />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* 喝后评分 · 闭环节点 · 基础酒单之后 · 优先评 Builder 调的酒，回退酒单选择的酒 */}
       {hasPersona && (lastCrafted || (!detailOpen && selectedCocktail)) && (

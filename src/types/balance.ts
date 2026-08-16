@@ -143,6 +143,8 @@ export interface BalanceReport {
   scenarioStats: Array<{ id: string; name: string; winRate: number; desc: string }>;
   /** 详细表格行 */
   tableRows: BalanceTableRow[];
+  /** 纳什均衡分析 · 每型对手的博弈论评估 */
+  nashAnalysis?: NashAnalysisRow[];
 }
 
 export interface BalanceTableRow {
@@ -171,6 +173,67 @@ export interface BalanceConfig {
   baseSkill: number;
   /** 是否输出详细日志 */
   debug: boolean;
+  /** 用户棋局决策信号 · 用于个性化模拟 */
+  userSignals?: ChessDecisionSignals;
+}
+
+/** 纳什均衡分析行 · 每型对手的博弈论评估 */
+export interface NashAnalysisRow {
+  mbti: string;
+  group: string;
+  groupColor: string;
+  /** 均衡分数 0-1 */
+  equilibriumScore: number;
+  /** 策略推荐 0-1 */
+  strategyRecommendation: number;
+  /** 市场格局 */
+  marketRegime: string;
+  /** 纳什稳定性 0-1 */
+  nashStability: number;
+  /** 胜率 */
+  winRate: number;
+}
+
+// ═════════════════════════════════════════════════════════
+// 模拟结果 · pokerSimulator 输出
+// ═════════════════════════════════════════════════════════
+
+export interface SimulationResult {
+  stats: Record<string, MbtiStats>;
+  personas: Record<string, PokerBehaviorProfile>;
+  scenarios: GameScenario[];
+  mbtiList: string[];
+  totalRounds: number;
+  baseSkill: number;
+}
+
+// ═════════════════════════════════════════════════════════
+// 对局历史 · 从 PokerPage 持久化到 BalancePage
+// ═════════════════════════════════════════════════════════
+
+export interface GameHistoryEntry {
+  /** 唯一 ID */
+  id: string;
+  /** 对局时间戳 */
+  timestamp: number;
+  /** 玩家名 */
+  players: string[];
+  /** 各玩家手牌（字符串表示） */
+  holeCards: string[][];
+  /** 公共牌 */
+  communityCards: string[];
+  /** 各玩家手牌评估 */
+  handEvaluations: string[];
+  /** 胜者名 */
+  winner: string;
+  /** 胜者牌型 */
+  winnerHand: string;
+  /** 底池 */
+  pot: number;
+  /** 弃牌玩家 */
+  foldedPlayers: string[];
+  /** 各玩家行动序列 */
+  actionSummary: string[];
 }
 
 // ═════════════════════════════════════════════════════════

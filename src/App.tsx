@@ -42,6 +42,7 @@ const MindLibraryPage = lazy(() => import('./pages/MindLibraryPage'));
 const InvestPage = lazy(() => import('./pages/InvestPage'));
 const SandboxPage = lazy(() => import('./pages/SandboxPage'));
 const BalancePage = lazy(() => import('./pages/BalancePage'));
+const PokerPage = lazy(() => import('./pages/PokerPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 /** Suspense fallback · 深空加载态 */
@@ -108,6 +109,7 @@ export default function App() {
                 <Route path="/invest" element={<InvestPage />} />
                 <Route path="/brew/sandbox" element={<SandboxPage />} />
                 <Route path="/brew/balance" element={<BalancePage />} />
+                <Route path="/poker" element={<PokerPage />} />
                 {/* 404 兜底 · 此路无月 */}
                 <Route path="*" element={<NotFoundPage />} />
               </Route>

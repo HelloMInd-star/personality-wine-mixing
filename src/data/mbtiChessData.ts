@@ -278,13 +278,18 @@ export function getChessTemperament(id: ChessTemperamentId): ChessTemperament {
   return CHESS_TEMPERAMENTS.find((t) => t.id === id) ?? CHESS_TEMPERAMENTS[1];
 }
 
-/** MBTI code → 所属 temperament */
+/** MBTI code → 所属 temperament · Keirsey 气质分组 */
 export function mbtiToTemperament(mbti: string): ChessTemperamentId {
   const upper = mbti.toUpperCase();
-  if (upper.includes('NF')) return 'NF';
-  if (upper.includes('NT')) return 'NT';
-  if (upper.includes('SJ')) return 'SJ';
-  if (upper.includes('SP')) return 'SP';
+  const s = upper[1]; // S 或 N
+  if (s === 'N') {
+    const tf = upper[2]; // T 或 F
+    return tf === 'F' ? 'NF' : 'NT';
+  }
+  if (s === 'S') {
+    const jp = upper[3]; // J 或 P
+    return jp === 'J' ? 'SJ' : 'SP';
+  }
   return 'NT'; // 兜底
 }
 

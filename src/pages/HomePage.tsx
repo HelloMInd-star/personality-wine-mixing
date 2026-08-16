@@ -271,7 +271,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* 思维库 · 已造（向内） */}
           <button
             type="button"
@@ -340,6 +340,43 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="text-amethyst-400/40 group-hover:text-gold-400 transition-colors duration-500 text-sm tracking-widest">
+                  →
+                </div>
+              </div>
+            </GlassPanel>
+          </button>
+
+          {/* 扑克对局 · 金融孪生 */}
+          <button
+            type="button"
+            onClick={() => navigate('/poker')}
+            className="block w-full text-left group cursor-pointer"
+            aria-label="进入扑克对局"
+          >
+            <GlassPanel padding="lg" className="relative h-full">
+              <div
+                className="absolute inset-0 rounded-2xl pointer-events-none opacity-40 group-hover:opacity-70 transition-opacity duration-500"
+                style={{ border: '1px dashed rgba(240, 198, 116, 0.25)' }}
+              />
+              <div className="relative flex items-center gap-4">
+                <div
+                  className="w-14 h-14 rounded-full flex items-center justify-center font-display text-sm text-moon-200/40 shrink-0 transition-all duration-500 group-hover:text-gold-400/60"
+                  style={{ border: '1px dashed rgba(216, 201, 245, 0.3)' }}
+                >
+                  扑
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="font-display text-lg text-moon-200/70 group-hover:text-gold-sheen transition-colors duration-500">
+                    金融孪生对局
+                  </div>
+                  <div className="text-[10px] text-amethyst-400/50 tracking-[0.2em] uppercase mt-0.5">
+                    Poker · 三人德州
+                  </div>
+                  <div className="text-xs text-moon-200/50 mt-1">
+                    你的棋风驱动牌局 · AI 由投资人画像驱动
+                  </div>
+                </div>
+                <div className="text-gold-400/40 group-hover:text-gold-400 transition-colors duration-500 text-sm tracking-widest">
                   →
                 </div>
               </div>
