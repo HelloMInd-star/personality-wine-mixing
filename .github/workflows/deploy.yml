@@ -25,7 +25,7 @@ jobs:
 
       - name: Install and Build
         run: |
-          npm ci
+          npm install  # lock 文件与 package.json 暂不同步，先用 install 模式
           npm run build
 
       - name: Deploy to GitHub Pages
