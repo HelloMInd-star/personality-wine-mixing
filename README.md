@@ -2,6 +2,10 @@
 
 > 人格 × 感官 × 时间 · 把一个人的决策风格、感官偏好、昼夜节律，织成同一份向量
 
+## 🍸 [Live Demo → hellomind-star.github.io/personality-wine-mixing](https://hellomind-star.github.io/personality-wine-mixing/)
+
+![Y.Mine · 调酒 Elixir 界面：六维人格向量实时派生今夜之杯](docs/screenshots/elixir.jpg)
+
 Y.Mine 以六维人格向量为统一契约，把人格画像、感官偏好、时间生物学映射到同一份数据结构，再派生出调酒推荐、气味配方、酒局匹配等多模态产物。这不是问卷换酒单，是向量织夜。
 
 ---
