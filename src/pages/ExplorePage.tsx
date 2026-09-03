@@ -14,11 +14,11 @@ import { useNavigate } from 'react-router-dom';
 
 /** 五维切面 · 呼应产品本体而非商业概念 */
 const FIVE_DIMS = [
-  { glyph: '镜', name: '人格', sub: 'Persona',   desc: '六维向量 · OCEAN 映射 · 双轨采集（静问卷 + 动棋局）' },
+  { glyph: '镜', name: '人格', sub: 'Persona',   desc: '六维向量 · OCEAN 映射 · 静问卷与动棋局双轨采镜' },
   { glyph: '香', name: '感官', sub: 'Sensory',   desc: '视觉色 / 听觉乐 / 嗅觉香 / 味觉酒 · 多模态同构' },
-  { glyph: '弧', name: '时间', sub: 'Time',      desc: '皮质醇 / 褪黑素 / 睾酮 / 血清素 · 昼夜动态校准' },
+  { glyph: '弧', name: '时间', sub: 'Time',      desc: '皮质醇 / 褪黑素 / 睾酮 / 血清素 · 昼夜情绪弧线' },
   { glyph: '局', name: '场景', sub: 'Scene',     desc: '吧台 / 酒馆 / 酒局 · 一份向量织入不同氛围' },
-  { glyph: '杯', name: '反馈', sub: 'Feedback', desc: '评分 → 向量校准 → 推荐优化 · 闭环回路' },
+  { glyph: '杯', name: '反馈', sub: 'Feedback', desc: '评分 → 向量校准 → 旅程回路 · 感官闭环循环' },
 ] as const;
 
 export default function ExplorePage() {
@@ -38,9 +38,9 @@ export default function ExplorePage() {
         type="button"
         className="explore-back"
         onClick={() => navigate('/')}
-        aria-label="回到首页"
+        aria-label="回到入镜"
       >
-        ← 回到首页
+        ← 回到入镜
       </button>
 
       {/* 主体 */}
@@ -50,8 +50,8 @@ export default function ExplorePage() {
         </div>
         <h1 className="explore-title">五维织夜</h1>
         <p className="explore-lead">
-          Y.Mine 把人格、感官、时间、场景、反馈织成同一份向量。
-          这不是问卷换酒单，是向量织夜。
+          觉醉 把人格、感官、时间、场景、反馈织成同一份向量。
+          这不是问卷换酒单，是感官在夜里循环往复。
         </p>
 
         {/* 五维切面 */}
@@ -81,14 +81,14 @@ export default function ExplorePage() {
             className="explore-exit-primary"
             onClick={() => navigate('/hub')}
           >
-            进入星球枢纽 →
+            踏入星球枢纽 →
           </button>
           <button
             type="button"
             className="explore-exit-secondary"
             onClick={() => navigate('/')}
           >
-            回到首页
+            回到入镜
           </button>
         </div>
       </main>

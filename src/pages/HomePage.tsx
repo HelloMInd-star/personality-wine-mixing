@@ -1,5 +1,5 @@
 /**
- * HomePage · Y.Mine 入口
+ * HomePage · 觉醉 入口
  * 双轨系统的总览 · 人格与调酒在此交汇
  */
 
@@ -115,15 +115,15 @@ export default function HomePage() {
         )}
 
         <div className="text-[11px] tracking-[0.4em] text-amethyst-400/80 mb-4">
-          星云 · 人格调酒台
+          觉醉 · 感官情绪探索
         </div>
         <h1 className="font-display text-6xl lg:text-7xl text-gold-sheen text-shadow-glow-gold leading-tight">
-          人格调酒
+          入镜 · 调一杯夜
         </h1>
         <p className="mt-6 text-moon-200/70 max-w-xl leading-relaxed font-display">
-          以人格为引，调一杯专属于你的夜。
+          镜中自观，调酒仪式，情绪反馈。
           <br />
-          五维星图，八瓣风味，在深空里彼此映照。
+          在深空里，感官在夜里循环往复。
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-4 items-center">
@@ -132,13 +132,13 @@ export default function HomePage() {
             size="lg"
             onClick={() => navigate('/hub')}
           >
-            进入星球枢纽 →
+            入夜 →
           </GradientButton>
           <button
             type="button"
             onClick={() => navigate('/prelude')}
             className="text-xs tracking-[0.3em] text-amethyst-400/60 hover:text-gold-400 transition-colors duration-300 py-2 px-3"
-            aria-label="观看概念预告"
+            aria-label="观看觉醉概念预告"
           >
             概念预告 →
           </button>
@@ -160,7 +160,7 @@ export default function HomePage() {
             <div className="relative flex flex-col md:flex-row md:items-center gap-6">
               <div className="flex-1">
                 <div className="text-xs text-amethyst-400/70 tracking-widest mb-2">
-                  当前映照
+                  镜中映照
                 </div>
                 <div className="font-display text-3xl text-gold-sheen mb-2">
                   {profile.archetype.name}
@@ -180,7 +180,7 @@ export default function HomePage() {
                   className="text-xs text-amethyst-400/60 hover:text-gold-400 transition-colors"
                   onClick={() => navigate('/personality')}
                 >
-                  重新测评
+                  重新织镜
                 </button>
               </div>
             </div>
@@ -192,14 +192,14 @@ export default function HomePage() {
       <section className="max-w-2xl mx-auto py-12">
         <div className="text-center mb-8">
           <div className="text-[11px] tracking-[0.6em] text-amethyst-400/60 uppercase mb-3">
-            Host · 主理人
+            Host · 镜中之你
           </div>
           <h2 className="font-display text-2xl text-gold-sheen">
-            主理人 · 镜中之你
+            镜中之你
           </h2>
           <p className="text-moon-200/50 text-sm mt-3 max-w-lg mx-auto leading-relaxed">
-            主理人是你的极客化身。完成测评后，镜中的程序员显形，
-            随时段切换在线状态，用你的人格给自己调一杯契合今夜的酒。
+            完成镜中自观后，镜中人会按时段切换在线状态。
+            不是为你调一杯，是陪你看着自己，给此刻调一杯。
           </p>
         </div>
 
@@ -244,10 +244,10 @@ export default function HomePage() {
               </div>
               <div className="min-w-0 flex-1">
                 <div className="font-display text-lg text-moon-200/60">
-                  镜中人未现
+                  镜中未现
                 </div>
                 <div className="text-xs text-moon-200/50 mt-0.5">
-                  完成测评 · 让镜中的程序员显形
+                  完成镜中自观 · 让镜中的你显形
                 </div>
               </div>
             </div>
@@ -264,10 +264,11 @@ export default function HomePage() {
             Foundation · 底座
           </div>
           <h2 className="font-display text-2xl text-gold-sheen">
-            向内 · 向外
+            镜的两面
           </h2>
           <p className="text-moon-200/50 text-sm mt-3 max-w-lg mx-auto leading-relaxed">
-            思维库展示已实现的认知引擎（向内），灵感实验室承接未实现的创意（向外）。
+            思维库照见已实现的认知引擎（向内），
+            灵感实验室收容未点亮的灵感（向外）。
           </p>
         </div>
 
@@ -299,7 +300,7 @@ export default function HomePage() {
                     Mind · 向内
                   </div>
                   <div className="text-xs text-moon-200/50 mt-1">
-                    已实现的认知引擎 · 六重底座
+                    已造好的镜 · 六重底座
                   </div>
                 </div>
                 <div className="text-gold-400/40 group-hover:text-gold-400 transition-colors duration-500 text-sm tracking-widest">
@@ -336,7 +337,7 @@ export default function HomePage() {
                     Ideas · 向外
                   </div>
                   <div className="text-xs text-moon-200/50 mt-1">
-                    未实现的创意池 · 待点亮
+                    未点亮的灵感池 · 等你的火
                   </div>
                 </div>
                 <div className="text-amethyst-400/40 group-hover:text-gold-400 transition-colors duration-500 text-sm tracking-widest">
@@ -373,7 +374,7 @@ export default function HomePage() {
                     Poker · 三人德州
                   </div>
                   <div className="text-xs text-moon-200/50 mt-1">
-                    你的棋风驱动牌局 · AI 由投资人画像驱动
+                    你的棋风化身入局 · 与 AI 在筹码间对话
                   </div>
                 </div>
                 <div className="text-gold-400/40 group-hover:text-gold-400 transition-colors duration-500 text-sm tracking-widest">

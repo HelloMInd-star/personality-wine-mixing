@@ -44,14 +44,14 @@ export default function HubPage() {
 
       {/* 返回首页 */}
       <button className="hub-back" onClick={() => navigate('/')} aria-label="返回首页">
-        ← 首页
+        ← 入镜
       </button>
 
       {/* 标题 */}
       <header className="hub-header">
-        <div className="hub-eyebrow">Y · MINE</div>
-        <h1 className="hub-title">选择你的星球</h1>
-        <p className="hub-subtitle">日咖茶酒月 · 五个时段 · 五重宇宙</p>
+        <div className="hub-eyebrow">JUEZUI · 觉醉</div>
+        <h1 className="hub-title">踏入你的星球</h1>
+        <p className="hub-subtitle">日 · 咖 · 茶 · 酒 · 月 · 五重宇宙入夜</p>
       </header>
 
       {/* 星球入口 */}
