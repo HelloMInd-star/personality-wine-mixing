@@ -13,7 +13,7 @@
  * 环境约束：
  *   - 需 AppStoreProvider（BarCounterPage 用 useAppStore 读取 vector）
  *   - 需 MemoryRouter（BarCounterPage 用 useNavigate）
- *   - 注入 localStorage 'y-mine-vector' 模拟已采集人格
+ *   - 注入 localStorage 'juezui-vector' 模拟已采集人格
  */
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
@@ -44,7 +44,7 @@ const TEST_VECTOR: PersonaVector = {
   VIS: 0.60,
 };
 
-const VECTOR_KEY = 'y-mine-vector';
+const VECTOR_KEY = 'juezui-vector';
 
 function injectVector(vector: PersonaVector): void {
   localStorage.setItem(VECTOR_KEY, JSON.stringify(vector));

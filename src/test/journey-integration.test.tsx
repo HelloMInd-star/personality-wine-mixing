@@ -57,7 +57,7 @@ const TEST_PROFILE: PersonalityProfile = {
 
 /** 注入 localStorage 供 appStore 挂载时读取 */
 function injectProfile(): PersonalityProfile {
-  localStorage.setItem('y-mine-profile', JSON.stringify(TEST_PROFILE));
+  localStorage.setItem('juezui-profile', JSON.stringify(TEST_PROFILE));
   return TEST_PROFILE;
 }
 
