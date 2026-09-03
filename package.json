@@ -1,9 +1,9 @@
 {
-  "name": "y-mine-personality-cocktail",
+  "name": "juezui-personality-cocktail",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Y.Mine 人格调酒系统 · 人格×调酒双轨系统",
+  "description": "觉醉 · 感官情绪探索游戏 · 镜中自观 × 调酒仪式 × 情绪反馈",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

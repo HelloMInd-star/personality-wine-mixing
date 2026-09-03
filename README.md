@@ -1,12 +1,12 @@
-# Y.Mine · 人格调酒系统
+# 觉醉 · 感官情绪探索游戏
 
-> 人格 × 感官 × 时间 · 把一个人的决策风格、感官偏好、昼夜节律，织成同一份向量
+> 镜中自观 · 调酒仪式 · 情绪反馈 · 感官情绪探索的循环玩物
 
 ## 🍸 [Live Demo → hellomind-star.github.io/personality-wine-mixing](https://hellomind-star.github.io/personality-wine-mixing/)
 
-![Y.Mine · 调酒 Elixir 界面：六维人格向量实时派生今夜之杯](docs/screenshots/elixir.jpg)
+![觉醉 · Elixir 界面：六维人格向量实时派生今夜之杯](docs/screenshots/elixir.jpg)
 
-Y.Mine 以六维人格向量为统一契约，把人格画像、感官偏好、时间生物学映射到同一份数据结构，再派生出调酒推荐、气味配方、酒局匹配等多模态产物。这不是问卷换酒单，是向量织夜。
+觉醉以六维人格向量为统一契约，把镜中自观、调酒仪式、情绪反馈织成同一份数据结构。这不是问卷换酒单，是感官在夜里循环。
 
 ---
 
@@ -25,7 +25,7 @@ Y.Mine 以六维人格向量为统一契约，把人格画像、感官偏好、�
 
 ## 生态定位
 
-本站是 **Y.Mine 五域生态**中的 **MBTI 人格调酒线**，与 ymine 主站 / finance / poker-egg / validation-hub 等站点组成**六站回跳矩阵**——每站右下角的「🌌 Y.Mine 应用矩阵 · 返回作品集」回跳条已全部打通（回跳条全绿），作品集内任意站点可一键互跳。
+本站是 **觉醉五感生态**中的 **MBTI 人格调酒线**，与 觉醉主站（原 ymine） / finance / poker-egg / validation-hub 等站点组成**六站回跳矩阵**——每站右下角的「🌌 觉醉应用矩阵 · 返回作品集」回跳条已全部打通（回跳条全绿），作品集内任意站点可一键互跳。
 
 ### 内容资产
 
@@ -141,7 +141,7 @@ src/
 - **视觉**：深空紫金体系，金线固定 `#f0c674`；卡牌底色为基调融合色（28% 亮度）；评分组件走 `--gold-400`
 - **数据流**：用户点星球 → `setManualTimeSlot` → `resolveTimeSlot` → `applyBiologyShift` → `dynamicVector` 喂推荐引擎
 - **反馈回路**：`calibrateVector` 必须纯函数（浅拷贝 `{...base}`）；单次校准幅度硬上限 `0.05`，clamp `[0,1]`；评分 ≥4 朝推荐方向 `+0.02`，评分 ≤2 反向 `-0.02`，=3 不动
-- **持久化**：`feedbackHistory` 通过 localStorage（key `ymine-feedback`），上限 100 条；`dismissGuide` 用 sessionStorage
+- **持久化**：`feedbackHistory` 通过 localStorage（key `juezui-feedback`），上限 100 条；`dismissGuide` 用 sessionStorage
 - **兜底**：`getCalibratedVector` selector 兜底取最近 `recommendedVec`；`profileToVector(profile)` 在无向量时降级
 
 完整约束清单见 `project_memory.md`。

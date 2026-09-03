@@ -1,4 +1,4 @@
-# Y.Mine 架构调整技术文档
+# 觉醉架构技术文档
 
 > 主题：人格引擎 × 调酒引擎 → 统一 Service 层整合
 > 版本：v1.0 · 2026-08-07
@@ -10,7 +10,7 @@
 
 ### 1.1 调整前现状
 
-Y.Mine 的核心业务由两个独立引擎承载：
+觉醉 的核心业务由两个独立引擎承载：
 
 - `personalityEngine` — 大五人格 OCEAN 计分、原型匹配、风味偏好生成
 - `cocktailEngine` — 余弦相似度推荐、原型亲和、关键词搜索、情绪筛选
@@ -125,7 +125,7 @@ Y.Mine 的核心业务由两个独立引擎承载：
 | `loadProfile()` | 读取并 JSON.parse | 解析失败/不存在 → 返回 `null` |
 | `clearProfile()` | 移除键 | 同上 |
 
-存储键：`y-mine-profile`
+存储键：`juezui-profile`
 
 ---
 
