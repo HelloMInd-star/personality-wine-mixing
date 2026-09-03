@@ -41,7 +41,7 @@ export default function HomePage() {
   const hostState = resolveHostState(currentSlot.slot, profile, '/');
 
   return (
-    <div className="min-h-screen px-6 lg:px-16 py-12 animate-fade-in">
+    <div className="min-h-screen px-6 lg:px-16 py-12 animate-orbit-fade-up">
       {/* —— Hero · 镜月入口 —— */}
       <section className="flex flex-col items-center text-center pt-8 pb-16">
         <div className="relative mb-6">
@@ -53,7 +53,7 @@ export default function HomePage() {
             aria-label={orbsExpanded ? '收起宇宙星球' : '展开宇宙星球'}
             aria-expanded={orbsExpanded}
           >
-            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-moon-50 via-amethyst-400 to-amethyst-600 shadow-glow-amethyst animate-breathe relative group-hover:shadow-glow-gold transition-shadow duration-500">
+            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-moon-50 via-amethyst-400 to-amethyst-600 shadow-glow-amethyst animate-breathe relative group-hover:shadow-glow-gold transition-all duration-orbit-mid ease-orbit">
               <div className="absolute inset-[6px] rounded-full bg-void-gradient opacity-90" />
               <div className="absolute inset-0 rounded-full border border-gold-400/40" />
               <div className="absolute -inset-3 rounded-full border border-amethyst-500/20 animate-twinkle-slow" />
@@ -74,7 +74,7 @@ export default function HomePage() {
 
         {/* 当前时段校准面板 · 显示生物学依据与人格向量偏移 */}
         {orbsExpanded && (
-          <div className="mt-3 mb-2 animate-fade-in max-w-md">
+          <div className="mt-3 mb-2 animate-orbit-fade-up max-w-md">
             <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] tracking-widest">
               <span
                 className="inline-block w-1.5 h-1.5 rounded-full animate-breathe"
@@ -106,7 +106,7 @@ export default function HomePage() {
               <button
                 type="button"
                 onClick={() => setManualTimeSlot(null)}
-                className="mt-2 text-[10px] text-amethyst-400/50 hover:text-gold-400 transition-colors tracking-widest"
+                className="mt-2 text-[10px] text-amethyst-400/50 hover:text-gold-400 transition-colors duration-orbit-mid ease-orbit tracking-widest"
               >
                 ↺ 回到系统时间
               </button>
@@ -114,7 +114,8 @@ export default function HomePage() {
           </div>
         )}
 
-        <div className="text-[11px] tracking-[0.4em] text-amethyst-400/80 mb-4">
+        <div className="text-[11px] tracking-[0.4em] text-amethyst-400/80 mb-4 flex items-center justify-center gap-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-signal animate-orbit-pulse shadow-glow-signal" />
           觉醉 · 感官情绪探索
         </div>
         <h1 className="font-display text-6xl lg:text-7xl text-gold-sheen text-shadow-glow-gold leading-tight">
@@ -131,13 +132,14 @@ export default function HomePage() {
             variant="gold"
             size="lg"
             onClick={() => navigate('/hub')}
+            className="rounded-capsule duration-orbit-mid ease-orbit"
           >
             入夜 →
           </GradientButton>
           <button
             type="button"
             onClick={() => navigate('/prelude')}
-            className="text-xs tracking-[0.3em] text-amethyst-400/60 hover:text-gold-400 transition-colors duration-300 py-2 px-3"
+            className="text-xs tracking-[0.3em] text-amethyst-400/60 hover:text-gold-400 transition-colors duration-orbit-mid ease-orbit py-2 px-3"
             aria-label="观看觉醉概念预告"
           >
             概念预告 →
@@ -150,7 +152,7 @@ export default function HomePage() {
       {/* —— 若已有画像 · 当前映照 —— */}
       {profile && (
         <section className="max-w-4xl mx-auto mb-16 animate-slide-up">
-          <GlassPanel gold padding="lg" className="overflow-visible">
+          <GlassPanel gold padding="lg" className="rounded-card overflow-visible">
             <div
               className="absolute inset-0 opacity-30 pointer-events-none rounded-2xl"
               style={{
@@ -177,7 +179,7 @@ export default function HomePage() {
                   查看专属调酒 →
                 </GradientButton>
                 <button
-                  className="text-xs text-amethyst-400/60 hover:text-gold-400 transition-colors"
+                  className="text-xs text-amethyst-400/60 hover:text-gold-400 transition-colors duration-orbit-mid ease-orbit"
                   onClick={() => navigate('/personality')}
                 >
                   重新织镜
@@ -191,7 +193,8 @@ export default function HomePage() {
       {/* —— 主理人 · 镜中之你 —— */}
       <section className="max-w-2xl mx-auto py-12">
         <div className="text-center mb-8">
-          <div className="text-[11px] tracking-[0.6em] text-amethyst-400/60 uppercase mb-3">
+          <div className="text-[11px] tracking-[0.6em] text-amethyst-400/60 uppercase mb-3 flex items-center justify-center gap-2">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent" />
             Host · 镜中之你
           </div>
           <h2 className="font-display text-2xl text-gold-sheen">
@@ -203,7 +206,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <GlassPanel padding="lg" className="max-w-md mx-auto">
+        <GlassPanel padding="lg" className="rounded-card max-w-md mx-auto">
           {profile ? (
             <div className="flex items-center gap-4">
               <div
@@ -260,7 +263,8 @@ export default function HomePage() {
       {/* —— 底座双联 · 已造 / 待造 —— */}
       <section className="max-w-2xl mx-auto py-12">
         <div className="text-center mb-8">
-          <div className="text-[11px] tracking-[0.6em] text-amethyst-400/60 uppercase mb-3">
+          <div className="text-[11px] tracking-[0.6em] text-amethyst-400/60 uppercase mb-3 flex items-center justify-center gap-2">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-signal animate-orbit-pulse" />
             Foundation · 底座
           </div>
           <h2 className="font-display text-2xl text-gold-sheen">
@@ -280,7 +284,7 @@ export default function HomePage() {
             className="block w-full text-left group cursor-pointer"
             aria-label="进入思维库底座"
           >
-            <GlassPanel padding="lg" className="relative h-full">
+            <GlassPanel padding="lg" className="rounded-card relative h-full">
               <div
                 className="absolute inset-0 rounded-2xl pointer-events-none opacity-40 group-hover:opacity-70 transition-opacity duration-500"
                 style={{ border: '1px dashed rgba(240, 198, 116, 0.25)' }}
@@ -317,7 +321,7 @@ export default function HomePage() {
             className="block w-full text-left group cursor-pointer"
             aria-label="进入灵感实验室"
           >
-            <GlassPanel padding="lg" className="relative h-full">
+            <GlassPanel padding="lg" className="rounded-card relative h-full">
               <div
                 className="absolute inset-0 rounded-2xl pointer-events-none opacity-40 group-hover:opacity-70 transition-opacity duration-500"
                 style={{ border: '1px dashed rgba(155, 123, 212, 0.3)' }}
@@ -354,7 +358,7 @@ export default function HomePage() {
             className="block w-full text-left group cursor-pointer"
             aria-label="进入扑克对局"
           >
-            <GlassPanel padding="lg" className="relative h-full">
+            <GlassPanel padding="lg" className="rounded-card relative h-full">
               <div
                 className="absolute inset-0 rounded-2xl pointer-events-none opacity-40 group-hover:opacity-70 transition-opacity duration-500"
                 style={{ border: '1px dashed rgba(240, 198, 116, 0.25)' }}
