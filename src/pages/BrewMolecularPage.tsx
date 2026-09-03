@@ -1,7 +1,9 @@
 /**
- * BrewMolecularPage · 酿·分子 · 风味工程
+ * BrewMolecularPage · 觉醉·酿·分子 · 风味工程
  *
  * 圆锥浓度模型 + 七维风味向量 + 3D 分子可视化
+ *
+ * 战略定位：觉醉「感官情绪探索」中的味觉/嗅觉轴 · 圆锥浓度跨域同构的工程化
  *
  * 核心功能：
  *   1. 基酒选择（清酒/威士忌/白酒/洋酒）+ 品牌
@@ -290,7 +292,7 @@ export default function BrewMolecularPage() {
         <div className="flex items-center justify-between gap-4 mb-3">
           <div>
             <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3">
-              酿 · 分子 · Flavor Engineering
+              觉醉 · 酿·分子 · Flavor Engineering
             </div>
             <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
               分子调酒实验室

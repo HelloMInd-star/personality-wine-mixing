@@ -1,8 +1,10 @@
 /**
- * BrewMusicPage · 酿·乐 · 音乐控件独立展示页
+ * BrewMusicPage · 觉醉·酿·乐 · 音乐控件独立展示页
  *
  * 展示四梯度歌单切换 + 旅程音乐控制
  * 由 musicEngine 程序化合成白噪音底 · 零音频文件
+ *
+ * 战略定位：觉醉「感官情绪探索」中的听觉轴 · 夜里循环的心跳底色
  */
 
 import { Link } from 'react-router-dom';
@@ -108,7 +110,7 @@ export default function BrewMusicPage() {
         <div className="flex items-center justify-between gap-4 mb-3">
           <div>
             <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3">
-              酿 · 乐 · Music Engine
+              觉醉 · 酿·乐 · Music Engine
             </div>
             <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
               旅程音乐

@@ -1,5 +1,5 @@
 /**
- * BrewScentPage · 酿·香 · 气味定制页 · 五步流程
+ * BrewScentPage · 觉醉·酿·香 · 气味定制页 · 五步流程
  *
  * 1. 选香味基础（6 调性 · 对应 MBTI 倾向）
  * 2. 拖拽组合配方（乐高分子结构搭建 · MoleculeBuilder）
@@ -8,7 +8,7 @@
  * 5. 输出结果（线上注册复用 / 线下预约定制杯垫）
  *
  * MBTI 联动：选 MBTI 后高亮推荐基础 + 一键填充推荐配方
- * 视觉语言：深空紫金 + 磨砂玻璃 · 与 TavernPage/CocktailPage 同语
+ * 视觉语言：深空紫金 + 磨砂玻璃 · 觉醉感官情绪探索 · 与 TavernPage/CocktailPage 同语
  */
 
 import { useMemo, useState } from 'react';
@@ -169,10 +169,10 @@ export default function BrewScentPage() {
       {/* 标题区 */}
       <header className="mb-10">
         <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3">
-          酿 · 香 · Scent Lab
+          觉醉 · 酿·香 · Scent Lab
         </div>
         <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
-          气味 · 分子搭建
+          香气实验室
         </h1>
         <p className="mt-2 text-sm md:text-base text-moon-200/60 italic">
           拖拽香味分子，拼出属于你的一缕气。
@@ -186,7 +186,7 @@ export default function BrewScentPage() {
           className="inline-block w-1.5 h-1.5 rounded-full animate-breathe"
           style={{ background: currentSlot.auraColor, boxShadow: `0 0 8px ${currentSlot.auraColor}` }}
         />
-        <span className="text-moon-200/60">气味时辰</span>
+        <span className="text-moon-200/60">香气时辰</span>
         <span className="font-display text-gold-sheen">{currentSlot.label}</span>
         <span className="text-amethyst-400/40">·</span>
         <span className="text-moon-200/70">{SLOT_SCENT_HINT[currentSlot.slot]}</span>

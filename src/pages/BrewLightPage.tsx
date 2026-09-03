@@ -1,8 +1,10 @@
 /**
- * BrewLightPage · 酿·光 · 杯底光效独立展示页
+ * BrewLightPage · 觉醉·酿·光 · 杯底光效独立展示页
  *
  * 独立展示可编程 LED 灯环效果 · 四种动画模式可切换
  * 由 lightEngine 派生光效参数 · 零硬件依赖
+ *
+ * 战略定位：觉醉「感官情绪探索」中的视觉轴 · 一杯酒底下的光之呼吸
  */
 
 import { useState } from 'react';
@@ -43,7 +45,7 @@ export default function BrewLightPage() {
         <div className="flex items-center justify-between gap-4 mb-3">
           <div>
             <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3">
-              酿 · 光 · Light Canvas
+              觉醉 · 酿·光 · Light Canvas
             </div>
             <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
               杯底光效

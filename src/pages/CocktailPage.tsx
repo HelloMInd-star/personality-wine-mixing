@@ -1,5 +1,5 @@
 /**
- * CocktailPage · 调酒配方库主页面
+ * CocktailPage · 觉醉 · 调酒 · 一杯一注脚
  * 三层信息架构：酒单（浏览） → 调酒台（推荐+搭建） → 调酒回路（感官）
  * 有人格画像 · 织就契合推荐；无人格画像 · 浏览全部夜之酒单
  */
@@ -75,7 +75,7 @@ export default function CocktailPage() {
   // 说明卡片关闭态 · sessionStorage 持久化（同会话不重复打扰）
   const [dismissGuide, setDismissGuide] = useState<boolean>(() => {
     try {
-      return sessionStorage.getItem('ymine-guide-dismissed') === '1';
+      return sessionStorage.getItem('juezui-guide-dismissed') === '1';
     } catch {
       return false;
     }
@@ -84,7 +84,7 @@ export default function CocktailPage() {
   const dismissGuideCard = useCallback(() => {
     setDismissGuide(true);
     try {
-      sessionStorage.setItem('ymine-guide-dismissed', '1');
+      sessionStorage.setItem('juezui-guide-dismissed', '1');
     } catch {
       /* sessionStorage 不可用 · 静默降级 */
     }
@@ -267,7 +267,7 @@ export default function CocktailPage() {
                   How It Works · 使用指南
                 </div>
                 <h3 className="font-display text-lg text-gold-sheen tracking-[0.1em]">
-                  人格调酒 · 五步成夜
+                  旅程 · 五步入夜
                 </h3>
               </div>
             </div>
@@ -275,10 +275,10 @@ export default function CocktailPage() {
             {/* 五步流程 · 横向步骤条 */}
             <ol className="grid grid-cols-1 sm:grid-cols-5 gap-3 sm:gap-2">
               {[
-                { n: '①', t: '人格采集', d: '落定六维向量' },
-                { n: '②', t: '时段校准', d: '生物钟偏移' },
-                { n: '③', t: '选酒入夜', d: '契合夜色推荐' },
-                { n: '④', t: '喝后评分', d: '收集味觉信号' },
+                { n: '①', t: '镜中自观', d: '落定六维向量' },
+                { n: '②', t: '时段校准', d: '情绪弧线偏移' },
+                { n: '③', t: '选酒入夜', d: '契合此刻的杯' },
+                { n: '④', t: '喝后评分', d: '收集感官信号' },
                 { n: '⑤', t: '向量校准', d: '下一杯更懂你' },
               ].map((step, idx) => (
                 <li
@@ -317,7 +317,7 @@ export default function CocktailPage() {
 
             {/* 反馈回路说明 · 强调闭环 */}
             <p className="mt-4 text-[11px] text-moon-200/55 italic leading-relaxed text-center">
-              第 ④⑤步构成反馈回路 · 你的每一次评分都会校准向量，让下一杯更贴近此刻的你。
+              第 ④⑤步构成旅程回路 · 你的每一次评分都会校准向量，让下一杯更贴近此刻的你。
             </p>
 
             {/* 关闭入口 */}
@@ -327,7 +327,7 @@ export default function CocktailPage() {
                 onClick={dismissGuideCard}
                 className="text-[11px] tracking-[0.2em] text-amethyst-400/60 hover:text-gold-400 transition-colors duration-300 font-mono uppercase"
               >
-                了解了 · 入夜
+                知道了 · 入夜
               </button>
             </div>
           </div>
@@ -339,10 +339,11 @@ export default function CocktailPage() {
         <GlassPanel padding="lg" className="mb-10">
           <div className="flex flex-col items-center text-center max-w-xl mx-auto">
             <h2 className="font-display text-2xl text-moon-50 mb-2">
-              尚未织就画像
+              镜中尚未织就
             </h2>
             <p className="text-sm text-moon-200/65 leading-relaxed mb-6">
-              先去人格页落定你的夜之轮廓，或直接浏览全部酒单，让一杯酒自己来找你。
+              先去镜中自观，落定你的轮廓，
+              或直接逛逛酒单，让一杯酒自己来找你。
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <GradientButton
@@ -350,14 +351,14 @@ export default function CocktailPage() {
                 size="md"
                 onClick={() => navigate('/personality')}
               >
-                去测评
+                入镜
               </GradientButton>
               <GradientButton
                 variant="ghost"
                 size="md"
                 onClick={() => navigate('/menu')}
               >
-                浏览全部
+                逛酒单
               </GradientButton>
             </div>
           </div>
@@ -369,8 +370,8 @@ export default function CocktailPage() {
        * ═══════════════════════════════════════ */}
       <SectionHeader
         index="Ⅰ"
-        title="基础酒单"
-        subtitle="从步进调酒或酒单开始 · 落定今夜的第一杯"
+        title="今夜之杯"
+        subtitle="从步进调酒或酒单开始 · 落定此刻的第一杯"
       />
 
       {/* 步进式调酒搭建 · 主入口 · 有画像或向量时显示 */}
@@ -388,7 +389,7 @@ export default function CocktailPage() {
         <section className="mb-12">
           <div className="flex items-baseline justify-between gap-4 mb-5">
             <h3 className="font-display text-xl md:text-2xl text-moon-200/80 tracking-[0.1em]">
-              旅程契合推荐
+              旅程契合
             </h3>
             <span
               className="text-xs tracking-[0.15em] font-display transition-colors duration-500"
@@ -416,7 +417,7 @@ export default function CocktailPage() {
             <div className="text-[10px] tracking-[0.3em] text-amethyst-400/70 uppercase mb-1">
               Browse · 浏览
             </div>
-            <h3 className="font-display text-lg text-gold-sheen">浏览全部酒单</h3>
+            <h3 className="font-display text-lg text-gold-sheen">逛逛全部酒单</h3>
             <p className="text-xs text-moon-200/50 mt-1">
               经典、创意、原创 · 按分类与情绪筛选
             </p>
@@ -436,7 +437,7 @@ export default function CocktailPage() {
                 人格契合酒库
               </h3>
               <p className="text-[11px] text-amethyst-400/50 mt-1 italic">
-                六维向量 × MBTI 原型匹配 · 从 40 款经典中为你筛选
+                六维向量 × MBTI 原型 · 四十款经典里挑出陪你
               </p>
             </div>
             <span className="text-xs tracking-[0.15em] font-display text-amethyst-400/60">
@@ -471,8 +472,8 @@ export default function CocktailPage() {
         <>
           <SectionHeader
             index="Ⅱ"
-            title="创意调酒"
-            subtitle="已迁移至「酿」层 · 前往探索香、弧、光、乐"
+            title="旅程回路"
+            subtitle="已迁移至「酿」层 · 探索香、弧、光、乐"
           />
 
           {/* 有人格画像 · 画像摘要条 */}
@@ -503,7 +504,7 @@ export default function CocktailPage() {
                     {profile.archetype.tagline}
                   </p>
                   <p className="text-xs text-moon-200/50 mt-2">
-                    这是为你织就的几杯夜。
+                    这是今夜陪你走过的那几杯。
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2 shrink-0">
@@ -519,7 +520,7 @@ export default function CocktailPage() {
                     size="sm"
                     onClick={() => navigate('/personality')}
                   >
-                    重新测评
+                    重新织镜
                   </GradientButton>
                 </div>
               </div>
@@ -541,7 +542,7 @@ export default function CocktailPage() {
                     VECTOR · 六维契约
                   </span>
                   <h2 className="font-display text-2xl md:text-3xl text-gold-sheen text-shadow-glow-gold mt-1">
-                    牌类人格已采集
+                    镜中已现
                   </h2>
                   <p className="text-sm text-moon-200/70 italic mt-1">
                     六维向量已织就，正为你派今夜的酒。
