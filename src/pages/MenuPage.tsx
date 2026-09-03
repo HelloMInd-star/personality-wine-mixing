@@ -1,7 +1,9 @@
 /**
- * MenuPage · 酒单页面
+ * MenuPage · 觉醉·调·酒单 · 酒单浏览页
  * 独立页面 · 三分类浏览（经典 / 创意 / 原创）
  * 搜索与情绪筛选作用于全酒单 · 合并库数据 + 现存酒单，同名去重
+ *
+ * 视觉语言：深空暗紫 + 情绪光斑 · 觉醉感官情绪探索游戏 · 与 TavernPage/CocktailPage 同语
  */
 
 import { useState, useEffect, useMemo } from 'react';

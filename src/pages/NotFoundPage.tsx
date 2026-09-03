@@ -1,6 +1,8 @@
 /**
- * NotFoundPage · 404 兜底
+ * NotFoundPage · 觉醉·途·404 · 兜底
  * 深空风格 · 此路无月 · 引导回入口
+ *
+ * 视觉语言：深空暗紫 + 情绪光斑 · 觉醉感官情绪探索游戏 · 与 TavernPage/CocktailPage 同语
  */
 
 import { useNavigate, useLocation } from 'react-router-dom';
