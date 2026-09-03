@@ -133,7 +133,7 @@ export default function CocktailBuilder({ dynamicVector, onCrafted }: CocktailBu
   // 进入 result 步 · 通知父组件调酒完成 · 传出稳定 recipeId 供评分回路
   useEffect(() => {
     if (isResult && fusion && onCrafted) {
-      const recipeId = `ymine-builder-${baseSpirit}-${flavors
+      const recipeId = `juezui-builder-${baseSpirit}-${flavors
         .slice()
         .sort()
         .join('-')}-${scene}`;

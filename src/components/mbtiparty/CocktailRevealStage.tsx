@@ -615,7 +615,7 @@ export default function CocktailRevealStage({
                 className="font-display text-[9px] tracking-[0.18em] text-white/90"
                 style={{ textShadow: '0 0 4px rgba(0,0,0,0.5)' }}
               >
-                Y.Mine
+                觉醉
               </span>
             </div>
             {/* 中心孔 */}

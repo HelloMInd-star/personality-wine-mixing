@@ -1,7 +1,7 @@
 /**
  * 单人酒局沙盘引擎 · SandboxEngine
  *
- * 核心逻辑：场景选择 → 五轮推理 → MBTI 概率分布 → 桥接 Y.Mine 六维向量
+ * 核心逻辑：场景选择 → 五轮推理 → MBTI 概率分布 → 桥接 觉醉 六维向量
  *
  * 算法链路：
  *   八维分数累加 → 四维度百分比 → MBTI 类型推导
@@ -250,7 +250,7 @@ export function calcMbtiProbabilities(scores: TraitScores): { type: string; prob
 }
 
 // ═════════════════════════════════════════════════════════
-// 桥接：沙盘结果 → Y.Mine 六维向量
+// 桥接：沙盘结果 → 觉醉 六维向量
 // ═════════════════════════════════════════════════════════
 
 /**
@@ -259,7 +259,7 @@ export function calcMbtiProbabilities(scores: TraitScores): { type: string; prob
  * 桥接路径：
  *   SandboxResult.mbtiType → mbtiToBaseVector() → PersonaVector
  *
- * 六维向量可直接喂给 Y.Mine 的推荐引擎：
+ * 六维向量可直接喂给 觉醉 的推荐引擎：
  *   - cocktailEngine（调酒推荐）
  *   - scentEngine（气味定制）
  *   - cocktailStoryEngine（故事生成）

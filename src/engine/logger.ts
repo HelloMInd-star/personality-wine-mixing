@@ -1,5 +1,5 @@
 /**
- * Y.Mine · 分级日志系统
+ * 觉醉 · 分级日志系统
  *
  * 用法：
  *   import { logger } from '../engine/logger';
@@ -118,7 +118,7 @@ const createLogger = (category: LogCategory, level: LogLevel = 'log') => {
     // 控制台输出 · 彩色标签
     const consoleFn = console[level] as (...a: unknown[]) => void;
     consoleFn(
-      `%cY.Mine%c ${tag} %c${timestamp}%c ${message}`,
+      `%c觉醉%c ${tag} %c${timestamp}%c ${message}`,
       `background: ${color}; color: white; padding: 2px 8px; border-radius: 4px; font-weight: bold;`,
       `color: ${color}; font-weight: bold;`,
       'color: #64748b; font-size: 11px;',

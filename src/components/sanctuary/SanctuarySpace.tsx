@@ -72,7 +72,7 @@ const STATUS_COLOR: Record<string, string> = {
 const WHISPER_DETAILS: { title: string; desc: string; next: string }[] = [
   {
     title: '酒馆征集',
-    desc: '寻找愿意在夜里点一盏灯、听一段故事的实体酒馆，成为 Y.Mine 的线下解忧节点。',
+    desc: '寻找愿意在夜里点一盏灯、听一段故事的实体酒馆，成为 觉醉 的线下解忧节点。',
     next: '下一层 · 待启',
   },
   {

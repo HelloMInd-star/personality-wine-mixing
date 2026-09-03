@@ -1,8 +1,8 @@
 /**
  * Game Theory Engine · 纳什均衡博弈论引擎
  *
- * 从 ymine 仓库 models/gamemind/gamemind-model.js 移植至 TypeScript，
- * 与 Y.Mine 日志系统集成。
+ * 从 juezui 仓库 models/gamemind/gamemind-model.js 移植至 TypeScript，
+ * 与 觉醉 日志系统集成。
  *
  * 核心算法：
  *   1. 根据输入参数构建 2x2 收益矩阵

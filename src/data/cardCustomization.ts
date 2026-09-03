@@ -1,7 +1,7 @@
 /**
  * 卡牌定制数据 · 周边产品牌定制系统
  *
- * Y.Mine 周边产品牌定制层 · 与牌类人格采集（CardsPage）解耦：
+ * 觉醉 周边产品牌定制层 · 与牌类人格采集（CardsPage）解耦：
  *   CardsPage 四套牌（塔罗/星盘/扑克/德州）→ 六维向量 → 调酒
  *   本层（cardCustomization）→ 包装样式 + 三类定制卡 → 牌盒取出动画
  *
@@ -417,7 +417,7 @@ export function deriveCardPalette(
 // 持久化 · localStorage · 用户在 CardsPage 选定的包装偏好
 // ═════════════════════════════════════════════════════════
 
-const PACKAGING_STORAGE_KEY = 'y-mine-packaging-config';
+const PACKAGING_STORAGE_KEY = 'juezui-packaging-config';
 
 export function loadPackagingConfig(): PackagingConfig {
   try {

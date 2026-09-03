@@ -11,7 +11,7 @@
  *   - 深空底色 · 金色中心点
  *   - 右侧图例面板
  *
- * 设计呼应 Y.Mine 紫金语系，阈值环色与 Game-OS 三基准对齐
+ * 设计呼应 觉醉 紫金语系，阈值环色与 Game-OS 三基准对齐
  */
 
 import { useEffect, useRef } from 'react';

@@ -73,7 +73,7 @@ export default function Sidebar() {
         </div>
         <div className="hidden lg:block">
           <div className="font-display text-lg text-gold-sheen leading-none">
-            Y.Mine
+            觉醉
           </div>
           <div className="text-[10px] text-amethyst-400 tracking-[0.3em] mt-1">
             人格调酒

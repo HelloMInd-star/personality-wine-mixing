@@ -16,7 +16,7 @@ import logger from './logger';
 // 常量
 // ═════════════════════════════════════════════════════════
 
-const STORAGE_KEY = 'ymine_poker_history';
+const STORAGE_KEY = 'juezui_poker_history';
 const MAX_HISTORY = 50; // 最多保留 50 条记录
 
 // ═════════════════════════════════════════════════════════

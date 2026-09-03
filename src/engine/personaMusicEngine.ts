@@ -2,7 +2,7 @@
  * 人格声纹引擎 · PersonaMusicEngine
  *
  * 借鉴金融孪生平台 musicEngine.js 的「数据→音乐叙事」映射思路，
- * 将 Y.Mine 六维人格向量 (PersonaVector) 翻译为音乐合成参数。
+ * 将 觉醉 六维人格向量 (PersonaVector) 翻译为音乐合成参数。
  *
  * 映射逻辑：
  *   SPD  (速度)   → BPM         · 决策速度映射为节奏

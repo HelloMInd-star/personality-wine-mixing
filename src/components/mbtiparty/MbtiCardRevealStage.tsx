@@ -1,7 +1,7 @@
 /**
  * MbtiCardRevealStage · 牌盒取出动画舞台
  *
- * Y.Mine 周边产品牌定制的揭示层 · 与 CocktailRevealStage 并列于酒局揭示阶段：
+ * 觉醉 周边产品牌定制的揭示层 · 与 CocktailRevealStage 并列于酒局揭示阶段：
  *   CocktailRevealStage 渲染「联合酒体」· 本组件渲染「每人定制卡」
  *
  * 支持三类定制卡（通过 UnifiedCardSpec 统一渲染契约）：
