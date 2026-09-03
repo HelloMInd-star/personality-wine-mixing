@@ -1,5 +1,5 @@
 /**
- * TavernPage · 可编程酒馆 · 场所级夜程编排
+ * TavernPage · 觉醉 · 酒馆夜场
  *
  * 三层可编程空间的第一层：全场基调由「时间 × 主题」派生
  *   - 主题选择：4 套预设（深空夜航/月潮秘境/焰心工坊/雾行秘境），持久化到本地
@@ -38,7 +38,7 @@ export default function TavernPage() {
     logTavern('theme:restore', {
       code: restored.code,
       name: restored.name,
-      from: localStorage.getItem('y-mine-tavern-theme') ? 'localStorage' : 'default',
+      from: localStorage.getItem('juezui-tavern-theme') ? 'localStorage' : 'default',
     });
     return restored;
   });
@@ -95,7 +95,7 @@ export default function TavernPage() {
     logTavern('theme:pick', { from: theme.code, to: t.code, name: t.name });
     setTheme(t);
     cocktailService.saveTavernTheme(t);
-    logTavern('theme:saved', { code: t.code, storageKey: 'y-mine-tavern-theme' });
+    logTavern('theme:saved', { code: t.code, storageKey: 'juezui-tavern-theme' });
   };
 
   // 整夜进度分段 · 用于弧线渲染
@@ -151,7 +151,7 @@ export default function TavernPage() {
           Programmable Tavern
         </div>
         <h1 className="font-display text-5xl lg:text-6xl text-gold-sheen text-shadow-glow-gold leading-tight">
-          可编程酒馆
+          酒馆 · 夜的现场
         </h1>
         <p className="mt-5 text-moon-200/70 max-w-xl leading-relaxed font-display">
           {state.withinNight

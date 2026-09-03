@@ -1,7 +1,7 @@
 /**
  * MbtiPartyPage · MBTI 酒局页面
  *
- * 把 Y.Mine 核心能力（人格调酒、角色系统、气味映射、共创机制）
+ * 把 觉醉 核心能力（人格调酒、角色系统、气味映射、共创机制）
  * 整合到一个酒桌形态的界面里 · 让用户像进入一场游戏一样进入酒局
  *
  * 页面结构：
@@ -276,11 +276,11 @@ export default function MbtiPartyPage() {
           MBTI Party · 人格博弈空间
         </div>
         <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.18em]">
-          MBTI 酒局
+          多人酒局
         </h1>
         <p className="text-sm text-moon-200/60 italic mt-3 max-w-xl mx-auto leading-relaxed">
-          轻互动 · 有社交感 · 多人参与 · 把人格调酒、角色系统、气味映射、共创机制
-          整合到一个酒桌形态的界面里。
+          几张镜围一桌 · 各带自己的人格入场 ·
+          调酒、角色、香气、共创融进同一席酒。
         </p>
 
         {/* 时段校准 · 影响酒局氛围 */}

@@ -97,15 +97,15 @@ export default function BarCounterPage() {
       {/* —— Hero —— */}
       <section className="flex flex-col items-center text-center pt-4 pb-10">
         <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-4">
-          Programmable Bar Counter
+          Bar Counter · 吧台
         </div>
         <h1 className="font-display text-5xl lg:text-6xl text-gold-sheen text-shadow-glow-gold leading-tight">
-          可编程吧台
+          吧台 · 一杯一世界
         </h1>
         <p className="mt-5 text-moon-200/70 max-w-xl leading-relaxed font-display">
           单杯硬件联动 · 杯垫 × 光效 × 气味
           <br />
-          一杯一世界，由向量 × 阶段即时编排。
+          一杯一世界 · 由向量 × 阶段即时编排。
         </p>
       </section>
 
@@ -240,18 +240,18 @@ export default function BarCounterPage() {
           <GlassPanel padding="lg">
             <div className="text-center py-8">
               <div className="font-display text-xl text-moon-200/60 mb-3">
-                单杯编排需先采集人格
+                单杯编排需先入镜
               </div>
               <p className="text-xs text-moon-200/50 leading-relaxed max-w-md mx-auto mb-6">
                 吧台层的光效与气味由向量 × 阶段派生。
-                请先通过牌类采集或人格测评，织就你的六维向量。
+                请先通过牌类采镜或镜中自观，织就你的六维向量。
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <GradientButton variant="gold" size="md" onClick={() => navigate('/cards')}>
-                  牌类采集
+                  牌类采镜
                 </GradientButton>
                 <GradientButton variant="ghost" size="md" onClick={() => navigate('/personality')}>
-                  人格测评
+                  镜中自观
                 </GradientButton>
               </div>
             </div>
