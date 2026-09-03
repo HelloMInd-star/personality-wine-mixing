@@ -1,13 +1,13 @@
 /**
  * StorageBus · 三分区数据总线
  *
- * 对应 Y.Mine Game-OS 的命名空间隔离规范：
+ * 对应 觉醉 Game-OS 的命名空间隔离规范：
  *   - pipeline_* : 只读（官方流水线结果，任何业务代码禁止写入）
  *   - draft_*    : 可写（用户数据、草稿区、临时状态）
  *   - audit_log_*: 仅追加不可篡改（永久审计日志，附 HMAC 防篡改签名）
  *
  * 与现有 localStorage 共存，通过前缀隔离命名空间。
- * 当前 Y.Mine 已实现 draft 区（feedback-raw/calibrated），
+ * 当前 觉醉 已实现 draft 区（feedback-raw/calibrated），
  * 本模块补充 audit 区 HMAC 签名 + 健康检查。
  */
 
@@ -17,7 +17,7 @@ import { logger } from '../engine/logger';
 // HMAC 轻量签名（前端防篡改）· 生产环境请升级到 Web Crypto Subtle HMAC
 // ═════════════════════════════════════════════════════════
 
-const HMAC_SECRET = 'Y.Mine.Audit.V1.Secret';
+const HMAC_SECRET = '觉醉.Audit.V1.Secret';
 
 function simpleHmac(payload: unknown): string {
   const str = typeof payload === 'string' ? payload : JSON.stringify(payload);
@@ -53,7 +53,7 @@ export function signEntry<T extends Record<string, unknown>>(entry: T): T & { _s
 // 审计日志存储
 // ═════════════════════════════════════════════════════════
 
-const AUDIT_KEY = 'audit_log_ymine';
+const AUDIT_KEY = 'audit_log_juezui';
 
 interface AuditEntry {
   id: string;
@@ -166,7 +166,7 @@ export function busHealthCheck(): BusHealth {
     const localStorageAvailable = true;
 
     // 检查 draft 区（feedback-raw 是否存在）
-    const draftOk = localStorage.getItem('ymine-feedback-raw') !== null
+    const draftOk = localStorage.getItem('juezui-feedback-raw') !== null
       ? 'READY'
       : 'READY (no data yet)';
 

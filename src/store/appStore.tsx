@@ -5,10 +5,10 @@
  * 持久化逻辑委托给 cocktailService，本层只管 React 状态
  *
  * 反馈数据三分区存储（参考 YBus PIPELINE/DRAFT/AUDIT 隔离）：
- *   - ymine-feedback-raw · 原始评分信号（仅追加，cap 100）· 用户数据
- *   - ymine-feedback-calibrated · 最新校准后向量快照（可覆盖）· 派生态
- *   - ymine-feedback-audit · 校准动作日志（仅追加，cap 100）· 含 drift/fused
- *   旧 key 'ymine-feedback' 在 mount 时一次性迁移到 raw 区
+ *   - juezui-feedback-raw · 原始评分信号（仅追加，cap 100）· 用户数据
+ *   - juezui-feedback-calibrated · 最新校准后向量快照（可覆盖）· 派生态
+ *   - juezui-feedback-audit · 校准动作日志（仅追加，cap 100）· 含 drift/fused
+ *   旧 key 'juezui-feedback' 在 mount 时一次性迁移到 raw 区
  *
  * 鉴权：Mock 登录 · localStorage 持久化 · 后端就绪后替换 login 为真实 API
  *
@@ -35,14 +35,14 @@ import { logger } from '../engine/logger';
 import { signEntry } from '../services/storageBus';
 
 /** 情绪调节器 session 存储键 · 关 tab 即失 */
-const MOOD_STORAGE_KEY = 'y-mine-mood';
+const MOOD_STORAGE_KEY = 'juezui-mood';
 
 // ═════════════════════════════════════════════════════════
 // 鉴权 · Mock 登录 · localStorage 持久化
 // ═════════════════════════════════════════════════════════
 
 /** 鉴权存储键 */
-const AUTH_STORAGE_KEY = 'y-mine-auth';
+const AUTH_STORAGE_KEY = 'juezui-auth';
 
 interface AuthState {
   isLoggedIn: boolean;
@@ -90,13 +90,13 @@ function persistAuthState(state: AuthState): void {
 // ═════════════════════════════════════════════════════════
 
 /** raw 区 · 原始评分信号 */
-const FEEDBACK_RAW_KEY = 'ymine-feedback-raw';
+const FEEDBACK_RAW_KEY = 'juezui-feedback-raw';
 /** calibrated 区 · 最新校准后向量快照 */
-const FEEDBACK_CALIBRATED_KEY = 'ymine-feedback-calibrated';
+const FEEDBACK_CALIBRATED_KEY = 'juezui-feedback-calibrated';
 /** audit 区 · 校准动作日志 */
-const FEEDBACK_AUDIT_KEY = 'ymine-feedback-audit';
+const FEEDBACK_AUDIT_KEY = 'juezui-feedback-audit';
 /** 旧 key · 一次性迁移到 raw 区后删除 */
-const FEEDBACK_LEGACY_KEY = 'ymine-feedback';
+const FEEDBACK_LEGACY_KEY = 'juezui-feedback';
 
 /** 评分历史上限 · 超出截断旧记录 */
 const FEEDBACK_HISTORY_LIMIT = 100;

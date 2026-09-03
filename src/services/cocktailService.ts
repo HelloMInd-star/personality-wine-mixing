@@ -108,13 +108,13 @@ import type {
 } from '../types/tavern';
 
 /** 画像本地存储键 */
-const PROFILE_STORAGE_KEY = 'y-mine-profile';
+const PROFILE_STORAGE_KEY = 'juezui-profile';
 
 /** 六维向量本地存储键 · 牌类入口产物，作为唯一数据契约的持久化载体 */
-const VECTOR_STORAGE_KEY = 'y-mine-vector';
+const VECTOR_STORAGE_KEY = 'juezui-vector';
 
 /** 酒馆主题本地存储键 · 场所基调偏好持久化 */
-const TAVERN_THEME_STORAGE_KEY = 'y-mine-tavern-theme';
+const TAVERN_THEME_STORAGE_KEY = 'juezui-tavern-theme';
 
 /** 一站式结果 · 画像 + 推荐一并返回 */
 export interface ProfileWithRecommendations {
