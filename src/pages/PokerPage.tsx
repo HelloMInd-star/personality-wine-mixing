@@ -1,5 +1,5 @@
 /**
- * PokerPage · 三人德州扑克 · 金融孪生对局
+ * PokerPage · 觉醉·弈 · 三人德州扑克 · 金融孪生对局
  *
  * 布局：三角形牌桌布局
  *   - 上方：AI 对手 2（索罗斯 · Queen）
@@ -7,6 +7,8 @@
  *   - 右下：你（INTJ 用户）
  *   - 中央：公共牌 + 底池
  *   - 右侧：AI 推理日志
+ *
+ * 视觉语言：深空暗紫 + 情绪光斑 · 觉醉感官情绪探索游戏 · 与 TavernPage/CocktailPage 同语
  */
 
 import { useState, useCallback, useEffect, useRef } from 'react';
@@ -326,7 +328,7 @@ export default function PokerPage() {
       <div className="min-h-screen px-6 lg:px-16 py-12 max-w-6xl mx-auto animate-fade-in">
         <header className="mb-10 text-center">
           <div className="text-[11px] tracking-[0.5em] text-amethyst-400/70 uppercase font-mono mb-2">
-            Poker Arena · 三人德州扑克
+            觉醉 · 弈 · Poker Arena · 三人德州
           </div>
           <h1 className="font-display text-4xl md:text-5xl text-gold-sheen text-shadow-glow-gold tracking-[0.18em]">
             金融孪生对局

@@ -1,9 +1,11 @@
 /**
- * LoginPage · 登入镜中
+ * LoginPage · 觉醉·镜中 · 登入镜中
  *
  * 深空沉浸式登录页 · 无侧栏/无星野/无主理人
  * Mock 鉴权：用户名+密码非空即可登录，持久化到 localStorage
  * 后端就绪后替换 login() 为真实 API 调用
+ *
+ * 视觉语言：深空暗紫 + 情绪光斑 · 觉醉感官情绪探索游戏 · 与 TavernPage/CocktailPage 同语
  */
 
 import { useState, type FormEvent } from 'react';
@@ -73,7 +75,7 @@ export default function LoginPage() {
           </div>
 
           <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3">
-            星云 · 人格调酒台
+            觉醉 · 星云 · 人格调酒台
           </div>
           <h1 className="font-display text-4xl text-gold-sheen text-shadow-glow-gold">
             觉醉

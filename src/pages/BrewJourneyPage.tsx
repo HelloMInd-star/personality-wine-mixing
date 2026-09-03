@@ -1,5 +1,5 @@
 /**
- * BrewJourneyPage · 酿·弧 · 情绪旅程回路
+ * BrewJourneyPage · 觉醉·酿·弧 · 情绪旅程回路
  * 轻量演示页 · 零新依赖，复用真实组件与深空 UI
  *
  * 展示内容：
@@ -10,6 +10,8 @@
  *   5. 四阶段对照表 · 回路全貌
  *
  * 独立工作 · 内置 mock 画像，无需先做测评
+ *
+ * 视觉语言：深空暗紫 + 情绪光斑 · 觉醉感官情绪探索游戏 · 与 TavernPage/CocktailPage 同语
  */
 
 import { useMemo, useEffect } from 'react';
@@ -134,7 +136,7 @@ export default function BrewJourneyPage() {
         <div className="flex items-center justify-between gap-4 mb-3">
           <div>
             <div className="text-[10px] tracking-[0.3em] text-amethyst-400/70 uppercase mb-1">
-              酿 · 弧 · Journey Arc
+              觉醉 · 酿·弧 · Journey Arc
             </div>
             <h1 className="font-display text-2xl md:text-3xl text-moon-50 tracking-[0.1em]">
               情绪旅程回路

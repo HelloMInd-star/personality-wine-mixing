@@ -1,8 +1,10 @@
 /**
- * BalancePage · 衡 · 平衡性验证
+ * BalancePage · 觉醉·衡 · 平衡性验证
  *
  * 模拟 1000 次对局，统计不同人格类型对手的胜率分布，
  * 评估游戏平衡性。支持自定义局数、实时进度、多维度报告。
+ *
+ * 视觉语言：深空暗紫 + 情绪光斑 · 觉醉感官情绪探索游戏 · 与 TavernPage/CocktailPage 同语
  */
 
 import { useState, useCallback, useRef, useEffect, useMemo } from 'react';
@@ -618,7 +620,7 @@ export default function BalancePage() {
             ← {fromChess ? '棋局' : '沙盘'}
           </Link>
           <div className="w-px h-4 bg-amethyst-500/20" />
-          <span className="text-[10px] text-amethyst-400/30 tracking-[0.3em] uppercase">BALANCE</span>
+          <span className="text-[10px] text-amethyst-400/30 tracking-[0.3em] uppercase">觉醉 · 衡 · BALANCE</span>
           {fromChess && (
             <>
               <div className="w-px h-4 bg-amethyst-500/20" />
