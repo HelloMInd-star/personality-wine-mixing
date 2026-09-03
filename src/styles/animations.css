@@ -122,3 +122,43 @@
 .ym-delay-500 { animation-delay: 0.5s; }
 .ym-delay-600 { animation-delay: 0.6s; }
 .ym-delay-800 { animation-delay: 0.8s; }
+
+/* ═════════════════════════════════════════════════════════
+   ORBIT 借鉴 · 2 关键帧（pulse · fadeUp）
+   状态色 + 极简过渡 · 提升觉醉状态反馈质感
+   ═════════════════════════════════════════════════════════ */
+
+@keyframes ym-orbit-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.55; }
+}
+
+@keyframes ym-orbit-fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ym-orbit-pulse {
+  animation: ym-orbit-pulse 2.4s cubic-bezier(.2,.7,.2,1) infinite;
+}
+
+.ym-orbit-fade-up {
+  animation: ym-orbit-fade-up 240ms cubic-bezier(.2,.7,.2,1) both;
+}
+
+/* ORBIT 状态色应用类（signal 绿 · alert 红 · accent 蓝） */
+.ym-status-signal {
+  color: #5BCFA0;
+  background: rgba(91, 207, 160, 0.12);
+  border: 1px solid rgba(91, 207, 160, 0.25);
+}
+.ym-status-alert {
+  color: #FF6B6B;
+  background: rgba(255, 107, 107, 0.12);
+  border: 1px solid rgba(255, 107, 107, 0.25);
+}
+.ym-status-accent {
+  color: #6FA8FF;
+  background: rgba(111, 168, 255, 0.12);
+  border: 1px solid rgba(111, 168, 255, 0.25);
+}
