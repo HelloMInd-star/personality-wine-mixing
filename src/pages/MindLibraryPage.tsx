@@ -39,7 +39,7 @@ const MIND_MODULES = [
     name: '画圈实验',
     nameEn: 'Circle',
     layer: '实时探针',
-    desc: '运动-认知外显 · 速度/圆度/节奏稳定性 · 与问卷互补的实时测量',
+    desc: '运动-认知外显 · 速度/圆度/节奏稳定性 · 与镜中自观互补的实时测量',
   },
   {
     symbol: '忘',
@@ -77,10 +77,10 @@ export default function MindLibraryPage() {
           MIND · 底座
         </div>
         <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
-          思维库
+          思维库 · 镜的两面
         </h1>
         <p className="mt-3 text-sm md:text-base text-moon-200/60 italic max-w-xl leading-relaxed">
-          极客程序员在夜里编程的底座。六重结构,待你点亮。
+          觉醉在夜里编程的底座 · 六重结构，待你点亮。
         </p>
         <div className="divider-gold mt-5 w-40" />
       </header>

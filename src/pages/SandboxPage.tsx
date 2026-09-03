@@ -84,7 +84,7 @@ export default function SandboxPage() {
         setResult(calcResult);
         setJudgeComments(getJudgeComments());
 
-        // 桥接 → Y.Mine 六维向量
+        // 桥接 → 觉醉 六维向量
         const vector = sandboxToVector(calcResult);
         saveVector(vector);
 

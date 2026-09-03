@@ -76,7 +76,7 @@ export default function LoginPage() {
             星云 · 人格调酒台
           </div>
           <h1 className="font-display text-4xl text-gold-sheen text-shadow-glow-gold">
-            Y.Mine
+            觉醉
           </h1>
           <p className="mt-2 text-moon-200/50 text-sm tracking-wider">
             登入镜中 · 以人格为引
@@ -161,7 +161,7 @@ export default function LoginPage() {
                 setError('');
                 // 新客 · 自动填入默认用户名并登录
                 setUsername('新客');
-                setPassword('ymine');
+                setPassword('juezui');
               }}
               className="text-[11px] text-amethyst-400/50 hover:text-gold-400 transition-colors duration-300 tracking-wider"
             >

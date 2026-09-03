@@ -1,5 +1,5 @@
 /**
- * InvestPage · 灵感实验室（重塑中）
+ * InvestPage · 觉醉 · 灵感实验室
  *
  * 原「投资部·商业底座」已下线，本页正重塑为「灵感实验室·创意池」。
  * 当前为占位骨架页，待 Phase 后续填充：
@@ -46,15 +46,15 @@ export default function InvestPage() {
           灵感实验室
         </h1>
         <p className="mt-3 text-sm md:text-base text-moon-200/60 italic max-w-xl leading-relaxed">
-          创意的蓄水池。未实现的点子在此点亮、孵化、归档。
+          创意的蓄水池 · 未点燃的火种，在此点亮、孵化、归档。
         </p>
         <div className="divider-gold mt-5 w-40" />
       </header>
 
-      {/* 主理人区 · 复用 investHostEngine 状态指示灯 */}
+      {/* 灵感主理人 · 复用 investHostEngine 状态指示灯 */}
       <section className="mb-12">
         <div className="text-[11px] tracking-[0.3em] text-amethyst-400/60 uppercase mb-5">
-          主理人 · Ideas Host
+          灵感主理人 · Ideas Host
         </div>
         <GlassPanel padding="lg">
           <div className="flex items-center gap-4">
@@ -177,7 +177,7 @@ export default function InvestPage() {
 
 /** 创意分类占位 · 重塑时替换为数据源 */
 const CATEGORIES_PLACEHOLDER = [
-  { id: 'cocktail', glyph: '杯', title: '调酒创意', nameEn: 'Cocktail', desc: '配方扩展 · 推荐算法实验 · 风味维度派生' },
+  { id: 'cocktail', glyph: '杯', title: '调酒创意', nameEn: 'Cocktail', desc: '配方扩展 · 风味维度派生 · 旅程回路实验' },
   { id: 'sensory', glyph: '香', title: '感官扩展', nameEn: 'Sensory', desc: '视觉 / 听觉 / 嗅觉 / 味觉的多模态同构' },
   { id: 'persona', glyph: '镜', title: '人格维度', nameEn: 'Persona', desc: '六维向量扩展 · OCEAN 映射 · 动态校准' },
   { id: 'scene', glyph: '局', title: '场景设计', nameEn: 'Scene', desc: '酒局融合 · 吧台交互 · 酒馆氛围' },
