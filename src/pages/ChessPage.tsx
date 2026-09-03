@@ -1,14 +1,13 @@
 /**
- * ChessPage · MBTI 国际象棋局 · 棋风人格采集
+ * ChessPage · 觉醉 · 棋局自观
  *
- * 三态：atlas（棋风图谱）→ collecting（4 场景决策采集）→ report（棋风人格报告）
+ * 三态：atlas（棋风图谱）→ 4 场景走法自观 → report（棋风人格织就）
  *
- * 采集逻辑：
- *   4 个棋局关键节点 → 用户选走法 → ChessDecisionSignals(0-1)
- *   → signalsToTemperament → temperament.vector → saveVector 落库
+ * 4 个棋局关键节点 → 你选走法 → 棋风人格织就
+ * → saveVector 落库
  *
  * 不依赖完整棋局 AI · 用关键节点选择式交互降级复杂度
- * 与 CardsPage（牌类采集）同构 · 作为人格采集的第三轨
+ * 与 CardsPage（牌类自观）同构 · 作为人格自观的第三轨
  */
 
 import { useState } from 'react';
@@ -165,15 +164,15 @@ export default function ChessPage() {
       {/* 标题区 */}
       <header className="mb-10 text-center">
         <div className="text-[11px] tracking-[0.5em] text-amethyst-400/70 uppercase font-mono mb-2">
-          MBTI Chess · 棋局人格采集
+          Chess · 棋局采镜
         </div>
         <h1 className="font-display text-4xl md:text-5xl text-gold-sheen text-shadow-glow-gold tracking-[0.18em]">
           国际象棋局
         </h1>
         <p className="text-sm text-moon-200/60 italic mt-3 max-w-xl mx-auto leading-relaxed">
-          走棋即答问 · 每一步都在泄露你的人格。
+          落子即心声 · 每一步都在泄露你的镜像。
           <br />
-          棋局是人格验证的策略推演场景 · 与调酒双轨互校。
+          棋局是镜中自观的策略推演 · 与调酒双轨互校。
         </p>
         <div className="divider-gold mt-5 w-40" />
 
@@ -314,11 +313,11 @@ export default function ChessPage() {
           <section className="text-center py-8">
             {vector ? (
               <div className="mb-6 text-[11px] tracking-[0.3em] text-amethyst-400/60">
-                已有棋风向量为 {Object.entries(vector).slice(0, 3).map(([k, v]) => `${DIM_LABEL[k as keyof PersonaVector]}${(v as number).toFixed(2)}`).join(' · ')}... · 重新采集将覆盖
+                已有棋风向量为 {Object.entries(vector).slice(0, 3).map(([k, v]) => `${DIM_LABEL[k as keyof PersonaVector]}${(v as number).toFixed(2)}`).join(' · ')}... · 重新落子将覆盖
               </div>
             ) : null}
             <GradientButton variant="gold" size="lg" onClick={() => setPhase('collecting')}>
-              开始棋风采集 →
+              入棋局 →
             </GradientButton>
             <div className="mt-6 font-display text-moon-200/40 text-sm italic max-w-md mx-auto leading-relaxed">
               「棋盘是夜的另一面镜子 · 照见调酒照不见的那部分你。」
@@ -367,7 +366,7 @@ export default function ChessPage() {
               onClick={() => setPhase('atlas')}
               className="text-[11px] tracking-[0.3em] text-amethyst-400/50 hover:text-gold-400 transition-colors"
             >
-              ← 返回棋风图谱
+              ← 回到棋风图谱
             </button>
           </div>
         </section>

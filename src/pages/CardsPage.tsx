@@ -1,7 +1,7 @@
 /**
  * CardsPage · 牌类人格采集 · 数据入口层
  *
- * Y.Mine 可编程酒馆的「数据入口层」UI：
+ * 觉醉 可编程酒馆的「数据入口层」UI：
  *   四套牌类（塔罗/星盘/扑克/德州）采集 → 融合 → 六维人格向量
  *   落库后作为唯一数据契约，驱动调酒/光效/香氛派生
  *
@@ -284,7 +284,7 @@ export default function CardsPage() {
           Card-based Persona Collection
         </div>
         <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
-          牌类 · 人格采集
+          牌类 · 采镜
         </h1>
         <p className="mt-2 text-sm md:text-base text-moon-200/60 italic">
           四套牌织一张向量，向量织一杯酒。
@@ -297,13 +297,13 @@ export default function CardsPage() {
         <StepIndicator currentStep={step} doneCount={stepIndex} />
       )}
 
-      {/* 实时向量可视化 · 采集阶段显示 · 每步完成后部分融合演进 */}
+      {/* 实时向量可视化 · 采镜阶段显示 · 每步完成后部分融合演进 */}
       {!isResult && (
         <div className="max-w-3xl mx-auto mb-10">
           <VectorLiveBar
             vector={liveVector}
             collectedCount={collectedCount}
-            title="实时向量 · 随采集演进"
+            title="实时向量 · 随采镜演进"
           />
         </div>
       )}

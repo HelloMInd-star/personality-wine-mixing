@@ -1,7 +1,7 @@
 /**
- * PersonalityPage · 人格测评主页面
- * 夜之问卷的入口与归宿：从一盏灯，到一张星图
- * 三态流转：idle 封面 → testing 问卷 → done 星图
+ * PersonalityPage · 觉醉 镜中自观
+ * 夜之问的入口与归宿：从一盏灯，到一张星图
+ * 三态流转：idle 封面 → testing 镜中自观 → done 星图
  */
 
 import { useState } from 'react';
@@ -36,7 +36,7 @@ export default function PersonalityPage() {
     getProgress,
   } = usePersonality();
 
-  // 本地控制 · 是否已离开封面进入问卷
+  // 本地控制 · 是否已离开封面进入镜中自观
   const [started, setStarted] = useState(false);
 
   const currentQuestion = PERSONALITY_QUESTIONS[currentStep];
@@ -69,7 +69,7 @@ export default function PersonalityPage() {
       {/* 页面标题区 */}
       <header className="mb-10 md:mb-14">
         <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
-          人格 · Persona
+          镜中自观 · Persona
         </h1>
         <p className="mt-2 text-sm md:text-base text-moon-200/60 italic">
           夜给的镜，照见白日里看不见的那个自己。
@@ -101,7 +101,7 @@ export default function PersonalityPage() {
           <div className="mt-8">
             <div className="flex items-center justify-between text-xs text-moon-200/50 mb-2">
               <span className="tracking-[0.2em]">
-                已答 {Object.keys(answers).length} / {TOTAL_QUESTIONS}
+                镜中已观 {Object.keys(answers).length} / {TOTAL_QUESTIONS}
               </span>
               <span className="font-mono">
                 {Math.round(progress * 100)}%
@@ -131,7 +131,7 @@ export default function PersonalityPage() {
               onClick={next}
               disabled={!isAnswered || currentStep === TOTAL_QUESTIONS - 1}
             >
-              下一题 →
+              继续织镜 →
             </GradientButton>
           </div>
         </div>
@@ -168,9 +168,8 @@ function IdleView({ onStart }: IdleViewProps) {
           织一张属于你的夜
         </h2>
         <p className="text-moon-200/70 text-sm md:text-base leading-relaxed mb-8 max-w-xl mx-auto">
-          三十题夜之问卷，约三分钟。
-          每一次作答都是一根丝，织出一张独属于你的星图，
-          它将在吧台那头，点亮一杯为你而调的酒。
+          夜之问的丝线，每答一根，织一张独属你的星图。
+          吧台那头的酒，会循着这张图点亮。
         </p>
 
         {/* 五维简介 · 横向星点 */}
@@ -190,7 +189,7 @@ function IdleView({ onStart }: IdleViewProps) {
         </div>
 
         <GradientButton variant="gold" size="lg" onClick={onStart}>
-          开始测评
+          入镜启程
         </GradientButton>
       </GlassPanel>
 
@@ -201,7 +200,7 @@ function IdleView({ onStart }: IdleViewProps) {
           className="text-amethyst-300/80 hover:text-gold-sheen transition-colors tracking-widest"
           onClick={() => navigate('/cards')}
         >
-          以牌类采集人格 →
+          以牌类采镜 →
         </button>
       </div>
     </div>
@@ -278,10 +277,10 @@ function DoneView({ profile, onReset, onViewCocktail }: DoneViewProps) {
       {/* 操作按钮 */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
         <GradientButton variant="ghost" size="md" onClick={onReset}>
-          重新测评
+          重新织镜
         </GradientButton>
         <GradientButton variant="gold" size="lg" onClick={onViewCocktail}>
-          查看专属调酒 →
+          入夜看酒 →
         </GradientButton>
       </div>
     </div>
