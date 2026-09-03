@@ -1,7 +1,7 @@
 /**
  * 人格 → 风味映射系统
  * 人格五维 (OCEAN) → 风味八维的权重矩阵
- * 这是 Y.Mine 双轨系统的核心纽带
+ * 这是 觉醉 双轨系统的核心纽带
  */
 
 import type { FlavorKey } from './cocktail';

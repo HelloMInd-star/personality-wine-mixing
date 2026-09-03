@@ -201,7 +201,7 @@ const CASES: { name: string; target: Record<TraitKey, Target> }[] = [
   },
 ];
 
-console.log(`\n${C.bold}${C.gold}Y.Mine · 人格匹配 & 调酒推荐 逻辑测试${C.reset}`);
+console.log(`\n${C.bold}${C.gold}觉醉 · 人格匹配 & 调酒推荐 逻辑测试${C.reset}`);
 console.log(`${C.dim}8 组模拟画像 × 引擎纯函数链路验证${C.reset}\n`);
 
 CASES.forEach((c, i) => printCase(i + 1, c.name, c.target));

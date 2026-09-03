@@ -1,7 +1,7 @@
 /**
  * Game Theory 类型定义
  *
- * 从 ymine 仓库 models/gamemind 移植的纳什均衡博弈论类型系统
+ * 从 juezui 仓库 models/gamemind 移植的纳什均衡博弈论类型系统
  */
 
 /** 博弈输入参数 */
