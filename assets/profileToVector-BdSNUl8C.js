@@ -1,0 +1,1 @@
+const s=o=>Math.max(0,Math.min(1,o/100));function n(o){return Math.round(o*1e3)/1e3}function u(o){const{scores:e}=o,a=s(e.openness),i=s(e.conscientiousness),t=s(e.extraversion),c=s(e.agreeableness),r=s(e.neuroticism);return{VIS:n(a),INF:n(i),ENT:n(t),LEAD:n(t*.6+(1-c)*.4),TOL:n((1-r)*.5+c*.5),SPD:n(1-r)}}export{u as p};
