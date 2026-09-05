@@ -12,7 +12,7 @@ export default function NotFoundPage() {
   const { pathname } = useLocation();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 animate-fade-in">
+    <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 animate-orbit-fade-up">
       {/* 月相 · 缺损的半月 */}
       <div className="relative w-24 h-24 mb-8">
         <div className="absolute inset-0 rounded-full border border-amethyst-500/30 animate-breathe" />
@@ -33,7 +33,8 @@ export default function NotFoundPage() {
         />
       </div>
 
-      <div className="text-[11px] tracking-[0.5em] text-amethyst-400/60 uppercase mb-4">
+      <div className="text-[11px] tracking-[0.5em] text-amethyst-400/60 uppercase mb-4 flex items-center justify-center gap-2">
+        <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-alert animate-orbit-pulse shadow-glow-alert" />
         404 · Void
       </div>
       <h1 className="font-display text-4xl md:text-5xl text-gold-sheen text-shadow-glow-gold mb-4">
@@ -50,14 +51,14 @@ export default function NotFoundPage() {
         <button
           type="button"
           onClick={() => navigate('/')}
-          className="px-8 py-3 rounded-full font-display text-sm tracking-[0.3em] text-void bg-gradient-to-r from-gold-400 to-gold-600 shadow-glow-gold hover:shadow-glow-gold-strong transition-all duration-500"
+          className="px-8 py-3 rounded-full font-display text-sm tracking-[0.3em] text-void bg-gradient-to-r from-gold-400 to-gold-600 shadow-glow-gold hover:shadow-glow-gold-strong transition-all duration-orbit-mid ease-orbit"
         >
           回到入口 →
         </button>
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="px-6 py-3 text-xs tracking-[0.3em] text-amethyst-400/60 hover:text-gold-400 transition-colors duration-300"
+          className="px-6 py-3 text-xs tracking-[0.3em] text-amethyst-400/60 hover:text-gold-400 transition-colors duration-orbit-mid ease-orbit"
         >
           ← 退回上一步
         </button>
