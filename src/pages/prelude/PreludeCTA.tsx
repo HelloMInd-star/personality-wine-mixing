@@ -53,7 +53,7 @@ export function EpilogueCTA() {
   ];
 
   return (
-    <div className="prelude-explore-wrap animate-fade-in">
+    <div className="prelude-explore-wrap animate-orbit-fade-up">
       {/* 5 维度探索入口 */}
       <div className="prelude-explore-dims">
         {dims.map((d) => (
@@ -104,7 +104,7 @@ export function EpilogueCTA() {
           padding: 0; border: none; background: none; cursor: pointer;
           display: flex; align-items: center; justify-content: center;
           opacity: 0; transform: translateY(16px);
-          animation: dim-enter 0.9s cubic-bezier(0.22,1,0.36,1) var(--dim-delay) forwards;
+          animation: dim-enter 0.9s cubic-bezier(.2,.7,.2,1) var(--dim-delay) forwards;
         }
         @keyframes dim-enter { to { opacity: 1; transform: translateY(0); } }
         .prelude-dim-body {
@@ -116,7 +116,7 @@ export function EpilogueCTA() {
           box-shadow: inset -6px -6px 18px rgba(7,4,20,0.65), 0 0 24px var(--dim-aura);
           display: flex; align-items: center; justify-content: center;
           animation: dim-float 4.8s ease-in-out infinite var(--dim-delay);
-          transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s;
+          transition: transform 240ms cubic-bezier(.2,.7,.2,1), box-shadow 240ms cubic-bezier(.2,.7,.2,1);
         }
         @keyframes dim-float {
           0%, 100% { transform: translateY(0); }
@@ -160,7 +160,7 @@ export function EpilogueCTA() {
           background: linear-gradient(135deg, #f0c674 0%, #d4a84b 50%, #a8842f 100%);
           border: none; border-radius: 999px; cursor: pointer;
           box-shadow: 0 0 32px rgba(240, 198, 116, 0.45);
-          transition: all 0.3s ease;
+          transition: all 240ms cubic-bezier(.2,.7,.2,1);
         }
         .prelude-enter-btn:hover {
           transform: translateY(-2px);

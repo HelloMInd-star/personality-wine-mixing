@@ -125,10 +125,11 @@ export default function MenuPage() {
   }));
 
   return (
-    <div className="animate-fade-in min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
+    <div className="animate-orbit-fade-up min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
       {/* 页面标题区 */}
       <header className="mb-10 md:mb-14">
-        <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
+        <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em] flex items-center gap-3">
+          <span className="inline-block w-2 h-2 rounded-full bg-orbit-signal animate-orbit-pulse shadow-glow-signal" />
           酒单
         </h1>
         <p className="mt-2 text-sm md:text-base text-moon-200/60 italic">
@@ -147,7 +148,7 @@ export default function MenuPage() {
               key={tab.key}
               type="button"
               onClick={() => setMenuTab(tab.key)}
-              className={`px-4 py-2 rounded-lg text-sm tracking-[0.15em] border transition-all duration-300 ${
+              className={`px-4 py-2 rounded-capsule text-sm tracking-[0.15em] border transition-all duration-orbit-mid ease-orbit ${
                 active
                   ? 'border-gold-400/60 text-gold-400 bg-gold-400/10 shadow-glow-gold'
                   : 'border-amethyst-500/25 text-moon-200/55 hover:border-amethyst-400/40 hover:text-moon-200/80'
@@ -171,7 +172,7 @@ export default function MenuPage() {
             value={searchKeyword}
             onChange={(e) => setSearchKeyword(e.target.value)}
             placeholder="搜索酒名、基酒或风味…"
-            className="w-full px-4 py-2.5 pl-10 rounded-xl bg-void-700/60 border border-amethyst-500/25 text-sm text-moon-50 placeholder-moon-200/35 focus:outline-none focus:border-gold-400/50 focus:shadow-glow-gold transition-all duration-300"
+            className="w-full px-4 py-2.5 pl-10 rounded-capsule bg-void-700/60 border border-amethyst-500/25 text-sm text-moon-50 placeholder-moon-200/35 focus:outline-none focus:border-gold-400/50 focus:shadow-glow-gold transition-all duration-orbit-mid ease-orbit"
           />
           <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-moon-200/40 text-sm pointer-events-none">
             ⌕
@@ -181,7 +182,7 @@ export default function MenuPage() {
               type="button"
               onClick={() => setSearchKeyword('')}
               aria-label="清空"
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-moon-200/40 hover:text-gold-400 transition-colors text-sm"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-moon-200/40 hover:text-gold-400 transition-colors duration-orbit-mid ease-orbit text-sm"
             >
               ✕
             </button>
@@ -198,7 +199,7 @@ export default function MenuPage() {
               key={mood}
               type="button"
               onClick={() => setFilterMood(active ? null : mood)}
-              className={`px-3 py-1 rounded-full text-xs tracking-[0.1em] border transition-all duration-300 ${
+              className={`px-3 py-1 rounded-full text-xs tracking-[0.1em] border transition-all duration-orbit-mid ease-orbit ${
                 active
                   ? 'border-gold-400/60 text-gold-400 bg-gold-400/10 shadow-glow-gold'
                   : 'border-amethyst-500/30 text-moon-200/60 hover:border-amethyst-400/50 hover:text-moon-200/90'

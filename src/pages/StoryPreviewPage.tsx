@@ -41,12 +41,13 @@ export default function StoryPreviewPage() {
   }, []);
 
   return (
-    <div className="animate-fade-in min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
+    <div className="animate-orbit-fade-up min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
       {/* 标题 */}
       <header className="mb-10">
         <div className="flex items-center justify-between gap-4 mb-3">
           <div>
-            <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3">
+            <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3 flex items-center gap-2">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-signal animate-orbit-pulse shadow-glow-signal" />
               酿 · 故事 · Story Preview
             </div>
             <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
@@ -55,7 +56,7 @@ export default function StoryPreviewPage() {
           </div>
           <Link
             to="/brew/molecular"
-            className="text-xs text-amethyst-300/70 hover:text-amethyst-200 transition-colors tracking-[0.1em]"
+            className="text-xs text-amethyst-300/70 hover:text-amethyst-200 transition-colors duration-orbit-mid ease-orbit tracking-[0.1em]"
           >
             ← 返回分子实验室
           </Link>
@@ -76,7 +77,7 @@ export default function StoryPreviewPage() {
                 <button
                   key={m}
                   onClick={() => handleMbtiClick(m)}
-                  className={`px-3 py-1.5 text-xs rounded-full border transition-all tracking-[0.05em] ${
+                  className={`px-3 py-1.5 text-xs rounded-full border transition-all duration-orbit-mid ease-orbit tracking-[0.05em] ${
                     mbti === m
                       ? 'border-gold-400/50 bg-gold-400/10 text-gold-400'
                       : 'border-amethyst-500/20 text-moon-200/50 hover:border-amethyst-500/40'
@@ -96,7 +97,7 @@ export default function StoryPreviewPage() {
             <select
               value={cocktailId}
               onChange={(e) => setCocktailId(e.target.value)}
-              className="w-full md:w-80 px-3 py-2 text-xs bg-void-700/80 border border-amethyst-500/20 rounded-lg text-moon-200/70 focus:border-gold-400/40 focus:outline-none transition-colors"
+              className="w-full md:w-80 px-3 py-2 text-xs bg-void-700/80 border border-amethyst-500/20 rounded-capsule text-moon-200/70 focus:border-gold-400/40 focus:outline-none transition-colors duration-orbit-mid ease-orbit"
             >
               {COCKTAIL_OPTIONS.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -136,7 +137,8 @@ export default function StoryPreviewPage() {
 
           {/* 序章 */}
           <section className="mb-8">
-            <div className="text-[10px] tracking-[0.3em] text-gold-400/60 uppercase mb-4 text-center">
+            <div className="text-[10px] tracking-[0.3em] text-gold-400/60 uppercase mb-4 text-center flex items-center justify-center gap-2">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-signal animate-orbit-pulse" />
               序章 · 人格底色
             </div>
             <div className="text-sm text-moon-200/80 leading-relaxed max-w-2xl mx-auto whitespace-pre-line">
@@ -148,7 +150,8 @@ export default function StoryPreviewPage() {
 
           {/* 风味叙事 */}
           <section className="mb-8">
-            <div className="text-[10px] tracking-[0.3em] text-gold-400/60 uppercase mb-4 text-center">
+            <div className="text-[10px] tracking-[0.3em] text-gold-400/60 uppercase mb-4 text-center flex items-center justify-center gap-2">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-signal animate-orbit-pulse" />
               风味叙事
             </div>
             <div className="text-sm text-moon-200/80 leading-relaxed max-w-2xl mx-auto whitespace-pre-line">
@@ -160,14 +163,15 @@ export default function StoryPreviewPage() {
 
           {/* 场景时刻 */}
           <section className="mb-8">
-            <div className="text-[10px] tracking-[0.3em] text-gold-400/60 uppercase mb-4 text-center">
+            <div className="text-[10px] tracking-[0.3em] text-gold-400/60 uppercase mb-4 text-center flex items-center justify-center gap-2">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-signal animate-orbit-pulse" />
               场景时刻
             </div>
             <div className="grid md:grid-cols-3 gap-4 max-w-3xl mx-auto">
               {story.scenes.map((scene, i) => (
                 <div
                   key={i}
-                  className="p-4 rounded-lg bg-white/[0.03] border border-amethyst-500/10 text-sm text-moon-200/70 leading-relaxed"
+                  className="p-4 rounded-card bg-white/[0.03] border border-amethyst-500/10 text-sm text-moon-200/70 leading-relaxed"
                 >
                   <div className="text-[10px] tracking-[0.2em] text-amethyst-400/50 uppercase mb-2">
                     场景 {i + 1}
@@ -182,7 +186,8 @@ export default function StoryPreviewPage() {
 
           {/* 金句 */}
           <section>
-            <div className="text-[10px] tracking-[0.3em] text-gold-400/60 uppercase mb-4 text-center">
+            <div className="text-[10px] tracking-[0.3em] text-gold-400/60 uppercase mb-4 text-center flex items-center justify-center gap-2">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-signal animate-orbit-pulse" />
               落款 · 金句
             </div>
             <blockquote className="text-lg text-gold-400/90 text-center italic max-w-xl mx-auto leading-relaxed tracking-[0.05em]">

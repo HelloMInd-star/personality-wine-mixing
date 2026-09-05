@@ -106,7 +106,7 @@ export default function PreludeIntro() {
           color: rgba(216, 201, 245, 0.5);
           background: rgba(15, 10, 30, 0.4); backdrop-filter: blur(8px);
           border: 1px solid rgba(155, 123, 212, 0.2); border-radius: 999px;
-          cursor: pointer; transition: all 0.3s ease;
+          cursor: pointer; transition: all 240ms cubic-bezier(.2,.7,.2,1);
         }
         .prelude-skip:hover {
           color: #f0c674; border-color: rgba(240, 198, 116, 0.5);

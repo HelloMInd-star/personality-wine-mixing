@@ -63,7 +63,7 @@ export default function LoginPage() {
       </div>
 
       {/* 登录容器 */}
-      <div className="relative z-10 w-full max-w-sm px-6 animate-fade-in">
+      <div className="relative z-10 w-full max-w-sm px-6 animate-orbit-fade-up">
         {/* 镜月 · 品牌标识 */}
         <div className="flex flex-col items-center mb-10">
           <div className="relative mb-6">
@@ -74,7 +74,8 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3">
+          <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3 flex items-center justify-center gap-2">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent" />
             觉醉 · 星云 · 人格调酒台
           </div>
           <h1 className="font-display text-4xl text-gold-sheen text-shadow-glow-gold">
@@ -109,7 +110,7 @@ export default function LoginPage() {
               placeholder="你的代号"
               autoComplete="username"
               autoFocus
-              className="w-full bg-void-700/60 border border-amethyst-500/20 rounded-xl px-4 py-3 text-moon-50 placeholder:text-moon-200/30 focus:outline-none focus:border-gold-400/50 transition-colors duration-300 text-sm"
+              className="w-full bg-void-700/60 border border-amethyst-500/20 rounded-capsule px-4 py-3 text-moon-50 placeholder:text-moon-200/30 focus:outline-none focus:border-gold-400/50 transition-colors duration-orbit-mid ease-orbit text-sm"
             />
           </div>
 
@@ -128,13 +129,13 @@ export default function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               autoComplete="current-password"
-              className="w-full bg-void-700/60 border border-amethyst-500/20 rounded-xl px-4 py-3 text-moon-50 placeholder:text-moon-200/30 focus:outline-none focus:border-gold-400/50 transition-colors duration-300 text-sm"
+              className="w-full bg-void-700/60 border border-amethyst-500/20 rounded-capsule px-4 py-3 text-moon-50 placeholder:text-moon-200/30 focus:outline-none focus:border-gold-400/50 transition-colors duration-orbit-mid ease-orbit text-sm"
             />
           </div>
 
           {/* 错误提示 */}
           {error && (
-            <div className="text-rose-400/80 text-xs text-center animate-fade-in">
+            <div className="text-rose-400/80 text-xs text-center animate-orbit-fade-up">
               {error}
             </div>
           )}
@@ -143,7 +144,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gold-sheen text-void-900 font-semibold py-3 rounded-xl tracking-wide transition-all duration-300 hover:shadow-glow-gold disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+            className="w-full bg-gold-sheen text-void-900 font-semibold py-3 rounded-capsule tracking-wide transition-all duration-orbit-mid ease-orbit hover:shadow-glow-gold disabled:opacity-50 disabled:cursor-not-allowed text-sm"
           >
             {loading ? (
               <span className="inline-flex items-center gap-2">
@@ -165,7 +166,7 @@ export default function LoginPage() {
                 setUsername('新客');
                 setPassword('juezui');
               }}
-              className="text-[11px] text-amethyst-400/50 hover:text-gold-400 transition-colors duration-300 tracking-wider"
+              className="text-[11px] text-amethyst-400/50 hover:text-gold-400 transition-colors duration-orbit-mid ease-orbit tracking-wider"
             >
               新客 · 初启
             </button>
