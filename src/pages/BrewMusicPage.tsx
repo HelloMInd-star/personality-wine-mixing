@@ -104,12 +104,13 @@ export default function BrewMusicPage() {
   }, [journeyState, currentTrack, profile, vector, activeMood, moodIntensity, audioAnalysis]);
 
   return (
-    <div className="animate-fade-in min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
+    <div className="animate-orbit-fade-up min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
       {/* 标题区 */}
       <header className="mb-10">
         <div className="flex items-center justify-between gap-4 mb-3">
           <div>
-            <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3">
+            <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3 flex items-center gap-2">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent" />
               觉醉 · 酿·乐 · Music Engine
             </div>
             <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
@@ -118,7 +119,7 @@ export default function BrewMusicPage() {
           </div>
           <Link
             to="/cocktail"
-            className="text-xs text-amethyst-300/70 hover:text-amethyst-200 transition-colors tracking-[0.1em]"
+            className="text-xs text-amethyst-300/70 hover:text-amethyst-200 transition-colors duration-orbit-mid ease-orbit tracking-[0.1em]"
           >
             ← 返回调酒
           </Link>
@@ -192,8 +193,8 @@ export default function BrewMusicPage() {
           </div>
           {audioAnalysis && (
             <div className="flex items-center justify-center gap-2 mt-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-[9px] text-green-400/70 tracking-[0.1em]">
+              <span className="w-1.5 h-1.5 rounded-full bg-orbit-signal animate-orbit-pulse shadow-glow-signal" />
+              <span className="text-[9px] text-orbit-signal tracking-[0.1em]">
                 实时音频分析 · 声学指纹反哺中
               </span>
               {audioAnalysis.rawBpm > 0 && (

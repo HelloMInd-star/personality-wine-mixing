@@ -130,12 +130,13 @@ export default function BrewJourneyPage() {
   const meta = journeyState.meta;
 
   return (
-    <div className="animate-fade-in min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16 pb-20">
+    <div className="animate-orbit-fade-up min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16 pb-20">
       {/* 顶部标题区 */}
       <header className="mb-10">
         <div className="flex items-center justify-between gap-4 mb-3">
           <div>
-            <div className="text-[10px] tracking-[0.3em] text-amethyst-400/70 uppercase mb-1">
+            <div className="text-[10px] tracking-[0.3em] text-amethyst-400/70 uppercase mb-1 flex items-center gap-2">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent" />
               觉醉 · 酿·弧 · Journey Arc
             </div>
             <h1 className="font-display text-2xl md:text-3xl text-moon-50 tracking-[0.1em]">
@@ -144,7 +145,7 @@ export default function BrewJourneyPage() {
           </div>
           <Link
             to="/cocktail"
-            className="text-xs text-amethyst-300/70 hover:text-amethyst-200 transition-colors tracking-[0.1em]"
+            className="text-xs text-amethyst-300/70 hover:text-amethyst-200 transition-colors duration-orbit-mid ease-orbit tracking-[0.1em]"
           >
             ← 返回调酒
           </Link>
@@ -177,7 +178,7 @@ export default function BrewJourneyPage() {
                 key={phase}
                 type="button"
                 onClick={() => presetPhase(phase, setActiveMood, setMoodIntensity)}
-                className="group relative flex flex-col items-center py-3 rounded-lg border transition-all duration-300"
+                className="group relative flex flex-col items-center py-3 rounded-capsule border transition-all duration-orbit-mid ease-orbit"
                 style={{
                   borderColor: active ? `${pMeta.color}cc` : 'rgba(124, 95, 191, 0.18)',
                   background: active ? `${pMeta.color}14` : 'rgba(10, 8, 20, 0.4)',

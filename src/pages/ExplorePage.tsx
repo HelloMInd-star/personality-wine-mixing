@@ -45,7 +45,8 @@ export default function ExplorePage() {
 
       {/* 主体 */}
       <main className="explore-main">
-        <div className="text-[11px] tracking-[0.6em] text-amethyst-400/70 uppercase mb-4">
+        <div className="text-[11px] tracking-[0.6em] text-amethyst-400/70 uppercase mb-4 flex items-center justify-center gap-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent" />
           Five Dimensions · 五维
         </div>
         <h1 className="explore-title">五维织夜</h1>
@@ -142,7 +143,7 @@ export default function ExplorePage() {
           border-radius: 999px;
           padding: 8px 14px;
           cursor: pointer;
-          transition: all 0.3s ease;
+          transition: all 240ms cubic-bezier(.2,.7,.2,1);
         }
         .explore-back:hover {
           color: #f0c674;
@@ -257,7 +258,7 @@ export default function ExplorePage() {
           border-radius: 999px;
           cursor: pointer;
           box-shadow: 0 0 32px rgba(240,198,116,0.35);
-          transition: all 0.3s ease;
+          transition: all 240ms cubic-bezier(.2,.7,.2,1);
         }
         .explore-exit-primary:hover {
           transform: translateY(-2px);
@@ -271,7 +272,7 @@ export default function ExplorePage() {
           border: none;
           cursor: pointer;
           padding: 8px 16px;
-          transition: color 0.3s;
+          transition: color 240ms cubic-bezier(.2,.7,.2,1);
         }
         .explore-exit-secondary:hover {
           color: #f0c674;

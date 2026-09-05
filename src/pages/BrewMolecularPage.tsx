@@ -286,12 +286,13 @@ export default function BrewMolecularPage() {
   const moleculeKey = SPIRIT_MOLECULE[solvent.baseSpirit] || 'ethanol';
 
   return (
-    <div className="animate-fade-in min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
+    <div className="animate-orbit-fade-up min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
       {/* 标题区 */}
       <header className="mb-10">
         <div className="flex items-center justify-between gap-4 mb-3">
           <div>
-            <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3">
+            <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3 flex items-center gap-2">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent" />
               觉醉 · 酿·分子 · Flavor Engineering
             </div>
             <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
@@ -300,7 +301,7 @@ export default function BrewMolecularPage() {
           </div>
           <Link
             to="/brew/journey"
-            className="text-xs text-amethyst-300/70 hover:text-amethyst-200 transition-colors tracking-[0.1em]"
+            className="text-xs text-amethyst-300/70 hover:text-amethyst-200 transition-colors duration-orbit-mid ease-orbit tracking-[0.1em]"
           >
             ← 返回酿层
           </Link>
@@ -314,7 +315,8 @@ export default function BrewMolecularPage() {
       {/* 核心公式 */}
       <GlassPanel padding="md" className="mb-8">
         <div className="text-center space-y-2">
-          <div className="text-[10px] tracking-[0.2em] text-amethyst-400/60 uppercase">
+          <div className="text-[10px] tracking-[0.2em] text-amethyst-400/60 uppercase flex items-center justify-center gap-2">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse" />
             核心公式 · 圆锥浓度模型（金融 → 风味迁移）
           </div>
           <div className="font-mono text-sm text-gold-400/80 tracking-[0.1em]">
@@ -347,8 +349,8 @@ export default function BrewMolecularPage() {
           />
           {pidActive && (
             <div className="flex items-center justify-center gap-2 mt-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-[9px] text-green-400/70 tracking-[0.1em]">
+              <span className="w-1.5 h-1.5 rounded-full bg-orbit-signal animate-orbit-pulse shadow-glow-signal" />
+              <span className="text-[9px] text-orbit-signal tracking-[0.1em]">
                 PID 调节中 · 收敛至 0.50 金线
               </span>
             </div>
@@ -368,7 +370,7 @@ export default function BrewMolecularPage() {
             <button
               key={s.key}
               onClick={() => handleSpiritChange(s.key)}
-              className={`px-4 py-2 text-xs rounded-full border transition-all tracking-[0.05em] ${
+              className={`px-4 py-2 text-xs rounded-pill border transition-all duration-orbit-mid ease-orbit tracking-[0.05em] ${
                 solvent.baseSpirit === s.key
                   ? 'border-gold-400/50 bg-gold-400/10 text-gold-400'
                   : 'border-amethyst-500/20 text-moon-200/50 hover:border-amethyst-500/40'
@@ -401,7 +403,7 @@ export default function BrewMolecularPage() {
               <button
                 key={g.key}
                 onClick={() => handleGlassChange(g.key)}
-                className={`px-2.5 py-1 text-[10px] rounded-full border transition-all ${
+                className={`px-2.5 py-1 text-[10px] rounded-pill border transition-all duration-orbit-mid ease-orbit ${
                   solvent.glassType === g.key
                     ? 'border-gold-400/40 bg-gold-400/10 text-gold-400'
                     : 'border-amethyst-500/15 text-moon-200/40 hover:border-amethyst-500/30'
@@ -417,7 +419,7 @@ export default function BrewMolecularPage() {
               <button
                 key={ice.key}
                 onClick={() => handleIceChange(ice.key)}
-                className={`px-2.5 py-1 text-[10px] rounded-full border transition-all ${
+                className={`px-2.5 py-1 text-[10px] rounded-pill border transition-all duration-orbit-mid ease-orbit ${
                   solvent.ice === ice.key
                     ? 'border-gold-400/40 bg-gold-400/10 text-gold-400'
                     : 'border-amethyst-500/15 text-moon-200/40 hover:border-amethyst-500/30'

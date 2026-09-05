@@ -39,12 +39,13 @@ export default function BrewLightPage() {
   };
 
   return (
-    <div className="animate-fade-in min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
+    <div className="animate-orbit-fade-up min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
       {/* 标题区 */}
       <header className="mb-10">
         <div className="flex items-center justify-between gap-4 mb-3">
           <div>
-            <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3">
+            <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3 flex items-center gap-2">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent" />
               觉醉 · 酿·光 · Light Canvas
             </div>
             <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
@@ -53,7 +54,7 @@ export default function BrewLightPage() {
           </div>
           <Link
             to="/cocktail"
-            className="text-xs text-amethyst-300/70 hover:text-amethyst-200 transition-colors tracking-[0.1em]"
+            className="text-xs text-amethyst-300/70 hover:text-amethyst-200 transition-colors duration-orbit-mid ease-orbit tracking-[0.1em]"
           >
             ← 返回调酒
           </Link>
@@ -82,7 +83,7 @@ export default function BrewLightPage() {
                 key={preset.pattern}
                 type="button"
                 onClick={() => setPattern(preset.pattern)}
-                className="p-3 rounded-lg border text-center transition-all duration-300"
+                className="p-3 rounded-capsule border text-center transition-all duration-orbit-mid ease-orbit"
                 style={{
                   borderColor: active ? 'rgba(240,198,116,0.5)' : 'rgba(124,95,191,0.2)',
                   background: active ? 'rgba(240,198,116,0.06)' : 'transparent',
