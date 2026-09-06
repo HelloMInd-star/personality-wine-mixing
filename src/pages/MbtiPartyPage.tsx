@@ -269,13 +269,14 @@ export default function MbtiPartyPage() {
   }, [selectedTable, selectedRole]);
 
   return (
-    <div className="min-h-screen px-4 lg:px-10 py-8 lg:py-12 max-w-7xl mx-auto">
+    <div className="min-h-screen px-4 lg:px-10 py-8 lg:py-12 max-w-7xl mx-auto animate-orbit-fade-up">
       {/* 顶部标题 */}
       <header className="mb-8 text-center">
         <div className="text-[11px] tracking-[0.5em] text-amethyst-400/70 uppercase font-mono mb-2">
           MBTI Party · 人格博弈空间
         </div>
-        <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.18em]">
+        <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.18em] flex items-center justify-center gap-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent shrink-0" />
           多人酒局
         </h1>
         <p className="text-sm text-moon-200/60 italic mt-3 max-w-xl mx-auto leading-relaxed">
@@ -286,7 +287,7 @@ export default function MbtiPartyPage() {
         {/* 时段校准 · 影响酒局氛围 */}
         <div className="mt-4 inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[11px] tracking-widest max-w-xl">
           <span
-            className="inline-block w-1.5 h-1.5 rounded-full animate-breathe"
+            className="inline-block w-1.5 h-1.5 rounded-full animate-orbit-pulse"
             style={{ background: currentSlot.auraColor, boxShadow: `0 0 8px ${currentSlot.auraColor}` }}
           />
           <span className="text-moon-200/60">酒局时辰</span>
@@ -315,7 +316,7 @@ export default function MbtiPartyPage() {
             <button
               type="button"
               onClick={handleQuickDemo}
-              className="glass border border-gold-400/40 rounded-full px-5 py-1.5 text-[11px] text-gold-sheen hover:border-gold-400/70 hover:shadow-glow-gold transition-all tracking-widest"
+              className="glass border border-gold-400/40 rounded-pill px-5 py-1.5 text-[11px] text-gold-sheen hover:border-gold-400/70 hover:shadow-glow-gold transition-all duration-orbit-mid ease-orbit tracking-widest"
             >
               ⚡ 快速演示 · 直达卡片揭示
             </button>
@@ -415,7 +416,7 @@ export default function MbtiPartyPage() {
 
       {/* ②+ 酒款揭示舞台 · revealing 阶段特写 · 替代纯文字揭示 */}
       {phase === 'revealing' && fusion && (
-        <section className="mb-8 animate-fade-in">
+        <section className="mb-8 animate-orbit-fade-up">
           <GlassPanel gold padding="lg" className="overflow-hidden">
             {/* 氛围光晕 · 主色渲染 */}
             <div
@@ -445,7 +446,7 @@ export default function MbtiPartyPage() {
           每位玩家一张定制 MBTI 卡 · 背景与底色统一为酒局主色调暗
           包装材质与烫金纹样来自用户在 CardsPage 的「周边定制」偏好 */}
       {phase === 'revealing' && fusion && fusion.participants.length > 0 && (
-        <section className="mb-8 animate-fade-in">
+        <section className="mb-8 animate-orbit-fade-up">
           <GlassPanel gold padding="lg" className="overflow-hidden">
             {/* 氛围光晕 · 与卡牌底色同源 */}
             <div

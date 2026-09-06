@@ -165,13 +165,14 @@ export default function BrewScentPage() {
   const description = useMemo(() => describeRecipe(recipe), [recipe]);
 
   return (
-    <div className="animate-fade-in min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
+    <div className="animate-orbit-fade-up min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
       {/* 标题区 */}
       <header className="mb-10">
         <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3">
           觉醉 · 酿·香 · Scent Lab
         </div>
-        <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
+        <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em] flex items-center gap-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent shrink-0" />
           香气实验室
         </h1>
         <p className="mt-2 text-sm md:text-base text-moon-200/60 italic">
@@ -183,7 +184,7 @@ export default function BrewScentPage() {
       {/* 时段气味校准 · 同一人格在不同时段匹配不同气味（生物学依据） */}
       <div className="max-w-3xl mx-auto mb-6 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[11px] tracking-widest">
         <span
-          className="inline-block w-1.5 h-1.5 rounded-full animate-breathe"
+          className="inline-block w-1.5 h-1.5 rounded-full animate-orbit-pulse"
           style={{ background: currentSlot.auraColor, boxShadow: `0 0 8px ${currentSlot.auraColor}` }}
         />
         <span className="text-moon-200/60">香气时辰</span>
@@ -239,7 +240,7 @@ export default function BrewScentPage() {
                     key={t}
                     type="button"
                     onClick={() => setMbti(selected ? null : t)}
-                    className="text-[10px] py-1 rounded font-mono tracking-wider transition-all duration-300"
+                    className="text-[10px] py-1 rounded font-mono tracking-wider transition-all duration-orbit-mid ease-orbit"
                     style={{
                       color: selected ? '#f0c674' : isRec ? '#d4af7a' : 'rgba(216,201,245,0.4)',
                       background: selected ? 'rgba(240,198,116,0.12)' : 'transparent',
@@ -277,7 +278,7 @@ export default function BrewScentPage() {
                 <div key={s} className="flex-1 flex items-center gap-2">
                   <div className="flex flex-col items-center gap-1.5 flex-1">
                     <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center font-display text-xs transition-all duration-500 ${
+                      className={`w-8 h-8 rounded-full flex items-center justify-center font-display text-xs transition-all duration-orbit-mid ease-orbit ${
                         active
                           ? 'bg-gold-sheen text-void-900 shadow-glow-gold'
                           : done
@@ -418,7 +419,7 @@ function StepBase({
               key={b.id}
               type="button"
               onClick={() => onSelect(b.id)}
-              className="group relative p-4 rounded-xl border text-left transition-all duration-400 overflow-hidden"
+              className="group relative p-4 rounded-xl border text-left transition-all duration-orbit-mid ease-orbit overflow-hidden"
               style={{
                 borderColor: active ? `${b.color}80` : 'rgba(124,95,191,0.2)',
                 background: active
@@ -657,7 +658,7 @@ function StepDelivery({
               key={d.id}
               type="button"
               onClick={() => onSelectDelivery(d.id)}
-              className="p-4 rounded-lg border text-left transition-all duration-300"
+              className="p-4 rounded-capsule border text-left transition-all duration-orbit-mid ease-orbit"
               style={{
                 borderColor: active ? 'rgba(240,198,116,0.5)' : 'rgba(124,95,191,0.2)',
                 background: active ? 'rgba(240,198,116,0.06)' : 'transparent',
@@ -683,7 +684,7 @@ function StepDelivery({
               key={b.id}
               type="button"
               onClick={() => onSelectBottle(b.id)}
-              className="p-3 rounded-lg border text-center transition-all duration-300"
+              className="p-3 rounded-capsule border text-center transition-all duration-orbit-mid ease-orbit"
               style={{
                 borderColor: active ? 'rgba(240,198,116,0.5)' : 'rgba(124,95,191,0.2)',
                 background: active ? 'rgba(240,198,116,0.06)' : 'transparent',

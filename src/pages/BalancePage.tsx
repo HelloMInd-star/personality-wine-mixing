@@ -420,7 +420,7 @@ function PersonalProfileCard({ profile }: { profile: PokerBehaviorProfile }) {
     <GlassPanel className="mb-6">
       <div className="flex items-center gap-4 mb-4">
         <div
-          className="w-12 h-12 rounded-full flex items-center justify-center font-display text-xl shrink-0 animate-breathe"
+          className="w-12 h-12 rounded-full flex items-center justify-center font-display text-xl shrink-0 animate-orbit-pulse"
           style={{
             background: `radial-gradient(circle at 30% 30%, ${color}cc, ${color}88)`,
             boxShadow: `0 0 20px ${color}66`,
@@ -615,7 +615,7 @@ export default function BalancePage() {
         <div className="flex items-center gap-4 mb-2">
           <Link
             to={fromChess ? '/chess' : '/brew/sandbox'}
-            className="text-[10px] text-amethyst-400/50 hover:text-gold-400 tracking-widest transition-colors"
+            className="text-[10px] text-amethyst-400/50 hover:text-gold-400 tracking-widest transition-colors duration-orbit-mid ease-orbit"
           >
             ← {fromChess ? '棋局' : '沙盘'}
           </Link>
@@ -628,7 +628,8 @@ export default function BalancePage() {
             </>
           )}
         </div>
-        <h1 className="text-2xl md:text-3xl font-display font-bold text-gold-sheen tracking-wider">
+        <h1 className="text-2xl md:text-3xl font-display font-bold text-gold-sheen tracking-wider flex items-center gap-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent shrink-0" />
           {fromChess ? '衡 · 对战模拟' : '衡 · 平衡性验证'}
         </h1>
         <p className="text-sm text-amethyst-400/50 mt-2 tracking-wider">
@@ -673,7 +674,7 @@ export default function BalancePage() {
                 type="button"
                 disabled={running}
                 onClick={() => setRounds(n)}
-                className={`px-4 py-2 rounded-lg text-xs font-mono transition-all border ${
+                className={`px-4 py-2 rounded-capsule text-xs font-mono transition-all duration-orbit-mid ease-orbit border ${
                   rounds === n
                     ? 'border-amethyst-500/40 bg-amethyst-500/15 text-gold-400'
                     : 'border-amethyst-500/10 text-moon-200/50 hover:border-amethyst-500/25'
@@ -688,7 +689,7 @@ export default function BalancePage() {
             type="button"
             disabled={running}
             onClick={() => handleRun()}
-            className={`px-8 py-2.5 rounded-lg text-sm font-bold tracking-wider transition-all ${
+            className={`px-8 py-2.5 rounded-capsule text-sm font-bold tracking-wider transition-all duration-orbit-mid ease-orbit ${
               running
                 ? 'bg-amethyst-500/20 text-amethyst-400/50 cursor-wait'
                 : 'bg-gradient-to-r from-amethyst-500 to-indigo-500 text-white hover:shadow-lg hover:shadow-amethyst-500/25 hover:-translate-y-0.5'
@@ -700,7 +701,7 @@ export default function BalancePage() {
             type="button"
             disabled={running}
             onClick={() => { setReport(null); setError(null); }}
-            className="px-4 py-2 rounded-lg text-xs border border-amethyst-500/15 text-moon-200/50 hover:text-moon-200/80 transition-colors disabled:opacity-40"
+            className="px-4 py-2 rounded-capsule text-xs border border-amethyst-500/15 text-moon-200/50 hover:text-moon-200/80 transition-colors duration-orbit-mid ease-orbit disabled:opacity-40"
           >
             重置
           </button>
@@ -746,7 +747,7 @@ export default function BalancePage() {
                 key={tab.key}
                 type="button"
                 onClick={() => setActiveTab(tab.key)}
-                className={`relative px-5 py-2.5 rounded-lg text-xs font-bold tracking-[0.15em] transition-all duration-300 ${
+                className={`relative px-5 py-2.5 rounded-capsule text-xs font-bold tracking-[0.15em] transition-all duration-orbit-mid ease-orbit ${
                   activeTab === tab.key
                     ? 'bg-amethyst-500/15 text-gold-400 border border-amethyst-500/30 shadow-[0_0_12px_rgba(139,92,246,0.15)]'
                     : 'text-moon-200/40 border border-transparent hover:text-moon-200/60 hover:bg-amethyst-500/5'
@@ -817,7 +818,7 @@ export default function BalancePage() {
                 onClick={() => setShowManualInput(!showManualInput)}
                 className="w-full px-4 py-3 rounded-xl border border-amethyst-500/15 bg-amethyst-500/5
                            text-xs text-amethyst-400/60 hover:text-gold-400 hover:border-amethyst-500/30
-                           transition-all duration-300 tracking-[0.15em]"
+                           transition-all duration-orbit-mid ease-orbit tracking-[0.15em]"
               >
                 {showManualInput ? '收起棋风输入 ▴' : '▸ 输入棋风报告 · 手动调整四维信号'}
               </button>
@@ -871,10 +872,10 @@ export default function BalancePage() {
                   <button
                     type="button"
                     onClick={handleManualRun}
-                    className="mt-5 w-full px-6 py-2.5 rounded-lg text-sm font-bold tracking-wider
+                    className="mt-5 w-full px-6 py-2.5 rounded-capsule text-sm font-bold tracking-wider
                                bg-gradient-to-r from-amethyst-500 to-indigo-500 text-white
                                hover:shadow-lg hover:shadow-amethyst-500/25 hover:-translate-y-0.5
-                               transition-all duration-300"
+                               transition-all duration-orbit-mid ease-orbit"
                   >
                     以此为棋风运行模拟
                   </button>

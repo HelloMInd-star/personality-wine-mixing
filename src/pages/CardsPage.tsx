@@ -277,13 +277,14 @@ export default function CardsPage() {
   };
 
   return (
-    <div className="animate-fade-in min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
+    <div className="animate-orbit-fade-up min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
       {/* 页面标题 */}
       <header className="mb-10 md:mb-14">
         <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-3">
           Card-based Persona Collection
         </div>
-        <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
+        <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em] flex items-center gap-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent shrink-0" />
           牌类 · 采镜
         </h1>
         <p className="mt-2 text-sm md:text-base text-moon-200/60 italic">
@@ -411,7 +412,7 @@ function StepIndicator({ currentStep, doneCount }: { currentStep: Step; doneCoun
             <div key={s.key} className="flex-1 flex items-center gap-2">
               <div className="flex flex-col items-center gap-2 flex-1">
                 <div
-                  className={`w-9 h-9 rounded-full flex items-center justify-center font-display text-sm transition-all duration-500 ${
+                  className={`w-9 h-9 rounded-full flex items-center justify-center font-display text-sm transition-all duration-orbit-mid ease-orbit ${
                     active
                       ? 'bg-gradient-to-br from-gold-400 to-amethyst-500 text-void shadow-glow-gold'
                       : done
@@ -570,7 +571,7 @@ function TarotStep({
               <button
                 key={card.id}
                 onClick={() => handlePick(card)}
-                className={`text-left p-2.5 rounded-lg transition-all duration-300 border ${
+                className={`text-left p-2.5 rounded-capsule transition-all duration-orbit-mid ease-orbit border ${
                   selected
                     ? 'glass-gold border-gold-400/60 shadow-glow-gold'
                     : 'glass border-transparent hover:border-amethyst-500/30'
@@ -699,7 +700,7 @@ function ZodiacStep({
                 <button
                   key={sign}
                   onClick={() => setSunSign(sign)}
-                  className={`p-3 rounded-lg transition-all duration-300 border ${
+                  className={`p-3 rounded-capsule transition-all duration-orbit-mid ease-orbit border ${
                     selected
                       ? 'glass-gold border-gold-400/60 shadow-glow-gold'
                       : 'glass border-transparent hover:border-amethyst-500/30'
@@ -725,7 +726,7 @@ function ZodiacStep({
                 <button
                   key={slot}
                   onClick={() => setTimeSlot(i)}
-                  className={`p-3 rounded-lg transition-all duration-300 border text-sm ${
+                  className={`p-3 rounded-capsule transition-all duration-orbit-mid ease-orbit border text-sm ${
                     selected
                       ? 'glass-gold border-gold-400/60 text-gold-sheen'
                       : 'glass border-transparent text-moon-200/70 hover:border-amethyst-500/30'
@@ -1008,21 +1009,21 @@ function TexasStep({
         <div className="grid grid-cols-3 gap-3">
           <button
             onClick={() => handleAction('fold')}
-            className="py-3 rounded-lg glass hover:border-rose-400/40 transition-all duration-300"
+            className="py-3 rounded-capsule glass hover:border-rose-400/40 transition-all duration-orbit-mid ease-orbit"
           >
             <div className="font-display text-base text-moon-50">弃牌</div>
             <div className="text-[9px] text-moon-200/40 mt-0.5">Fold</div>
           </button>
           <button
             onClick={() => handleAction('call')}
-            className="py-3 rounded-lg glass hover:border-amethyst-400/40 transition-all duration-300"
+            className="py-3 rounded-capsule glass hover:border-amethyst-400/40 transition-all duration-orbit-mid ease-orbit"
           >
             <div className="font-display text-base text-moon-50">跟注</div>
             <div className="text-[9px] text-moon-200/40 mt-0.5">Call</div>
           </button>
           <button
             onClick={() => handleAction('raise')}
-            className="py-3 rounded-lg glass hover:border-gold-400/50 transition-all duration-300"
+            className="py-3 rounded-capsule glass hover:border-gold-400/50 transition-all duration-orbit-mid ease-orbit"
           >
             <div className="font-display text-base text-gold-sheen">加注</div>
             <div className="text-[9px] text-moon-200/40 mt-0.5">Raise</div>
@@ -1076,7 +1077,7 @@ function ResultView({
   ];
 
   return (
-    <section className="max-w-4xl mx-auto animate-fade-in">
+    <section className="max-w-4xl mx-auto animate-orbit-fade-up">
       {/* 主标签 */}
       <GlassPanel gold padding="lg" className="mb-8">
         <div
@@ -1213,7 +1214,7 @@ function StepHeader({
   return (
     <div className="text-center mb-8">
       <div
-        className="inline-flex items-center justify-center w-12 h-12 rounded-full mb-3 animate-breathe"
+        className="inline-flex items-center justify-center w-12 h-12 rounded-full mb-3 animate-orbit-pulse"
         style={{
           background: `radial-gradient(circle at 30% 30%, ${color}, ${color}44)`,
           boxShadow: `0 0 20px ${color}55`,

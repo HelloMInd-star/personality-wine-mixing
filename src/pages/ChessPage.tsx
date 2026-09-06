@@ -160,13 +160,14 @@ export default function ChessPage() {
   // ═════════════════════════════════════════════════════════
 
   return (
-    <div className="min-h-screen px-6 lg:px-16 py-12 max-w-6xl mx-auto animate-fade-in">
+    <div className="min-h-screen px-6 lg:px-16 py-12 max-w-6xl mx-auto animate-orbit-fade-up">
       {/* 标题区 */}
       <header className="mb-10 text-center">
         <div className="text-[11px] tracking-[0.5em] text-amethyst-400/70 uppercase font-mono mb-2">
           Chess · 棋局采镜
         </div>
-        <h1 className="font-display text-4xl md:text-5xl text-gold-sheen text-shadow-glow-gold tracking-[0.18em]">
+        <h1 className="font-display text-4xl md:text-5xl text-gold-sheen text-shadow-glow-gold tracking-[0.18em] flex items-center justify-center gap-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent shrink-0" />
           国际象棋局
         </h1>
         <p className="text-sm text-moon-200/60 italic mt-3 max-w-xl mx-auto leading-relaxed">
@@ -179,7 +180,7 @@ export default function ChessPage() {
         {/* 时段校准 */}
         <div className="mt-5 inline-flex items-center gap-2 text-[11px] tracking-widest">
           <span
-            className="inline-block w-1.5 h-1.5 rounded-full animate-breathe"
+            className="inline-block w-1.5 h-1.5 rounded-full animate-orbit-pulse"
             style={{ background: currentSlot.auraColor, boxShadow: `0 0 8px ${currentSlot.auraColor}` }}
           />
           <span className="text-moon-200/60">棋局时辰</span>
@@ -334,7 +335,7 @@ export default function ChessPage() {
             {SCENARIOS.map((s, i) => (
               <div key={s.dim} className="flex items-center gap-2">
                 <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-mono tracking-wider transition-all duration-300 ${
+                  className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-mono tracking-wider transition-all duration-orbit-mid ease-orbit ${
                     i < step
                       ? 'bg-gold-400/20 text-gold-400 border border-gold-400/40'
                       : i === step
@@ -420,7 +421,7 @@ function ScenarioCard({
             key={i}
             type="button"
             onClick={() => onChoose(opt)}
-            className="group text-left p-4 rounded-xl border border-amethyst-500/20 hover:border-gold-400/50 bg-amethyst-500/5 hover:bg-gold-400/5 transition-all duration-300 cursor-pointer"
+            className="group text-left p-4 rounded-xl border border-amethyst-500/20 hover:border-gold-400/50 bg-amethyst-500/5 hover:bg-gold-400/5 transition-all duration-orbit-mid ease-orbit cursor-pointer"
           >
             <div className="flex items-start gap-3">
               <span className="w-6 h-6 rounded-full bg-amethyst-500/30 group-hover:bg-gold-400/30 flex items-center justify-center text-[11px] font-mono text-moon-200/70 group-hover:text-gold-sheen shrink-0 mt-0.5 transition-colors">
@@ -475,7 +476,7 @@ function ReportView({
         </div>
         <div className="inline-flex items-center gap-4">
           <span
-            className="w-14 h-14 rounded-full flex items-center justify-center font-display text-2xl shrink-0 animate-breathe"
+            className="w-14 h-14 rounded-full flex items-center justify-center font-display text-2xl shrink-0 animate-orbit-pulse"
             style={{
               background: `radial-gradient(circle at 30% 30%, ${temperament.secondaryColor}, ${temperament.color})`,
               boxShadow: `0 0 32px ${temperament.color}66`,
