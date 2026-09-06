@@ -147,7 +147,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="divider-gold max-w-2xl mx-auto mb-16" />
+      <div className="divider-gold max-w-2xl mx-auto mb-12" />
 
       {/* —— 若已有画像 · 当前映照 —— */}
       {profile && (
@@ -161,7 +161,7 @@ export default function HomePage() {
             />
             <div className="relative flex flex-col md:flex-row md:items-center gap-6">
               <div className="flex-1">
-                <div className="text-xs text-amethyst-400/70 tracking-widest mb-2">
+                <div className="text-[11px] text-amethyst-400/70 tracking-[0.6em] mb-3">
                   镜中映照
                 </div>
                 <div className="font-display text-3xl text-gold-sheen mb-2">
@@ -191,13 +191,13 @@ export default function HomePage() {
       )}
 
       {/* —— 主理人 · 镜中之你 —— */}
-      <section className="max-w-2xl mx-auto py-12">
+      <section className="max-w-2xl mx-auto pb-12">
         <div className="text-center mb-8">
           <div className="text-[11px] tracking-[0.6em] text-amethyst-400/60 uppercase mb-3 flex items-center justify-center gap-2">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent" />
             Host · 镜中之你
           </div>
-          <h2 className="font-display text-2xl text-gold-sheen">
+          <h2 className="font-display text-2xl text-gold-sheen tracking-[0.12em]">
             镜中之你
           </h2>
           <p className="text-moon-200/50 text-sm mt-3 max-w-lg mx-auto leading-relaxed">
@@ -262,17 +262,17 @@ export default function HomePage() {
           )}
         </GlassPanel>
 
-        <div className="divider-gold max-w-xs mx-auto mt-8" />
+        <div className="divider-gold max-w-xs mx-auto mt-16" />
       </section>
 
       {/* —— 底座双联 · 已造 / 待造 —— */}
-      <section className="max-w-2xl mx-auto py-12">
+      <section className="max-w-2xl mx-auto pb-12">
         <div className="text-center mb-8">
           <div className="text-[11px] tracking-[0.6em] text-amethyst-400/60 uppercase mb-3 flex items-center justify-center gap-2">
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-signal animate-orbit-pulse" />
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-signal animate-orbit-pulse shadow-glow-signal" />
             Foundation · 底座
           </div>
-          <h2 className="font-display text-2xl text-gold-sheen">
+          <h2 className="font-display text-2xl text-gold-sheen tracking-[0.12em]">
             镜的两面
           </h2>
           <p className="text-moon-200/50 text-sm mt-3 max-w-lg mx-auto leading-relaxed">
@@ -349,7 +349,7 @@ export default function HomePage() {
                     未点亮的灵感池 · 等你的火
                   </div>
                 </div>
-                <div className="text-amethyst-400/40 group-hover:text-gold-400 transition-colors duration-500 text-sm tracking-widest">
+                <div className="text-gold-400/40 group-hover:text-gold-400 transition-colors duration-500 text-sm tracking-widest">
                   →
                 </div>
               </div>
