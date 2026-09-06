@@ -4,7 +4,7 @@
  * 三态流转：idle 封面 → testing 镜中自观 → done 星图
  */
 
-import { useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { usePersonality, TOTAL_QUESTIONS } from '../hooks/usePersonality';
 import { useAppStore } from '../store/appStore';
@@ -49,6 +49,47 @@ export default function PersonalityPage() {
   const isDone = status === 'done' && profile !== null;
   const isTesting = started && !isDone;
 
+  // 自动推进 · 选中后短暂停留展示选中态，再滑入下一题（末题由 hook 自动织像收束）
+  const advanceRef = useRef<number | null>(null);
+
+  const handleSelect = useCallback(
+    (v: number) => {
+      if (!currentQuestion) return;
+      answer(currentQuestion.id, v);
+      // 连答去抖 · 新答案重置推进计时
+      if (advanceRef.current !== null) window.clearTimeout(advanceRef.current);
+      if (currentStep < TOTAL_QUESTIONS - 1) {
+        advanceRef.current = window.setTimeout(() => next(), 320);
+      }
+    },
+    [currentQuestion, currentStep, answer, next],
+  );
+
+  // 卸载清计时 · 防幽灵推进
+  useEffect(
+    () => () => {
+      if (advanceRef.current !== null) window.clearTimeout(advanceRef.current);
+    },
+    [],
+  );
+
+  // 键盘动线 · 数字 1-5 择一，←→ 翻题（题卡底部的箭头提示由此成真）
+  useEffect(() => {
+    if (!isTesting || !currentQuestion) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key >= '1' && e.key <= '5') {
+        handleSelect(Number(e.key));
+      } else if (e.key === 'ArrowRight') {
+        if (currentStep < TOTAL_QUESTIONS - 1 && answers[currentQuestion.id] !== undefined) next();
+      } else if (e.key === 'ArrowLeft') {
+        if (currentStep > 0) prev();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isTesting, currentStep, currentQuestion, answers, handleSelect, next, prev]);
+
   const handleStart = () => setStarted(true);
 
   const handleReset = () => {
@@ -67,7 +108,8 @@ export default function PersonalityPage() {
   return (
     <div className="animate-orbit-fade-up min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
       {/* 页面标题区 */}
-      <header className="mb-10 md:mb-14">
+      <header className="mb-12 md:mb-16">
+        <p className="text-[11px] tracking-[0.6em] text-amethyst-300/70 mb-3">觉醉 · 夜之问</p>
         <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em] flex items-center gap-2">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent shrink-0" />
           镜中自观 · Persona
@@ -94,7 +136,7 @@ export default function PersonalityPage() {
               index={currentStep}
               total={TOTAL_QUESTIONS}
               value={answers[currentQuestion.id]}
-              onSelect={(v) => answer(currentQuestion.id, v)}
+              onSelect={handleSelect}
             />
           )}
 
@@ -135,9 +177,20 @@ export default function PersonalityPage() {
               继续织镜 →
             </GradientButton>
           </div>
+
+          {/* 暂离 · 回封面保留织镜进度 */}
+          <div className="mt-6 text-center">
+            <button
+              type="button"
+              onClick={() => setStarted(false)}
+              className="text-xs text-moon-200/40 hover:text-gold-sheen transition-colors tracking-[0.25em]"
+            >
+              暂离 · 保留织镜进度
+            </button>
+          </div>
         </div>
       ) : (
-        <IdleView onStart={handleStart} />
+        <IdleView onStart={handleStart} hasAnswers={Object.keys(answers).length > 0} />
       )}
     </div>
   );
@@ -149,9 +202,11 @@ export default function PersonalityPage() {
 
 interface IdleViewProps {
   onStart: () => void;
+  /** 已有作答记录 · 封面按钮切「继续织镜」续答态 */
+  hasAnswers: boolean;
 }
 
-function IdleView({ onStart }: IdleViewProps) {
+function IdleView({ onStart, hasAnswers }: IdleViewProps) {
   const navigate = useNavigate();
   return (
     <div className="max-w-3xl mx-auto text-center">
@@ -165,7 +220,7 @@ function IdleView({ onStart }: IdleViewProps) {
 
       <GlassPanel gold padding="lg" className="animate-slide-up">
         {/* 主标题 */}
-        <h2 className="font-display text-4xl md:text-5xl text-gold-sheen text-shadow-glow-gold leading-tight mb-4">
+        <h2 className="font-display text-4xl md:text-5xl text-gold-sheen text-shadow-glow-gold tracking-[0.12em] leading-tight mb-4">
           织一张属于你的夜
         </h2>
         <p className="text-moon-200/70 text-sm md:text-base leading-relaxed mb-8 max-w-xl mx-auto">
@@ -190,7 +245,7 @@ function IdleView({ onStart }: IdleViewProps) {
         </div>
 
         <GradientButton variant="gold" size="lg" onClick={onStart}>
-          入镜启程
+          {hasAnswers ? '继续织镜 →' : '入镜启程'}
         </GradientButton>
       </GlassPanel>
 
@@ -227,7 +282,7 @@ function DoneView({ profile, onReset, onViewCocktail }: DoneViewProps) {
       <div className="grid md:grid-cols-2 gap-6">
         {/* 雷达图 */}
         <GlassPanel gold padding="md">
-          <h3 className="font-display text-lg text-moon-200/80 mb-2 tracking-[0.1em]">
+          <h3 className="font-display text-lg text-moon-200/80 mb-2 tracking-[0.12em]">
             五维星图
           </h3>
           <PersonalityRadar scores={scores} />
@@ -245,7 +300,7 @@ function DoneView({ profile, onReset, onViewCocktail }: DoneViewProps) {
             <span className="font-mono text-xs tracking-[0.3em] text-amethyst-400/80">
               {archetype.code}
             </span>
-            <h3 className="font-display text-4xl md:text-5xl text-gold-sheen text-shadow-glow-gold mt-2 mb-3">
+            <h3 className="font-display text-4xl md:text-5xl text-gold-sheen text-shadow-glow-gold tracking-[0.12em] mt-2 mb-3">
               {archetype.name}
             </h3>
             <p className="text-moon-200/80 text-sm md:text-base italic mb-5">
@@ -261,7 +316,7 @@ function DoneView({ profile, onReset, onViewCocktail }: DoneViewProps) {
 
       {/* 五维详情 */}
       <GlassPanel padding="lg">
-        <h3 className="font-display text-xl text-moon-200/80 mb-6 tracking-[0.1em]">
+        <h3 className="font-display text-xl text-moon-200/80 mb-6 tracking-[0.12em]">
           五维落点
         </h3>
         <div className="space-y-5">
@@ -276,7 +331,7 @@ function DoneView({ profile, onReset, onViewCocktail }: DoneViewProps) {
       </GlassPanel>
 
       {/* 操作按钮 */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
         <GradientButton variant="ghost" size="md" onClick={onReset}>
           重新织镜
         </GradientButton>
@@ -308,7 +363,7 @@ function TraitDetail({ traitKey, score }: TraitDetailProps) {
       {/* 维度标识 */}
       <div className="flex items-center gap-2 md:w-40 shrink-0">
         <span className="text-base">{trait.symbol}</span>
-        <span className="font-display text-moon-50 tracking-[0.1em]">
+        <span className="font-display text-moon-50 tracking-[0.12em]">
           {trait.label}
         </span>
         <span className="font-mono text-xs text-amethyst-400/60">
