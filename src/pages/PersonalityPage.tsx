@@ -65,10 +65,11 @@ export default function PersonalityPage() {
   };
 
   return (
-    <div className="animate-fade-in min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
+    <div className="animate-orbit-fade-up min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
       {/* 页面标题区 */}
       <header className="mb-10 md:mb-14">
-        <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
+        <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em] flex items-center gap-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent shrink-0" />
           镜中自观 · Persona
         </h1>
         <p className="mt-2 text-sm md:text-base text-moon-200/60 italic">
@@ -155,7 +156,7 @@ function IdleView({ onStart }: IdleViewProps) {
   return (
     <div className="max-w-3xl mx-auto text-center">
       {/* 星系入口 · 22 大阿尔卡纳 ↔ 太阳系星体 · 点击星体揭示对应塔罗牌 */}
-      <div className="mb-8 animate-fade-in">
+      <div className="mb-8 animate-orbit-fade-up">
         <GalaxyConstellation />
         <p className="mt-3 text-[10px] text-moon-200/40 tracking-[0.25em] italic">
           22 颗星 · 22 张塔罗 · 点一颗，看它的牌
@@ -180,7 +181,7 @@ function IdleView({ onStart }: IdleViewProps) {
               className="flex items-center gap-2 text-xs text-moon-200/60"
             >
               <span
-                className="inline-block w-2 h-2 rounded-full animate-breathe"
+                className="inline-block w-2 h-2 rounded-full animate-orbit-pulse"
                 style={{ backgroundColor: trait.color }}
               />
               <span className="tracking-[0.15em]">{trait.label}</span>

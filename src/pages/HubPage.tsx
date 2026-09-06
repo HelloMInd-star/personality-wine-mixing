@@ -143,7 +143,7 @@ export default function HubPage() {
           font-size: 12px;
           letter-spacing: 0.3em;
           color: rgba(155,123,212,0.6);
-          transition: color 0.3s;
+          transition: color 240ms cubic-bezier(.2, .7, .2, 1);
           z-index: 10;
         }
         .hub-back:hover { color: rgba(240,198,116,0.9); }

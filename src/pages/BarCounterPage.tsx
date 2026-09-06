@@ -89,7 +89,7 @@ export default function BarCounterPage() {
 
   return (
     <div
-      className="min-h-screen px-6 lg:px-16 py-12 animate-fade-in relative transition-all duration-700"
+      className="min-h-screen px-6 lg:px-16 py-12 animate-orbit-fade-up relative transition-all duration-700"
       style={{
         backgroundImage: `radial-gradient(ellipse at top, ${lightEffect.baseColor}33, transparent 70%)`,
       }}
@@ -99,7 +99,8 @@ export default function BarCounterPage() {
         <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-4">
           Bar Counter · 吧台
         </div>
-        <h1 className="font-display text-5xl lg:text-6xl text-gold-sheen text-shadow-glow-gold leading-tight">
+        <h1 className="font-display text-5xl lg:text-6xl text-gold-sheen text-shadow-glow-gold leading-tight flex items-center justify-center gap-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent shrink-0" />
           吧台 · 一杯一世界
         </h1>
         <p className="mt-5 text-moon-200/70 max-w-xl leading-relaxed font-display">
@@ -122,7 +123,7 @@ export default function BarCounterPage() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div className="flex items-center gap-3">
               <div
-                className="w-3 h-3 rounded-full animate-breathe"
+                className="w-3 h-3 rounded-full animate-orbit-pulse"
                 style={{
                   background: hasDataSource ? '#f0c674' : '#6b5b95',
                   boxShadow: `0 0 12px ${hasDataSource ? '#f0c67488' : '#6b5b9588'}`,
@@ -303,7 +304,7 @@ export default function BarCounterPage() {
                   <button
                     type="button"
                     onClick={() => setHwMode('auto')}
-                    className={`px-4 py-1.5 rounded-md text-xs tracking-[0.15em] transition-all duration-300 ${
+                    className={`px-4 py-1.5 rounded-md text-xs tracking-[0.15em] transition-all duration-orbit-mid ease-orbit ${
                       hwMode === 'auto'
                         ? 'bg-amethyst-500/30 text-gold-sheen shadow-glow-gold'
                         : 'text-moon-200/55 hover:text-moon-200/85'
@@ -314,7 +315,7 @@ export default function BarCounterPage() {
                   <button
                     type="button"
                     onClick={() => setHwMode('manual')}
-                    className={`px-4 py-1.5 rounded-md text-xs tracking-[0.15em] transition-all duration-300 ${
+                    className={`px-4 py-1.5 rounded-md text-xs tracking-[0.15em] transition-all duration-orbit-mid ease-orbit ${
                       hwMode === 'manual'
                         ? 'bg-amethyst-500/30 text-gold-sheen shadow-glow-gold'
                         : 'text-moon-200/55 hover:text-moon-200/85'
@@ -362,7 +363,7 @@ export default function BarCounterPage() {
                       <button
                         type="button"
                         onClick={() => setManualHeating((v) => !v)}
-                        className={`flex-1 py-2 rounded-lg text-sm tracking-[0.15em] transition-all duration-300 border ${
+                        className={`flex-1 py-2 rounded-capsule text-sm tracking-[0.15em] transition-all duration-orbit-mid ease-orbit border ${
                           manualHeating
                             ? 'border-[#e06552]/60 text-[#e06552] bg-[#e06552]/10 shadow-[0_0_16px_#e0655244]'
                             : 'border-amethyst-500/25 text-moon-200/55 hover:border-amethyst-400/50'
@@ -378,7 +379,7 @@ export default function BarCounterPage() {
                           setManualFan(1);
                           setManualHeating(true);
                         }}
-                        className="flex-1 py-1.5 rounded-md text-[10px] tracking-widest text-moon-200/60 border border-amethyst-500/25 hover:text-gold-400 hover:border-gold-400/40 transition-all duration-300"
+                        className="flex-1 py-1.5 rounded-md text-[10px] tracking-widest text-moon-200/60 border border-amethyst-500/25 hover:text-gold-400 hover:border-gold-400/40 transition-all duration-orbit-mid ease-orbit"
                       >
                         满载脉冲
                       </button>
@@ -388,7 +389,7 @@ export default function BarCounterPage() {
                           setManualFan(0);
                           setManualHeating(false);
                         }}
-                        className="flex-1 py-1.5 rounded-md text-[10px] tracking-widest text-moon-200/60 border border-amethyst-500/25 hover:text-gold-400 hover:border-gold-400/40 transition-all duration-300"
+                        className="flex-1 py-1.5 rounded-md text-[10px] tracking-widest text-moon-200/60 border border-amethyst-500/25 hover:text-gold-400 hover:border-gold-400/40 transition-all duration-orbit-mid ease-orbit"
                       >
                         归零冷却
                       </button>
@@ -466,7 +467,7 @@ export default function BarCounterPage() {
                   return (
                     <div
                       key={m}
-                      className={`flex-1 p-3 rounded-lg text-center transition-all duration-300 ${
+                      className={`flex-1 p-3 rounded-capsule text-center transition-all duration-orbit-mid ease-orbit ${
                         active
                           ? 'glass-gold text-gold-sheen'
                           : 'glass text-moon-200/50'
@@ -584,7 +585,7 @@ function CoasterParam({
       <div className="flex items-center gap-2">
         {dot && (
           <div
-            className="w-2 h-2 rounded-full shrink-0 animate-breathe"
+            className="w-2 h-2 rounded-full shrink-0 animate-orbit-pulse"
             style={{ background: dot, boxShadow: `0 0 8px ${dot}88` }}
           />
         )}

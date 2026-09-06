@@ -99,14 +99,14 @@ function PlayerPanel({
   const statusColor = isFolded ? 'text-red-400/60' : isAllIn ? 'text-amber-400' : isActive ? 'text-gold-400' : 'text-moon-200/40';
 
   return (
-    <div className={`relative rounded-2xl border p-4 transition-all duration-500 ${
+    <div className={`relative rounded-2xl border p-4 transition-all duration-orbit-mid ease-orbit ${
       isActive ? 'border-gold-400/40 bg-gold-400/5 shadow-[0_0_20px_rgba(240,198,116,0.15)]' :
       isFolded ? 'border-red-400/10 bg-red-400/3 opacity-60' :
       'border-amethyst-500/15 bg-void-900/60'
     }`}>
       {/* 状态指示 */}
       <div className="flex items-center gap-2 mb-2">
-        <div className={`w-2 h-2 rounded-full ${isActive ? 'bg-gold-400 animate-breathe' : isFolded ? 'bg-red-400' : 'bg-moon-200/30'}`} />
+        <div className={`w-2 h-2 rounded-full ${isActive ? 'bg-gold-400 animate-orbit-pulse' : isFolded ? 'bg-red-400' : 'bg-moon-200/30'}`} />
         <span className={`text-xs font-bold tracking-wider ${statusColor}`}>
           {name}
         </span>
@@ -325,12 +325,13 @@ export default function PokerPage() {
   // ── 渲染 ──
   if (!gameState) {
     return (
-      <div className="min-h-screen px-6 lg:px-16 py-12 max-w-6xl mx-auto animate-fade-in">
+      <div className="min-h-screen px-6 lg:px-16 py-12 max-w-6xl mx-auto animate-orbit-fade-up">
         <header className="mb-10 text-center">
           <div className="text-[11px] tracking-[0.5em] text-amethyst-400/70 uppercase font-mono mb-2">
             觉醉 · 弈 · Poker Arena · 三人德州
           </div>
-          <h1 className="font-display text-4xl md:text-5xl text-gold-sheen text-shadow-glow-gold tracking-[0.18em]">
+          <h1 className="font-display text-4xl md:text-5xl text-gold-sheen text-shadow-glow-gold tracking-[0.18em] flex items-center justify-center gap-2">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent shrink-0" />
             金融孪生对局
           </h1>
           <p className="text-sm text-moon-200/60 italic mt-3 max-w-xl mx-auto leading-relaxed">
@@ -465,36 +466,36 @@ export default function PokerPage() {
                     <button
                       type="button"
                       onClick={() => handleUserAction('fold')}
-                      className="flex-1 px-3 py-2 rounded-lg text-xs font-bold tracking-wider
+                      className="flex-1 px-3 py-2 rounded-capsule text-xs font-bold tracking-wider
                                  bg-red-500/20 text-red-400 border border-red-500/30
-                                 hover:bg-red-500/30 transition-colors"
+                                 hover:bg-red-500/30 transition-colors duration-orbit-mid ease-orbit"
                     >
                       弃牌
                     </button>
                     <button
                       type="button"
                       onClick={() => handleUserAction('call')}
-                      className="flex-1 px-3 py-2 rounded-lg text-xs font-bold tracking-wider
+                      className="flex-1 px-3 py-2 rounded-capsule text-xs font-bold tracking-wider
                                  bg-amethyst-500/20 text-amethyst-300 border border-amethyst-500/30
-                                 hover:bg-amethyst-500/30 transition-colors"
+                                 hover:bg-amethyst-500/30 transition-colors duration-orbit-mid ease-orbit"
                     >
                       跟注 {toCall}
                     </button>
                     <button
                       type="button"
                       onClick={() => handleUserAction('raise')}
-                      className="flex-1 px-3 py-2 rounded-lg text-xs font-bold tracking-wider
+                      className="flex-1 px-3 py-2 rounded-capsule text-xs font-bold tracking-wider
                                  bg-gold-400/20 text-gold-400 border border-gold-400/30
-                                 hover:bg-gold-400/30 transition-colors"
+                                 hover:bg-gold-400/30 transition-colors duration-orbit-mid ease-orbit"
                     >
                       加注
                     </button>
                     <button
                       type="button"
                       onClick={() => handleUserAction('allin')}
-                      className="flex-1 px-3 py-2 rounded-lg text-xs font-bold tracking-wider
+                      className="flex-1 px-3 py-2 rounded-capsule text-xs font-bold tracking-wider
                                  bg-amber-500/20 text-amber-400 border border-amber-500/30
-                                 hover:bg-amber-500/30 transition-colors"
+                                 hover:bg-amber-500/30 transition-colors duration-orbit-mid ease-orbit"
                     >
                       全下
                     </button>

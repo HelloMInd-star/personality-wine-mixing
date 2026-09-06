@@ -176,10 +176,11 @@ export default function CocktailPage() {
   const hasPersona = !!(profile || vector);
 
   return (
-    <div className="animate-fade-in min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
+    <div className="animate-orbit-fade-up min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
       {/* 页面标题区 */}
       <header className="mb-10 md:mb-14">
-        <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
+        <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em] flex items-center gap-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent shrink-0" />
           调酒 · Elixir
         </h1>
         <p className="mt-2 text-sm md:text-base text-moon-200/60 italic">
@@ -199,7 +200,7 @@ export default function CocktailPage() {
         <div className="relative flex flex-col md:flex-row md:items-center gap-3">
           <div className="flex items-center gap-2.5 shrink-0">
             <span
-              className="inline-block w-2 h-2 rounded-full animate-breathe"
+              className="inline-block w-2 h-2 rounded-full animate-orbit-pulse"
               style={{ background: currentSlot.auraColor, boxShadow: `0 0 10px ${currentSlot.auraColor}` }}
             />
             <div>
@@ -283,7 +284,7 @@ export default function CocktailPage() {
               ].map((step, idx) => (
                 <li
                   key={step.n}
-                  className="relative flex flex-col items-center text-center px-1 py-2 rounded-lg transition-colors duration-300 hover:bg-white/[0.03]"
+                  className="relative flex flex-col items-center text-center px-1 py-2 rounded-lg transition-colors duration-orbit-mid ease-orbit hover:bg-white/[0.03]"
                 >
                   <div
                     className="w-7 h-7 rounded-full flex items-center justify-center font-display text-sm mb-1.5"
@@ -325,7 +326,7 @@ export default function CocktailPage() {
               <button
                 type="button"
                 onClick={dismissGuideCard}
-                className="text-[11px] tracking-[0.2em] text-amethyst-400/60 hover:text-gold-400 transition-colors duration-300 font-mono uppercase"
+                className="text-[11px] tracking-[0.2em] text-amethyst-400/60 hover:text-gold-400 transition-colors duration-orbit-mid ease-orbit font-mono uppercase"
               >
                 知道了 · 入夜
               </button>

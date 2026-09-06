@@ -130,10 +130,11 @@ export default function SandboxPage() {
   // ═════════════════════════════════════════════════════════
 
   return (
-    <div className="animate-fade-in min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
+    <div className="animate-orbit-fade-up min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
       {/* 标题 */}
       <div className="mb-8">
-        <h1 className="font-display text-2xl md:text-3xl text-gold-sheen mb-2">
+        <h1 className="font-display text-2xl md:text-3xl text-gold-sheen mb-2 flex items-center gap-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent shrink-0" />
           单人酒局 · 沙盘
         </h1>
         <p className="text-amethyst-400/60 text-sm tracking-wider">
@@ -153,7 +154,7 @@ export default function SandboxPage() {
                 key={s.id}
                 type="button"
                 onClick={() => handleSelectScene(s)}
-                className="glass rounded-xl p-5 text-left transition-all duration-300 hover:border-gold-400/40 hover:shadow-glow-amethyst group"
+                className="glass rounded-xl p-5 text-left transition-all duration-orbit-mid ease-orbit hover:border-gold-400/40 hover:shadow-glow-amethyst group"
               >
                 <div className="text-lg font-display text-gold-sheen mb-2 group-hover:text-gold-400 transition-colors">
                   {s.title}
@@ -247,7 +248,7 @@ export default function SandboxPage() {
                   key={opt.key}
                   type="button"
                   onClick={() => handleSelectOption(opt.key)}
-                  className="w-full glass rounded-lg p-4 text-left transition-all duration-300 hover:border-gold-400/30 hover:bg-amethyst-500/5 group"
+                  className="w-full glass rounded-capsule p-4 text-left transition-all duration-orbit-mid ease-orbit hover:border-gold-400/30 hover:bg-amethyst-500/5 group"
                 >
                   <div className="flex items-center gap-3">
                     <span className="w-7 h-7 rounded-full border border-gold-400/30 flex items-center justify-center text-xs text-gold-400/70 font-display shrink-0 group-hover:border-gold-400/60 group-hover:text-gold-400 transition-colors">
@@ -406,13 +407,13 @@ export default function SandboxPage() {
             <button
               type="button"
               onClick={handleReset}
-              className="glass rounded-lg px-6 py-2.5 text-sm text-moon-200/60 hover:text-gold-sheen hover:border-gold-400/40 transition-all duration-300"
+              className="glass rounded-capsule px-6 py-2.5 text-sm text-moon-200/60 hover:text-gold-sheen hover:border-gold-400/40 transition-all duration-orbit-mid ease-orbit"
             >
               再来一次
             </button>
             <Link
               to="/cocktail"
-              className="glass rounded-lg px-6 py-2.5 text-sm text-gold-sheen hover:text-gold-400 border border-gold-400/30 hover:border-gold-400/60 transition-all duration-300"
+              className="glass rounded-capsule px-6 py-2.5 text-sm text-gold-sheen hover:text-gold-400 border border-gold-400/30 hover:border-gold-400/60 transition-all duration-orbit-mid ease-orbit"
             >
               用这个画像去调酒 →
             </Link>

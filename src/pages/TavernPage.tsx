@@ -113,7 +113,7 @@ export default function TavernPage() {
 
   return (
     <div
-      className="min-h-screen px-6 lg:px-16 py-12 animate-fade-in relative transition-all duration-1000"
+      className="min-h-screen px-6 lg:px-16 py-12 animate-orbit-fade-up relative transition-all duration-1000"
       style={{
         // 非营业时段背景更深沉 · 透明度按 withinNight 平滑过渡
         backgroundImage: `radial-gradient(ellipse at top, ${state.ambientColor}${state.withinNight ? '55' : '1a'}, transparent 70%)`,
@@ -150,7 +150,8 @@ export default function TavernPage() {
         <div className="text-[11px] tracking-[0.6em] text-amethyst-400/80 uppercase mb-4">
           Programmable Tavern
         </div>
-        <h1 className="font-display text-5xl lg:text-6xl text-gold-sheen text-shadow-glow-gold leading-tight">
+        <h1 className="font-display text-5xl lg:text-6xl text-gold-sheen text-shadow-glow-gold leading-tight flex items-center justify-center gap-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent shrink-0" />
           酒馆 · 夜的现场
         </h1>
         <p className="mt-5 text-moon-200/70 max-w-xl leading-relaxed font-display">
@@ -167,7 +168,7 @@ export default function TavernPage() {
         <div className="relative mt-8 mb-2">
           <div
             className={`w-20 h-20 rounded-full relative transition-all duration-1000 ${
-              state.withinNight ? 'animate-breathe' : ''
+              state.withinNight ? 'animate-orbit-pulse' : ''
             }`}
             style={{
               background: `radial-gradient(circle at 30% 30%, ${state.theme.accentColor}, ${state.theme.ambientColor})`,

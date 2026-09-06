@@ -70,13 +70,14 @@ export default function MindLibraryPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="animate-fade-in min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
+    <div className="animate-orbit-fade-up min-h-screen px-6 md:px-12 lg:px-20 py-12 md:py-16">
       {/* 页面标题区 */}
       <header className="mb-10 md:mb-14">
         <div className="text-[11px] tracking-[0.4em] text-amethyst-400/80 mb-3">
           MIND · 底座
         </div>
-        <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em]">
+        <h1 className="font-display text-3xl md:text-4xl text-gold-sheen text-shadow-glow-gold tracking-[0.15em] flex items-center gap-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-orbit-accent animate-orbit-pulse shadow-glow-accent shrink-0" />
           思维库 · 镜的两面
         </h1>
         <p className="mt-3 text-sm md:text-base text-moon-200/60 italic max-w-xl leading-relaxed">
@@ -94,7 +95,7 @@ export default function MindLibraryPage() {
           {MIND_MODULES.map((m) => (
             <div
               key={m.nameEn}
-              className="relative rounded-2xl p-5 border border-dashed border-amethyst-500/25 bg-void/40 backdrop-blur-sm transition-all duration-500 hover:border-gold-400/30 hover:bg-void/60"
+              className="relative rounded-2xl p-5 border border-dashed border-amethyst-500/25 bg-void/40 backdrop-blur-sm transition-all duration-orbit-mid ease-orbit hover:border-gold-400/30 hover:bg-void/60"
             >
               {/* 符号 · 虚线圆 · 待点亮态 */}
               <div className="flex items-center gap-3 mb-3">
