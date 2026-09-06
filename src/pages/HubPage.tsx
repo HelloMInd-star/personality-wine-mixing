@@ -22,7 +22,7 @@ interface Planet {
 const PLANETS: Planet[] = [
   { id: 'sun',    glyph: '日', name: '人格测评',   route: '/personality', size: 84,
     core: '#fff5e0', mid: '#f0c674', deep: '#d4a84b', glow: 'rgba(240,198,116,0.5)', orbitDur: 12 },
-  { id: 'coffee', glyph: '咖', name: '香氛实验室', route: '/scent-lab',   size: 100,
+  { id: 'coffee', glyph: '咖', name: '香氛实验室', route: '/brew/scent',   size: 100,
     core: '#d4b896', mid: '#8b6f47', deep: '#5c4530', glow: 'rgba(139,111,71,0.4)',  orbitDur: 16 },
   { id: 'tea',    glyph: '茶', name: '棋局',       route: '/chess',       size: 108,
     core: '#b8d4a8', mid: '#6b8e6b', deep: '#3d5c3d', glow: 'rgba(107,142,107,0.4)', orbitDur: 14 },

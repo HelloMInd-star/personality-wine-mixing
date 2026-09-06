@@ -30,15 +30,15 @@ export interface StageDef {
 }
 
 export const STAGES: StageDef[] = [
-  { id: 'starfield',  duration: 0,    caption: '轻触星空 · 进入银河' },
-  { id: 'galaxy',     duration: 4200, caption: '你进入了一个宇宙视角' },
-  { id: 'tarot',      duration: 2800, caption: '你的原型是什么' },
-  { id: 'descent',    duration: 2600, caption: '穿过云层 · 落回人间' },
+  { id: 'starfield',  duration: 0,    caption: '夜幕已落 · 轻触入镜' },
+  { id: 'galaxy',     duration: 4200, caption: '你坠入了自己的夜' },
+  { id: 'tarot',      duration: 2800, caption: '你的情绪原型是什么' },
+  { id: 'descent',    duration: 2600, caption: '穿过星尘 · 落回夜的现场' },
   { id: 'city',       duration: 1800, caption: '你在这里' },
-  { id: 'cardsSpread',duration: 2800, caption: '你确认自己' },
-  { id: 'earth',      duration: 3500, caption: '你在这个世界上行走' },
-  { id: 'sunMoon',    duration: 5200, caption: '你的生活状态 · 夜晚在银河系中涌现' },
-  { id: 'epilogue',   duration: 0,    caption: '准备好探索你的宇宙人间了吗' },
+  { id: 'cardsSpread',duration: 2800, caption: '在牌面里确认自己' },
+  { id: 'earth',      duration: 3500, caption: '白昼里你行走在人间' },
+  { id: 'sunMoon',    duration: 5200, caption: '白昼属于世界 · 夜晚属于你' },
+  { id: 'epilogue',   duration: 0,    caption: '准备好入夜 · 调一杯属于你的夜了吗' },
 ];
 
 export default function PreludeIntro() {

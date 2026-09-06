@@ -206,7 +206,12 @@ export default function HomePage() {
           </p>
         </div>
 
-        <GlassPanel padding="lg" className="rounded-card max-w-md mx-auto">
+        <GlassPanel
+          padding="lg"
+          className="rounded-card max-w-md mx-auto"
+          hover
+          onClick={() => navigate(profile ? '/tavern' : '/personality')}
+        >
           {profile ? (
             <div className="flex items-center gap-4">
               <div
